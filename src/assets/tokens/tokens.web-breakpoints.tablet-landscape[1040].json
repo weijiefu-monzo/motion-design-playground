@@ -1,0 +1,179 @@
+{
+  "$schema": "https://design-tokens.org/dtcg/schema.json",
+  "$metadata": {
+    "name": "Figma Variables — [Web]Breakpoints (Tablet-Landscape[1040])",
+    "description": "Tokens resolved for collection: [Web]Breakpoints, mode: Tablet-Landscape[1040]"
+  },
+  "tokens": {
+    "viewport": {
+      "width": {
+        "max": {
+          "$type": "dimension",
+          "$value": "1040px"
+        },
+        "min": {
+          "$type": "dimension",
+          "$value": "769px"
+        },
+        "breakpoint": {
+          "$type": "string",
+          "$value": "Tablet Landscape"
+        }
+      },
+      "grid": {
+        "column": {
+          "$type": "dimension",
+          "$value": "6px"
+        },
+        "margin": {
+          "$type": "dimension",
+          "$value": "{VariableID:4489:500}"
+        },
+        "gutter": {
+          "$type": "dimension",
+          "$value": "{VariableID:4489:501}"
+        }
+      }
+    },
+    "component": {
+      "navigation": {
+        "menu": {
+          "$type": "boolean",
+          "$value": false
+        },
+        "personal-business": {
+          "$type": "boolean",
+          "$value": true
+        },
+        "height": {
+          "$type": "dimension",
+          "$value": "84px"
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "1040px"
+        }
+      },
+      "page": {
+        "padding": {
+          "horizontal": {
+            "$type": "dimension",
+            "$value": "{VariableID:4489:500}"
+          }
+        }
+      }
+    },
+    "type": {
+      "line-height": {
+        "step-2": {
+          "$type": "dimension",
+          "$value": "30.950000762939453px"
+        },
+        "step--1": {
+          "$type": "dimension",
+          "$value": "18.809999465942383px"
+        },
+        "step-1": {
+          "$type": "dimension",
+          "$value": "25.979999542236328px"
+        },
+        "step-3": {
+          "$type": "dimension",
+          "$value": "37.150001525878906px"
+        },
+        "step-4": {
+          "$type": "dimension",
+          "$value": "44.900001525878906px"
+        },
+        "step-0": {
+          "$type": "dimension",
+          "$value": "22px"
+        },
+        "step--2": {
+          "$type": "dimension",
+          "$value": "16.260000228881836px"
+        },
+        "step-6": {
+          "$type": "dimension",
+          "$value": "66.68000030517578px"
+        },
+        "step-5": {
+          "$type": "dimension",
+          "$value": "54.58000183105469px"
+        }
+      },
+      "font-size": {
+        "step-1": {
+          "$type": "dimension",
+          "$value": "19.979999542236328px"
+        },
+        "step-0": {
+          "$type": "dimension",
+          "$value": "16px"
+        },
+        "step--1": {
+          "$type": "dimension",
+          "$value": "12.8100004196167px"
+        },
+        "step-5": {
+          "$type": "dimension",
+          "$value": "48.58000183105469px"
+        },
+        "step-4": {
+          "$type": "dimension",
+          "$value": "38.900001525878906px"
+        },
+        "step-6": {
+          "$type": "dimension",
+          "$value": "60.68000030517578px"
+        },
+        "step-3": {
+          "$type": "dimension",
+          "$value": "31.149999618530273px"
+        },
+        "step-2": {
+          "$type": "dimension",
+          "$value": "24.950000762939453px"
+        },
+        "step--2": {
+          "$type": "dimension",
+          "$value": "10.260000228881836px"
+        }
+      }
+    },
+    "corner-radius": {
+      "x-large": {
+        "$type": "dimension",
+        "$value": "64px"
+      },
+      "small": {
+        "$type": "dimension",
+        "$value": "12px"
+      },
+      "3x-large": {
+        "$type": "dimension",
+        "$value": "128px"
+      },
+      "medium": {
+        "$type": "dimension",
+        "$value": "16px"
+      },
+      "x-small": {
+        "$type": "dimension",
+        "$value": "8px"
+      },
+      "2x-large": {
+        "$type": "dimension",
+        "$value": "80px"
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": "32px"
+      },
+      "2x-small": {
+        "$type": "dimension",
+        "$value": "4px"
+      }
+    }
+  }
+}

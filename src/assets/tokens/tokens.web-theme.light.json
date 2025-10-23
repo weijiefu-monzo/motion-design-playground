@@ -1,0 +1,252 @@
+{
+  "$schema": "https://design-tokens.org/dtcg/schema.json",
+  "$metadata": {
+    "name": "Figma Variables — [Web]Theme (Light)",
+    "description": "Tokens resolved for collection: [Web]Theme, mode: Light"
+  },
+  "tokens": {
+    "semantic": {
+      "background": {
+        "primary": {
+          "$type": "color",
+          "$description": "original name: background",
+          "$value": "{color.white}"
+        },
+        "secondary": {
+          "$type": "color",
+          "$description": "original name: backgroundSecondary",
+          "$value": "{color.grey.100}"
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{color.brand}",
+          "$description": "original name: backgroundFillPB/BB"
+        }
+      },
+      "content": {
+        "primary": {
+          "$type": "color",
+          "$value": "{color.navy.900}"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{alpha.navy.60%}"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{alpha.navy.30%}"
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{color.brand}"
+        },
+        "positive": {
+          "$type": "color",
+          "$value": "{color.green.550}"
+        },
+        "negative": {
+          "$type": "color",
+          "$value": "{color.red.550}"
+        },
+        "link": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.navy.900}"
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{color.navy.600}"
+          }
+        }
+      },
+      "inverse": {
+        "content": {
+          "primary": {
+            "$type": "color",
+            "$value": "{color.white}"
+          },
+          "secondary": {
+            "$type": "color",
+            "$value": "{alpha.white.90%}"
+          },
+          "link": {
+            "default": {
+              "$type": "color",
+              "$value": "{color.white}"
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{color.grey.300}"
+            }
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{alpha.white.30%}"
+          },
+          "negative": {
+            "$type": "color",
+            "$value": "{color.red.450}"
+          },
+          "positive": {
+            "$type": "color",
+            "$value": "{color.green.300}"
+          }
+        },
+        "action": {
+          "border": {
+            "secondary": {
+              "default": {
+                "$type": "color",
+                "$value": "{color.white}"
+              },
+              "disabled": {
+                "$type": "color",
+                "$value": "{alpha.white.30%}"
+              },
+              "loading": {
+                "$type": "color",
+                "$value": "{color.white}"
+              }
+            }
+          },
+          "fill": {
+            "primary": {
+              "default": {
+                "$type": "color",
+                "$value": "{color.white}"
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{alpha.navy.20%}"
+              },
+              "active": {
+                "$type": "color",
+                "$value": "{alpha.navy.10%}"
+              },
+              "disabled": {
+                "$type": "color",
+                "$value": "{alpha.white.30%}"
+              },
+              "loading": {
+                "$type": "color",
+                "$value": "{color.white}"
+              }
+            },
+            "secondary": {
+              "hover": {
+                "$type": "color",
+                "$value": "{alpha.white.10%}"
+              },
+              "active": {
+                "$type": "color",
+                "$value": "{alpha.white.20%}"
+              }
+            }
+          }
+        },
+        "background": {
+          "primary": {
+            "$type": "color",
+            "$value": "{color.navy.800}"
+          },
+          "secondary": {
+            "$type": "color",
+            "$value": "{color.navy.900}"
+          }
+        },
+        "separator": {
+          "$type": "color",
+          "$value": "{alpha.white.10%}"
+        }
+      },
+      "separator": {
+        "$type": "color",
+        "$value": "{alpha.navy.10%}"
+      },
+      "action": {
+        "fill": {
+          "primary": {
+            "default": {
+              "$type": "color",
+              "$value": "{color.navy.900}"
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{alpha.white.20%}"
+            },
+            "active": {
+              "$type": "color",
+              "$value": "{alpha.white.10%}"
+            },
+            "disabled": {
+              "$type": "color",
+              "$value": "{alpha.navy.10%}"
+            },
+            "loading": {
+              "$type": "color",
+              "$value": "{color.navy.900}"
+            }
+          },
+          "secondary": {
+            "hover": {
+              "$type": "color",
+              "$value": "{alpha.navy.10%}"
+            },
+            "active": {
+              "$type": "color",
+              "$value": "{alpha.navy.20%}"
+            }
+          }
+        },
+        "border": {
+          "secondary": {
+            "default": {
+              "$type": "color",
+              "$value": "{color.navy.900}"
+            },
+            "disabled": {
+              "$type": "color",
+              "$value": "{alpha.navy.10%}"
+            },
+            "loading": {
+              "$type": "color",
+              "$value": "{color.navy.900}"
+            }
+          }
+        },
+        "outline": {
+          "focus": {
+            "$type": "color",
+            "$value": "{color.blue.accent}"
+          }
+        }
+      },
+      "neutral": {
+        "lightest": {
+          "$type": "color",
+          "$value": "{color.grey.100}"
+        },
+        "lighter": {
+          "$type": "color",
+          "$value": "{color.grey.200}"
+        },
+        "light": {
+          "$type": "color",
+          "$value": "{color.grey.300}"
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "{color.grey.500}"
+        },
+        "darker": {
+          "$type": "color",
+          "$value": "{color.navy.600}"
+        },
+        "darkest": {
+          "$type": "color",
+          "$value": "{color.navy.700}"
+        }
+      }
+    }
+  }
+}

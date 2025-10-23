@@ -1,0 +1,312 @@
+/* WebButton Component Styles using Design System */
+
+/* Base Button Styles */
+.button {
+  /* Reset default button styles */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  /* Typography */
+  font-family: var(--font-family-content);
+  font-weight: 600; /* SemiBold */
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+
+  /* Transitions */
+  transition: all var(--motion-duration-short) var(--motion-easing-linear);
+
+  /* Focus management */
+  &:focus-visible {
+    outline: 2px solid var(--action-outline-focus);
+    outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+/* Content wrapper */
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.text {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Size Variants */
+.medium {
+  padding: 0 var(--spacing-large);
+  height: 48px;
+  border-radius: var(--corner-radius-3x-large);
+}
+
+.small {
+  padding: 0 var(--spacing-medium);
+  height: 40px;
+  border-radius: var(--corner-radius-3x-large);
+}
+
+.mediumContent {
+  font-size: var(--font-size-step-0);
+  line-height: var(--line-height-step-0);
+  letter-spacing: 0.16px;
+}
+
+.smallContent {
+  font-size: var(--font-size-step--1);
+  line-height: var(--line-height-step--1);
+  letter-spacing: 0.128px;
+}
+
+/* Primary Variant */
+.primary {
+  background-color: var(--action-fill-primary-default);
+  color: var(--inverse-content-primary);
+}
+
+.primary:hover:not(:disabled) {
+  background-image: linear-gradient(
+      90deg,
+      var(--action-fill-primary-hover) 0%,
+      var(--action-fill-primary-hover) 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--action-fill-primary-default) 0%,
+      var(--action-fill-primary-default) 100%
+    );
+}
+
+.primary:active:not(:disabled) {
+  background-image: linear-gradient(
+      90deg,
+      var(--action-fill-primary-active) 0%,
+      var(--action-fill-primary-active) 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--action-fill-primary-default) 0%,
+      var(--action-fill-primary-default) 100%
+    );
+}
+
+.primary:disabled {
+  background-color: var(--action-fill-primary-disabled);
+  color: var(--content-disabled);
+}
+
+/* Primary Inverse */
+.primary.inverse {
+  background-color: var(--inverse-action-fill-primary-default);
+  color: var(--content-primary);
+}
+
+.primary.inverse:hover:not(:disabled) {
+  background-image: linear-gradient(
+      90deg,
+      var(--inverse-action-fill-primary-hover) 0%,
+      var(--inverse-action-fill-primary-hover) 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--inverse-action-fill-primary-default) 0%,
+      var(--inverse-action-fill-primary-default) 100%
+    );
+}
+
+.primary.inverse:active:not(:disabled) {
+  background-image: linear-gradient(
+      90deg,
+      var(--inverse-action-fill-primary-active) 0%,
+      var(--inverse-action-fill-primary-active) 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--inverse-action-fill-primary-default) 0%,
+      var(--inverse-action-fill-primary-default) 100%
+    );
+}
+
+.primary.inverse:disabled {
+  background-color: var(--inverse-action-fill-primary-disabled);
+  color: var(--inverse-content-disabled);
+}
+
+/* Secondary Variant */
+.secondary {
+  background-color: transparent;
+  color: var(--content-primary);
+  border: 1px solid var(--action-border-secondary-default);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: var(--action-fill-secondary-hover);
+}
+
+.secondary:active:not(:disabled) {
+  background-color: var(--action-fill-secondary-active);
+}
+
+.secondary:disabled {
+  color: var(--content-disabled);
+  border: 1px solid var(--action-border-secondary-disabled);
+}
+
+/* Secondary Inverse */
+.secondary.inverse {
+  background-color: transparent;
+  color: var(--inverse-content-primary);
+  border: 1px solid var(--inverse-action-border-secondary-default);
+}
+
+.secondary.inverse:hover:not(:disabled) {
+  background-color: var(--inverse-action-fill-secondary-hover);
+}
+
+.secondary.inverse:active:not(:disabled) {
+  background-color: var(--inverse-action-fill-secondary-active);
+}
+
+.secondary.inverse:disabled {
+  color: var(--inverse-content-disabled);
+}
+
+/* Loading State */
+.loading {
+  cursor: default;
+}
+
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.loadingSpinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.small .loadingSpinner {
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Focus State */
+.focus {
+  outline: 2px solid var(--action-outline-focus);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (min-width: 394px) and (max-width: 768px) {
+  .mediumContent {
+    font-size: var(--font-size-step-0);
+    line-height: var(--line-height-step-0);
+  }
+
+  .smallContent {
+    font-size: var(--font-size-step--1);
+    line-height: var(--line-height-step--1);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1040px) {
+  .mediumContent {
+    font-size: var(--font-size-step-0);
+    line-height: var(--line-height-step-0);
+  }
+
+  .smallContent {
+    font-size: var(--font-size-step--1);
+    line-height: var(--line-height-step--1);
+  }
+}
+
+@media (min-width: 1041px) {
+  .mediumContent {
+    font-size: var(--font-size-step-0);
+    line-height: var(--line-height-step-0);
+  }
+
+  .smallContent {
+    font-size: var(--font-size-step--1);
+    line-height: var(--line-height-step--1);
+  }
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+  .primary {
+    background-color: var(--action-fill-primary-default);
+    color: var(--inverse-content-primary);
+  }
+
+  .primary:hover:not(:disabled) {
+    background-image: linear-gradient(
+        90deg,
+        var(--alpha-navy-20) 0%,
+        var(--alpha-navy-20) 100%
+      ),
+      linear-gradient(
+        90deg,
+        var(--action-fill-primary-default) 0%,
+        var(--action-fill-primary-default) 100%
+      );
+  }
+
+  .primary:active:not(:disabled) {
+    background-image: linear-gradient(
+        90deg,
+        var(--alpha-navy-10) 0%,
+        var(--alpha-navy-10) 100%
+      ),
+      linear-gradient(
+        90deg,
+        var(--action-fill-primary-default) 0%,
+        var(--action-fill-primary-default) 100%
+      );
+  }
+
+  .secondary {
+    color: var(--content-primary);
+  }
+
+  .secondary.inverse {
+    color: var(--inverse-content-primary);
+  }
+}

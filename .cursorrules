@@ -1,0 +1,75 @@
+# Cursor Rules for Motion Design Playground
+
+## Figma Component Development Rules
+
+### States vs Props
+
+When creating components from Figma designs:
+
+- **States (Default, Hover, Active, Focus, Disabled, Loading) are for interactions** - they should NOT be included as props in the component interface
+- States are handled automatically through CSS pseudo-classes (`:hover`, `:active`, `:focus`, `:disabled`) and conditional styling
+- Only include functional props like `disabled`, `loading`, `inverse`, `size`, `variant` etc.
+- The component should handle state styling internally through CSS classes and pseudo-selectors
+
+### Component Structure Pattern
+
+Follow this pattern for all components:
+
+1. Create component folder: `src/components/ComponentName/`
+2. Files: `ComponentName.tsx`, `ComponentName.module.css`, `index.ts`
+3. Export from main `src/components/index.ts`
+4. Use TypeScript interfaces for props
+5. Use CSS modules for styling
+6. Follow existing design system tokens
+
+### Design System Integration
+
+- Use CSS custom properties from design tokens
+- Follow existing naming conventions
+- Include proper accessibility attributes
+- Support both light and dark themes
+- Use consistent spacing and typography scales
+
+### Example of Correct State Handling
+
+```tsx
+// ✅ CORRECT - States handled via CSS
+<button className={styles.button} disabled={disabled}>
+  Content
+</button>
+
+// ❌ WRONG - Don't include state as props
+<button className={styles.button} state="hover" disabled={disabled}>
+  Content
+</button>
+```
+
+### CSS State Handling
+
+```css
+.button {
+  /* Default state */
+  background-color: var(--action-fill-primary-default);
+}
+
+.button:hover:not(:disabled) {
+  /* Hover state */
+  background-color: var(--action-fill-primary-hover);
+}
+
+.button:active:not(:disabled) {
+  /* Active state */
+  background-color: var(--action-fill-primary-active);
+}
+
+.button:focus-visible {
+  /* Focus state */
+  outline: 2px solid var(--action-outline-focus);
+}
+
+.button:disabled {
+  /* Disabled state */
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+```

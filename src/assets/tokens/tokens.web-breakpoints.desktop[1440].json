@@ -1,0 +1,179 @@
+{
+  "$schema": "https://design-tokens.org/dtcg/schema.json",
+  "$metadata": {
+    "name": "Figma Variables — [Web]Breakpoints (Desktop[1440])",
+    "description": "Tokens resolved for collection: [Web]Breakpoints, mode: Desktop[1440]"
+  },
+  "tokens": {
+    "viewport": {
+      "width": {
+        "max": {
+          "$type": "dimension",
+          "$value": "1568px"
+        },
+        "min": {
+          "$type": "dimension",
+          "$value": "1041px"
+        },
+        "breakpoint": {
+          "$type": "string",
+          "$value": "Desktop"
+        }
+      },
+      "grid": {
+        "column": {
+          "$type": "dimension",
+          "$value": "12px"
+        },
+        "margin": {
+          "$type": "dimension",
+          "$value": "{VariableID:4489:499}"
+        },
+        "gutter": {
+          "$type": "dimension",
+          "$value": "{VariableID:4489:501}"
+        }
+      }
+    },
+    "component": {
+      "navigation": {
+        "menu": {
+          "$type": "boolean",
+          "$value": false
+        },
+        "personal-business": {
+          "$type": "boolean",
+          "$value": true
+        },
+        "height": {
+          "$type": "dimension",
+          "$value": "84px"
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "1568px"
+        }
+      },
+      "page": {
+        "padding": {
+          "horizontal": {
+            "$type": "dimension",
+            "$value": "{VariableID:4489:499}"
+          }
+        }
+      }
+    },
+    "type": {
+      "line-height": {
+        "step-2": {
+          "$type": "dimension",
+          "$value": "31px"
+        },
+        "step--1": {
+          "$type": "dimension",
+          "$value": "18.799999237060547px"
+        },
+        "step-1": {
+          "$type": "dimension",
+          "$value": "26px"
+        },
+        "step-3": {
+          "$type": "dimension",
+          "$value": "37.25px"
+        },
+        "step-4": {
+          "$type": "dimension",
+          "$value": "45.060001373291016px"
+        },
+        "step-0": {
+          "$type": "dimension",
+          "$value": "22px"
+        },
+        "step--2": {
+          "$type": "dimension",
+          "$value": "16.239999771118164px"
+        },
+        "step-6": {
+          "$type": "dimension",
+          "$value": "67.04000091552734px"
+        },
+        "step-5": {
+          "$type": "dimension",
+          "$value": "54.83000183105469px"
+        }
+      },
+      "font-size": {
+        "step-1": {
+          "$type": "dimension",
+          "$value": "20px"
+        },
+        "step-0": {
+          "$type": "dimension",
+          "$value": "16px"
+        },
+        "step--1": {
+          "$type": "dimension",
+          "$value": "12.800000190734863px"
+        },
+        "step-5": {
+          "$type": "dimension",
+          "$value": "48.83000183105469px"
+        },
+        "step-4": {
+          "$type": "dimension",
+          "$value": "39.060001373291016px"
+        },
+        "step-6": {
+          "$type": "dimension",
+          "$value": "61.040000915527344px"
+        },
+        "step-3": {
+          "$type": "dimension",
+          "$value": "31.25px"
+        },
+        "step-2": {
+          "$type": "dimension",
+          "$value": "25px"
+        },
+        "step--2": {
+          "$type": "dimension",
+          "$value": "10.239999771118164px"
+        }
+      }
+    },
+    "corner-radius": {
+      "x-large": {
+        "$type": "dimension",
+        "$value": "64px"
+      },
+      "small": {
+        "$type": "dimension",
+        "$value": "12px"
+      },
+      "3x-large": {
+        "$type": "dimension",
+        "$value": "128px"
+      },
+      "medium": {
+        "$type": "dimension",
+        "$value": "16px"
+      },
+      "x-small": {
+        "$type": "dimension",
+        "$value": "8px"
+      },
+      "2x-large": {
+        "$type": "dimension",
+        "$value": "80px"
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": "32px"
+      },
+      "2x-small": {
+        "$type": "dimension",
+        "$value": "4px"
+      }
+    }
+  }
+}

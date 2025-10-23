@@ -1,0 +1,200 @@
+/* IconButton Component Styles using Design System */
+
+/* Base IconButton Styles */
+.iconButton {
+  /* Reset default button styles */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--corner-radius-3x-large);
+
+  /* Transitions */
+  transition: background-color var(--motion-duration-short)
+      var(--motion-easing-flow),
+    color var(--motion-duration-short) var(--motion-easing-flow),
+    border-color var(--motion-duration-short) var(--motion-easing-flow),
+    box-shadow var(--motion-duration-short) var(--motion-easing-flow);
+
+  /* Focus management */
+  &:focus-visible {
+    outline: 2px solid var(--action-outline-focus);
+    outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+/* Icon container */
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Default icon (navigation arrow) */
+.defaultIcon {
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M9 18l6-6-6-6' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    no-repeat center;
+  mask-size: contain;
+}
+
+/* Size Variants */
+.medium {
+  width: 48px;
+  height: 48px;
+}
+
+.small {
+  width: 40px;
+  height: 40px;
+}
+
+.small .defaultIcon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Outlined Variant */
+.outlined {
+  background-color: transparent;
+  color: var(--content-primary);
+  border: 1px solid var(--action-border-secondary-default);
+}
+
+.outlined:hover:not(:disabled) {
+  background-color: var(--action-fill-secondary-hover);
+}
+
+.outlined:active:not(:disabled) {
+  background-color: var(--action-fill-secondary-active);
+}
+
+.outlined:disabled {
+  color: var(--content-disabled);
+  border: 1px solid var(--action-border-secondary-disabled);
+}
+
+/* Outlined Inverse */
+.outlined.inverse {
+  background-color: transparent;
+  color: var(--inverse-content-primary);
+  border: 1px solid var(--inverse-action-border-secondary-default);
+}
+
+.outlined.inverse:hover:not(:disabled) {
+  background-color: var(--inverse-action-fill-secondary-hover);
+}
+
+.outlined.inverse:active:not(:disabled) {
+  background-color: var(--inverse-action-fill-secondary-active);
+}
+
+.outlined.inverse:disabled {
+  color: var(--inverse-content-disabled);
+  border: 1px solid var(--inverse-action-border-secondary-disabled);
+}
+
+/* Filled Variant */
+.filled {
+  background-color: transparent;
+  color: var(--content-primary);
+}
+
+.filled:hover:not(:disabled) {
+  background-color: var(--action-fill-secondary-hover);
+}
+
+.filled:active:not(:disabled) {
+  background-color: var(--action-fill-secondary-active);
+}
+
+.filled:disabled {
+  color: var(--content-disabled);
+}
+
+/* Filled Inverse */
+.filled.inverse {
+  background-color: transparent;
+  color: var(--inverse-content-primary);
+}
+
+.filled.inverse:hover:not(:disabled) {
+  background-color: var(--inverse-action-fill-secondary-hover);
+}
+
+.filled.inverse:active:not(:disabled) {
+  background-color: var(--inverse-action-fill-secondary-active);
+}
+
+.filled.inverse:disabled {
+  color: var(--inverse-content-disabled);
+}
+
+/* Loading State */
+.loading {
+  cursor: default;
+}
+
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.loadingSpinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.small .loadingSpinner {
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+  .outlined {
+    color: var(--content-primary);
+  }
+
+  .outlined.inverse {
+    color: var(--inverse-content-primary);
+  }
+
+  .filled {
+    color: var(--content-primary);
+  }
+
+  .filled.inverse {
+    color: var(--inverse-content-primary);
+  }
+}

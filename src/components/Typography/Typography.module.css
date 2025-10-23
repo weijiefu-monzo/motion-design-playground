@@ -1,0 +1,295 @@
+/* Typography Styles based on Figma Design System */
+
+/* Billboard - Largest heading */
+.billboard {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-6);
+  font-weight: 800;
+  line-height: var(--line-height-step-6);
+  font-style: normal;
+  margin: 0;
+}
+
+/* Heading Styles */
+.h1 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-5);
+  font-weight: 800;
+  line-height: var(--line-height-step-5);
+  font-style: normal;
+  margin: 0;
+}
+
+.h2 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-4);
+  font-weight: 800;
+  line-height: var(--line-height-step-4);
+  font-style: normal;
+  margin: 0;
+}
+
+.h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-3);
+  font-weight: 700;
+  line-height: var(--line-height-step-3);
+  font-style: normal;
+  margin: 0;
+}
+
+.h4 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-2);
+  font-weight: 700;
+  line-height: var(--line-height-step-2);
+  font-style: normal;
+  margin: 0;
+}
+
+.h5 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-1);
+  font-weight: 600;
+  line-height: var(--line-height-step-1);
+  font-style: normal;
+  margin: 0;
+}
+
+/* Body Text Styles */
+.bodyLargeRegular {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step-1);
+  font-weight: 400;
+  line-height: var(--line-height-step-1);
+  font-style: normal;
+  margin: 0;
+}
+
+.bodyLargeEmphasized {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step-1);
+  font-weight: 600;
+  line-height: var(--line-height-step-1);
+  font-style: normal;
+  margin: 0;
+}
+
+.bodyMediumRegular {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step-0);
+  font-weight: 400;
+  line-height: var(--line-height-step-0);
+  font-style: normal;
+  margin: 0;
+}
+
+.bodyMediumEmphasized {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step-0);
+  font-weight: 600;
+  line-height: var(--line-height-step-0);
+  font-style: normal;
+  margin: 0;
+}
+
+.bodySmallEmphasized {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step--1);
+  font-weight: 600;
+  line-height: var(--line-height-step--1);
+  font-style: normal;
+  margin: 0;
+}
+
+.bodySmallRegular {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step--1);
+  font-weight: 400;
+  line-height: var(--line-height-step--1);
+  font-style: normal;
+  margin: 0;
+}
+
+.bodyXSmallEmphasized {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step--2);
+  font-weight: 600;
+  line-height: var(--line-height-step--2);
+  font-style: normal;
+  margin: 0;
+}
+
+.bodyXSmallRegular {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step--2);
+  font-weight: 400;
+  line-height: var(--line-height-step--2);
+  font-style: normal;
+  margin: 0;
+}
+
+/* Responsive Typography - Mobile adjustments */
+@media (max-width: 768px) {
+  .billboard {
+    font-size: var(--font-size-step-5);
+    line-height: var(--line-height-step-5);
+  }
+
+  .h1 {
+    font-size: var(--font-size-step-4);
+    line-height: var(--line-height-step-4);
+  }
+
+  .h2 {
+    font-size: var(--font-size-step-3);
+    line-height: var(--line-height-step-3);
+  }
+
+  .h3 {
+    font-size: var(--font-size-step-2);
+    line-height: var(--line-height-step-2);
+  }
+
+  .h4 {
+    font-size: var(--font-size-step-1);
+    line-height: var(--line-height-step-1);
+  }
+
+  .h5 {
+    font-size: var(--font-size-step-0);
+    line-height: var(--line-height-step-0);
+  }
+}
+
+/* Color variants based on semantic tokens */
+.primary {
+  color: var(--semantic-content-primary);
+}
+
+.secondary {
+  color: var(--semantic-content-secondary);
+}
+
+.inverse {
+  color: var(--semantic-inverse-content-primary);
+}
+
+.inverseSecondary {
+  color: var(--semantic-inverse-content-secondary);
+}
+
+.accent {
+  color: var(--semantic-content-accent);
+}
+
+/* Utility classes for common combinations */
+.billboardPrimary {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-6);
+  font-weight: 800;
+  line-height: var(--line-height-step-6);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
+
+.h1Primary {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-5);
+  font-weight: 800;
+  line-height: var(--line-height-step-5);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
+
+.h2Primary {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-4);
+  font-weight: 800;
+  line-height: var(--line-height-step-4);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
+
+.h3Primary {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-3);
+  font-weight: 700;
+  line-height: var(--line-height-step-3);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
+
+.h4Primary {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-2);
+  font-weight: 700;
+  line-height: var(--line-height-step-2);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
+
+.h5Primary {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-step-1);
+  font-weight: 600;
+  line-height: var(--line-height-step-1);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
+
+.bodyLargeRegularPrimary {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step-1);
+  font-weight: 400;
+  line-height: var(--line-height-step-1);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
+
+.bodyLargeEmphasizedPrimary {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step-1);
+  font-weight: 600;
+  line-height: var(--line-height-step-1);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
+
+.bodyMediumRegularPrimary {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step-0);
+  font-weight: 400;
+  line-height: var(--line-height-step-0);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
+
+.bodyMediumEmphasizedPrimary {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step-0);
+  font-weight: 600;
+  line-height: var(--line-height-step-0);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
+
+.bodySmallEmphasizedPrimary {
+  font-family: var(--font-family-content);
+  font-size: var(--font-size-step--1);
+  font-weight: 600;
+  line-height: var(--line-height-step--1);
+  font-style: normal;
+  margin: 0;
+  color: var(--semantic-content-primary);
+}
