@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 import styles from "./Button.module.css";
 
 export interface ButtonProps {
@@ -28,19 +29,19 @@ export default function Button({
   "aria-label": ariaLabel,
   "data-qa": dataQa,
 }: ButtonProps) {
-  const buttonClasses = [
+  const buttonClasses = clsx(
     styles.button,
     styles[variant],
     styles[size],
-    inverse && styles.inverse,
-    disabled && styles.disabled,
-    loading && styles.loading,
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+    {
+      [styles.inverse]: inverse,
+      [styles.disabled]: disabled,
+      [styles.loading]: loading,
+    },
+    className
+  );
 
-  const contentClasses = [styles.content, styles[`${size}Content`]].join(" ");
+  const contentClasses = clsx(styles.content, styles[`${size}Content`]);
 
   const handleClick = () => {
     if (!disabled && !loading && onClick) {

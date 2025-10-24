@@ -1,0 +1,11 @@
+/* Cell Component Styles using Design System */
+
+/* Base Cell Styles */
+.cell {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: var(--corner-radius-medium);
+  background-color: var(--background-secondary);
+  padding: var(--spacing-small) var(--spacing-medium);
+}

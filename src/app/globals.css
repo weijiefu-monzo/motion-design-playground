@@ -86,6 +86,26 @@
   --font-family-content: "Monzo Sans Text", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
+  --font-size-step--2: clamp(0.64rem, 0.718rem + -0.1177vw, 0.6944rem);
+  --font-size-step--1: clamp(0.8rem, 0.8477rem + -0.0721vw, 0.8333rem);
+  --font-size-step-0: clamp(1rem, 1rem + 0vw, 1rem);
+  --font-size-step-1: clamp(1.2rem, 1.1784rem + 0.1081vw, 1.25rem);
+  --font-size-step-2: clamp(1.44rem, 1.387rem + 0.2649vw, 1.5625rem);
+  --font-size-step-3: clamp(1.728rem, 1.6306rem + 0.4868vw, 1.9531rem);
+  --font-size-step-4: clamp(2.0736rem, 1.9145rem + 0.7953vw, 2.4414rem);
+  --font-size-step-5: clamp(2.4883rem, 2.2447rem + 1.2182vw, 3.0518rem);
+  --font-size-step-6: clamp(2.986rem, 2.6276rem + 1.7918vw, 3.8147rem);
+
+  --line-height-step--2: calc(var(--font-size-step--2) + 6px);
+  --line-height-step--1: calc(var(--font-size-step--1) + 6px);
+  --line-height-step-0: calc(var(--font-size-step-0) + 6px);
+  --line-height-step-1: calc(var(--font-size-step-1) + 6px);
+  --line-height-step-2: calc(var(--font-size-step-2) + 6px);
+  --line-height-step-3: calc(var(--font-size-step-3) + 6px);
+  --line-height-step-4: calc(var(--font-size-step-4) + 6px);
+  --line-height-step-5: calc(var(--font-size-step-5) + 6px);
+  --line-height-step-6: calc(var(--font-size-step-6) + 6px);
+
   /* Motion */
   --motion-duration-instant: 0ms;
   --motion-duration-short: 100ms;
@@ -234,27 +254,6 @@
   --navigation-menu-mobile: true;
   --navigation-personal-business-mobile: false;
 
-  /* Typography - Mobile (Default) */
-  --font-size-step--2: 11.03px;
-  --font-size-step--1: 13.28px;
-  --font-size-step-0: 16px;
-  --font-size-step-1: 19.28px;
-  --font-size-step-2: 23.23px;
-  --font-size-step-3: 28px;
-  --font-size-step-4: 33.76px;
-  --font-size-step-5: 40.7px;
-  --font-size-step-6: 49.08px;
-
-  --line-height-step--2: 17.03px;
-  --line-height-step--1: 19.28px;
-  --line-height-step-0: 22px;
-  --line-height-step-1: 25.28px;
-  --line-height-step-2: 29.23px;
-  --line-height-step-3: 34px;
-  --line-height-step-4: 39.76px;
-  --line-height-step-5: 46.7px;
-  --line-height-step-6: 55.08px;
-
   /* Corner Radius - Mobile (Default) */
   --corner-radius-2x-small: 4px;
   --corner-radius-x-small: 8px;
@@ -264,74 +263,6 @@
   --corner-radius-2x-large: 48px;
   --corner-radius-x-large: 32px;
   --corner-radius-3x-large: 64px;
-}
-
-/* ===== DARK THEME ===== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark Theme Semantic Tokens */
-    --background-primary: var(--color-navy-800);
-    --background-secondary: var(--color-navy-900);
-    --background-accent: var(--color-brand);
-
-    --content-primary: var(--color-white);
-    --content-secondary: var(--alpha-white-60);
-    --content-disabled: var(--alpha-white-30);
-    --content-accent: var(--color-brand);
-    --content-positive: var(--color-green-300);
-    --content-negative: var(--color-red-450);
-
-    --link-default: var(--color-white);
-    --link-hover: var(--color-grey-300);
-
-    --inverse-content-primary: var(--color-navy-900);
-    --inverse-content-secondary: var(--alpha-navy-90);
-    --inverse-content-disabled: var(--alpha-navy-30);
-    --inverse-content-negative: var(--color-red-550);
-    --inverse-content-positive: var(--color-green-550);
-
-    --inverse-link-default: var(--color-navy-900);
-    --inverse-link-hover: var(--color-navy-600);
-
-    --inverse-background-primary: var(--color-white);
-    --inverse-background-secondary: var(--color-grey-100);
-
-    --separator: var(--alpha-white-10);
-    --inverse-separator: var(--alpha-navy-10);
-
-    --action-fill-primary-default: var(--alpha-white-90);
-    --action-fill-primary-hover: var(--alpha-navy-20);
-    --action-fill-primary-active: var(--alpha-navy-10);
-    --action-fill-primary-disabled: var(--alpha-navy-10);
-    --action-fill-primary-loading: var(--color-white);
-
-    --action-fill-secondary-hover: var(--alpha-white-10);
-    --action-fill-secondary-active: var(--alpha-white-10);
-
-    --action-border-secondary-default: var(--color-white);
-    --action-border-secondary-disabled: var(--alpha-white-10);
-    --action-border-secondary-loading: var(--color-white);
-
-    --inverse-action-fill-primary-default: var(--color-navy-900);
-    --inverse-action-fill-primary-hover: var(--alpha-white-20);
-    --inverse-action-fill-primary-active: var(--alpha-white-10);
-    --inverse-action-fill-primary-disabled: var(--alpha-navy-30);
-    --inverse-action-fill-primary-loading: var(--color-navy-900);
-
-    --inverse-action-fill-secondary-hover: var(--alpha-navy-10);
-    --inverse-action-fill-secondary-active: var(--alpha-navy-20);
-
-    --inverse-action-border-secondary-default: var(--color-navy-900);
-    --inverse-action-border-secondary-disabled: var(--alpha-navy-30);
-    --inverse-action-border-secondary-loading: var(--color-navy-900);
-
-    --neutral-lightest: var(--color-navy-700);
-    --neutral-lighter: var(--color-navy-600);
-    --neutral-light: var(--color-grey-500);
-    --neutral-dark: var(--color-grey-300);
-    --neutral-darker: var(--color-grey-200);
-    --neutral-darkest: var(--color-grey-100);
-  }
 }
 
 /* ===== RESPONSIVE BREAKPOINTS ===== */
@@ -344,27 +275,6 @@
     --navigation-width-tablet-portrait: 768px;
     --navigation-menu-tablet-portrait: false;
     --navigation-personal-business-tablet-portrait: true;
-
-    /* Typography - Tablet Portrait */
-    --font-size-step--2: 10.58px;
-    --font-size-step--1: 13.01px;
-    --font-size-step-0: 16px;
-    --font-size-step-1: 19.68px;
-    --font-size-step-2: 24.23px;
-    --font-size-step-3: 29.83px;
-    --font-size-step-4: 36.74px;
-    --font-size-step-5: 45.27px;
-    --font-size-step-6: 55.8px;
-
-    --line-height-step--2: 16.58px;
-    --line-height-step--1: 19.01px;
-    --line-height-step-0: 22px;
-    --line-height-step-1: 25.68px;
-    --line-height-step-2: 30.23px;
-    --line-height-step-3: 35.83px;
-    --line-height-step-4: 42.74px;
-    --line-height-step-5: 51.27px;
-    --line-height-step-6: 61.8px;
 
     /* Corner Radius - Tablet Portrait */
     --corner-radius-2x-small: 4px;
@@ -387,27 +297,6 @@
     --navigation-menu-tablet-landscape: false;
     --navigation-personal-business-tablet-landscape: true;
 
-    /* Typography - Tablet Landscape */
-    --font-size-step--2: 10.26px;
-    --font-size-step--1: 12.81px;
-    --font-size-step-0: 16px;
-    --font-size-step-1: 19.98px;
-    --font-size-step-2: 24.95px;
-    --font-size-step-3: 31.15px;
-    --font-size-step-4: 38.9px;
-    --font-size-step-5: 48.58px;
-    --font-size-step-6: 60.68px;
-
-    --line-height-step--2: 16.26px;
-    --line-height-step--1: 18.81px;
-    --line-height-step-0: 22px;
-    --line-height-step-1: 25.98px;
-    --line-height-step-2: 30.95px;
-    --line-height-step-3: 37.15px;
-    --line-height-step-4: 44.9px;
-    --line-height-step-5: 54.58px;
-    --line-height-step-6: 66.68px;
-
     /* Corner Radius - Tablet Landscape */
     --corner-radius-2x-small: 4px;
     --corner-radius-x-small: 8px;
@@ -428,27 +317,6 @@
     --navigation-width-desktop: 1568px;
     --navigation-menu-desktop: false;
     --navigation-personal-business-desktop: true;
-
-    /* Typography - Desktop */
-    --font-size-step--2: 10.24px;
-    --font-size-step--1: 12.8px;
-    --font-size-step-0: 16px;
-    --font-size-step-1: 20px;
-    --font-size-step-2: 25px;
-    --font-size-step-3: 31.25px;
-    --font-size-step-4: 39.06px;
-    --font-size-step-5: 48.83px;
-    --font-size-step-6: 61.04px;
-
-    --line-height-step--2: 16.24px;
-    --line-height-step--1: 18.8px;
-    --line-height-step-0: 22px;
-    --line-height-step-1: 26px;
-    --line-height-step-2: 31px;
-    --line-height-step-3: 37.25px;
-    --line-height-step-4: 45.06px;
-    --line-height-step-5: 54.83px;
-    --line-height-step-6: 67.04px;
 
     /* Corner Radius - Desktop */
     --corner-radius-2x-small: 4px;
@@ -491,12 +359,6 @@ a {
 
 a:hover {
   color: var(--link-hover);
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
 
 /* ===== DARK THEME ===== */

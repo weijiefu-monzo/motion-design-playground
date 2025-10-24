@@ -20,7 +20,42 @@ Follow this pattern for all components:
 3. Export from main `src/components/index.ts`
 4. Use TypeScript interfaces for props
 5. Use CSS modules for styling
-6. Follow existing design system tokens
+6. Use `clsx` for conditional class names
+7. Follow existing design system tokens
+
+### Class Name Handling with clsx
+
+Always use `clsx` for conditional class names instead of manual array filtering:
+
+```tsx
+// ✅ CORRECT - Using clsx
+import clsx from "clsx";
+
+const buttonClasses = clsx(
+  styles.button,
+  styles[variant],
+  styles[size],
+  {
+    [styles.inverse]: inverse,
+    [styles.disabled]: disabled,
+    [styles.loading]: loading,
+  },
+  className
+);
+
+// ❌ WRONG - Manual array filtering
+const buttonClasses = [
+  styles.button,
+  styles[variant],
+  styles[size],
+  inverse && styles.inverse,
+  disabled && styles.disabled,
+  loading && styles.loading,
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+```
 
 ### Design System Integration
 

@@ -155,7 +155,7 @@
 .secondary {
   background-color: transparent;
   color: var(--content-primary);
-  border: 1px solid var(--action-border-secondary-default);
+  border: 2px solid var(--action-border-secondary-default);
 }
 
 .secondary:hover:not(:disabled) {
@@ -168,14 +168,14 @@
 
 .secondary:disabled {
   color: var(--content-disabled);
-  border: 1px solid var(--action-border-secondary-disabled);
+  border: 2px solid var(--action-border-secondary-disabled);
 }
 
 /* Secondary Inverse */
 .secondary.inverse {
   background-color: transparent;
   color: var(--inverse-content-primary);
-  border: 1px solid var(--inverse-action-border-secondary-default);
+  border: 2px solid var(--inverse-action-border-secondary-default);
 }
 
 .secondary.inverse:hover:not(:disabled) {

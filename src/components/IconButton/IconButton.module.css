@@ -42,16 +42,6 @@
   height: 100%;
 }
 
-/* Default icon (navigation arrow) */
-.defaultIcon {
-  width: 16px;
-  height: 16px;
-  background-color: currentColor;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M9 18l6-6-6-6' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
-    no-repeat center;
-  mask-size: contain;
-}
-
 /* Size Variants */
 .medium {
   width: 48px;
@@ -72,7 +62,7 @@
 .outlined {
   background-color: transparent;
   color: var(--content-primary);
-  border: 1px solid var(--action-border-secondary-default);
+  border: 2px solid var(--action-border-secondary-default);
 }
 
 .outlined:hover:not(:disabled) {
@@ -85,14 +75,14 @@
 
 .outlined:disabled {
   color: var(--content-disabled);
-  border: 1px solid var(--action-border-secondary-disabled);
+  border: 2px solid var(--action-border-secondary-disabled);
 }
 
 /* Outlined Inverse */
 .outlined.inverse {
   background-color: transparent;
   color: var(--inverse-content-primary);
-  border: 1px solid var(--inverse-action-border-secondary-default);
+  border: 2px solid var(--inverse-action-border-secondary-default);
 }
 
 .outlined.inverse:hover:not(:disabled) {
@@ -105,7 +95,7 @@
 
 .outlined.inverse:disabled {
   color: var(--inverse-content-disabled);
-  border: 1px solid var(--inverse-action-border-secondary-disabled);
+  border: 2px solid var(--inverse-action-border-secondary-disabled);
 }
 
 /* Filled Variant */

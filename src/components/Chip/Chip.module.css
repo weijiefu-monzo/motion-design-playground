@@ -1,0 +1,130 @@
+/* Chip Component Styles using Design System */
+
+/* Base Chip Styles */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2x-small);
+  padding: var(--spacing-2x-small) var(--spacing-x-small);
+  border-radius: var(--corner-radius-3x-large);
+
+  /* Typography */
+  font-family: var(--font-family-content);
+  font-weight: 600; /* SemiBold */
+  font-size: var(--font-size-step-0);
+  line-height: var(--line-height-step-0);
+  letter-spacing: 0.16px;
+  text-align: left;
+  white-space: nowrap;
+  width: fit-content;
+  /* Transitions */
+  transition: background-color var(--motion-duration-short)
+      var(--motion-easing-flow),
+    color var(--motion-duration-short) var(--motion-easing-flow);
+}
+
+/* Icon container */
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Default icon (navigation arrow up) */
+.defaultIcon {
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 19V5M5 12l7-7 7 7' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    no-repeat center;
+  mask-size: contain;
+}
+
+/* Label text */
+.label {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Default Variant */
+.default {
+  background-color: var(--background-primary);
+  color: var(--content-primary);
+}
+
+.default.inverse {
+  background-color: transparent;
+  color: var(--inverse-content-primary);
+}
+
+/* Positive Variant */
+.positive {
+  background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.9) 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--content-positive) 0%,
+      var(--content-positive) 100%
+    );
+
+  color: var(--content-positive);
+}
+
+.positive.inverse {
+  background-image: linear-gradient(
+      90deg,
+      rgba(9, 23, 35, 0.9) 0%,
+      rgba(9, 23, 35, 0.9) 100%
+    ),
+    linear-gradient(90deg, rgb(48, 219, 91) 0%, rgb(48, 219, 91) 100%);
+  color: var(--inverse-content-positive);
+}
+
+/* Negative Variant */
+.negative {
+  background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.9) 100%
+    ),
+    linear-gradient(90deg, rgb(215, 0, 21) 0%, rgb(215, 0, 21) 100%);
+  color: var(--content-negative);
+}
+
+.negative.inverse {
+  background-image: linear-gradient(
+      90deg,
+      rgba(9, 23, 35, 0.9) 0%,
+      rgba(9, 23, 35, 0.9) 100%
+    ),
+    linear-gradient(90deg, rgb(255, 105, 97) 0%, rgb(255, 105, 97) 100%);
+  color: var(--inverse-content-negative);
+}
+
+/* Neutral Variant */
+.neutral {
+  background-color: var(--neutral-lighter);
+  color: var(--content-secondary);
+}
+
+.neutral.inverse {
+  background-color: var(--neutral-darker);
+  color: var(--inverse-content-secondary);
+}
+
+/* Accent Variant */
+.accent {
+  background-color: var(--color-blue-accent);
+  color: var(--color-white);
+}
+
+.accent.inverse {
+  background-color: var(--color-blue-accent);
+  color: var(--color-white);
+}

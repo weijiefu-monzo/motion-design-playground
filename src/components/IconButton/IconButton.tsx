@@ -1,5 +1,7 @@
 import React from "react";
+import clsx from "clsx";
 import styles from "./IconButton.module.css";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 export interface IconButtonProps {
   className?: string;
@@ -28,17 +30,18 @@ export default function IconButton({
   "aria-label": ariaLabel,
   "data-qa": dataQa,
 }: IconButtonProps) {
-  const buttonClasses = [
+  const buttonClasses = clsx(
     styles.iconButton,
     styles[size],
-    outlined ? styles.outlined : styles.filled,
-    inverse && styles.inverse,
-    disabled && styles.disabled,
-    loading && styles.loading,
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+    {
+      [styles.outlined]: outlined,
+      [styles.filled]: !outlined,
+      [styles.inverse]: inverse,
+      [styles.disabled]: disabled,
+      [styles.loading]: loading,
+    },
+    className
+  );
 
   const handleClick = () => {
     if (!disabled && !loading && onClick) {
@@ -70,7 +73,13 @@ export default function IconButton({
         </div>
       ) : (
         <div className={styles.iconContainer}>
-          {icon || <div className={styles.defaultIcon} />}
+          {icon ? (
+            React.cloneElement(icon as React.ReactElement<any>, {
+              size: size === "medium" ? 24 : 16,
+            })
+          ) : (
+            <AiOutlineArrowRight size={size === "medium" ? 24 : 16} />
+          )}
         </div>
       )}
     </button>
