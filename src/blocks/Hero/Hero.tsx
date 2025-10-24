@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import styles from "./Hero.module.css";
 import { Chip } from "../../components/Chip";
-import { H1, Body, H3 } from "../../components/Typography";
+import { H1, Body, H3, H2 } from "../../components/Typography";
 import { Button } from "../../components/Button";
 import { Cell } from "../../components/Cell";
 
@@ -72,7 +72,7 @@ export default function Hero({
         <div className={styles.content}>
           <div className={styles.textSection}>
             {chipLabel && <Chip label={chipLabel} variant="default" />}
-            <H1>{title}</H1>
+            <H2>{title}</H2>
             <Body size="large" style={{ color: "var(--content-secondary)" }}>
               {description}
             </Body>

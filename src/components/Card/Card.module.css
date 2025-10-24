@@ -35,6 +35,7 @@
 
 .card.notContained {
   background-color: transparent;
+  border-radius: 0;
 }
 
 /* Content Layout */
@@ -49,6 +50,7 @@
   padding: 0 var(--spacing-2x-large);
   justify-content: center;
   height: 100%;
+  width: 100%;
 }
 
 .verticalContent {
@@ -140,6 +142,10 @@
   object-fit: cover;
   border-radius: var(--corner-radius-x-large);
   display: block;
+}
+
+.notContained .imageElement {
+  border-radius: var(--corner-radius-large);
 }
 
 .imagePlaceholder {

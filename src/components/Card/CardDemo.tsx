@@ -66,7 +66,40 @@ export default function CardDemo() {
           data-qa="vertical-dark-card"
         />
       </div>
-      <div style={{ display: "flex", gap: "24px", width: "50%" }}>
+      <div style={{ display: "flex", gap: "24px", width: "100%" }}>
+        <Card
+          title="Non-contained"
+          description="This is a non-contained card with light theme."
+          direction="vertical"
+          inverse={false}
+          contained={false}
+          onButtonClick={() => handleButtonClick("non-contained-light")}
+          buttonLabel="View Details"
+          caption="This is a caption below the button."
+          data-qa="non-contained-light-card"
+        />
+        <Card
+          title="Non-contained"
+          description="This is a non-contained card with light theme."
+          direction="vertical"
+          inverse={false}
+          contained={false}
+          onButtonClick={() => handleButtonClick("non-contained-light")}
+          buttonLabel="View Details"
+          caption="This is a caption below the button."
+          data-qa="non-contained-light-card"
+        />
+        <Card
+          title="Non-contained"
+          description="This is a non-contained card with light theme."
+          direction="vertical"
+          inverse={false}
+          contained={false}
+          onButtonClick={() => handleButtonClick("non-contained-light")}
+          buttonLabel="View Details"
+          caption="This is a caption below the button."
+          data-qa="non-contained-light-card"
+        />
         <Card
           title="Non-contained"
           description="This is a non-contained card with light theme."

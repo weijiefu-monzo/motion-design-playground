@@ -1,0 +1,132 @@
+/* FeatureHighlights Block Styles using Design System */
+
+/* Base Section Styles */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2x-large);
+  background-color: var(--background-primary);
+  padding: var(--spacing-3x-large);
+  position: relative;
+  width: 100%;
+  max-width: 1568px;
+  margin: 0 auto;
+}
+
+/* Content Header */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x-large);
+  width: 100%;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+  width: 100%;
+}
+
+.title {
+  font-family: var(--font-family-display);
+  font-weight: 800; /* ExtraBold */
+  font-style: normal;
+  color: var(--content-primary);
+  margin: 0;
+  max-width: 720px;
+  font-size: var(--font-size-step-4);
+  line-height: var(--line-height-step-4);
+  letter-spacing: 0.3906px;
+}
+
+.description {
+  color: var(--content-secondary);
+  margin: 0;
+  max-width: 720px;
+  font-size: var(--font-size-step-1);
+  line-height: var(--line-height-step-1);
+  letter-spacing: 0.2px;
+}
+
+/* Action Section */
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.cta {
+  flex: 1;
+  min-width: 0;
+}
+
+.pageControl {
+  display: flex;
+  gap: var(--spacing-medium);
+  align-items: center;
+}
+
+/* Cards Grid */
+.cards {
+  display: flex;
+  gap: var(--spacing-large);
+  align-items: stretch;
+  width: 100%;
+}
+
+.cardContainer {
+  flex: 1;
+  min-width: 300px;
+  flex-shrink: 0;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--spacing-medium) var(--spacing-x-large);
+  }
+
+  .action {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-large);
+  }
+
+  .cta {
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .pageControl {
+    display: none; /* Hide page controls on mobile */
+  }
+
+  .card {
+    min-width: 280px;
+  }
+}
+@media (max-width: 393px) {
+  .section {
+    padding: var(--spacing-medium) var(--spacing-medium);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1040px) {
+  .section {
+    max-width: 1040px;
+    padding: var(--spacing-x-large) var(--spacing-3x-large);
+  }
+}
+
+@media (min-width: 1041px) {
+  .section {
+    max-width: 1536px;
+    padding: var(--spacing-3x-large);
+  }
+}

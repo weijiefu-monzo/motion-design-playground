@@ -1,0 +1,82 @@
+/* Carousel Component Styles using Design System */
+
+/* Base Carousel Styles */
+.carousel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x-large);
+  position: relative;
+}
+
+/* Content Row */
+.row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  position: relative;
+}
+
+/* Slides Container */
+.slidesContainer {
+  display: flex;
+  gap: var(--spacing-2x-large);
+  transition: transform var(--motion-duration-super-long)
+    var(--motion-easing-linear);
+  will-change: transform;
+}
+
+/* Controls Container */
+.controls {
+  display: flex;
+  gap: var(--spacing-large);
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Autoplay Control */
+.autoplayControl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pagination Dots */
+.dots {
+  display: flex;
+  gap: var(--spacing-small);
+  align-items: center;
+  justify-content: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--corner-radius-3x-large);
+  border: none;
+  background-color: var(--neutral-dark);
+  cursor: pointer;
+  transition: all var(--motion-duration-super-long) var(--motion-easing-linear);
+  position: relative;
+  overflow: hidden;
+}
+
+.dot:hover {
+  background-color: var(--neutral-darker);
+  transform: scale(1.2);
+}
+
+.dot:focus-visible {
+  outline: 2px solid var(--action-outline-focus);
+  outline-offset: 2px;
+}
+
+.dot.active {
+  width: 32px;
+  background-color: var(--neutral-darkest);
+}
+
+.dot.active:hover {
+  background-color: var(--neutral-darkest);
+  transform: none;
+}

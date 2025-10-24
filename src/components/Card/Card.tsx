@@ -8,7 +8,6 @@ export interface CardProps {
   className?: string;
   title?: string;
   description?: string;
-  button?: boolean;
   caption?: string;
   direction?: "horizontal" | "vertical";
   inverse?: boolean;
@@ -23,16 +22,15 @@ export interface CardProps {
 export default function Card({
   className = "",
   title = "Slide title",
-  description = "Slide description that explains the details of how it works, the content can span multiple lines, but not too long.",
-  button = true,
-  caption = "Caption below the CTA.",
+  description,
+  caption,
   direction = "horizontal",
   inverse = false,
   contained = true,
   imageSrc,
   imageAlt = "Card image",
   onButtonClick,
-  buttonLabel = "Button",
+  buttonLabel,
   "data-qa": dataQa,
 }: CardProps) {
   const cardClasses = clsx(
@@ -67,7 +65,7 @@ export default function Card({
                 {description}
               </Body>
             </div>
-            {button && (
+            {buttonLabel && (
               <Button
                 variant="secondary"
                 inverse={inverse}
@@ -122,7 +120,7 @@ export default function Card({
                 {description}
               </Body>
             </div>
-            {button && (
+            {buttonLabel && (
               <Button
                 variant="secondary"
                 size={contained ? "medium" : "small"}

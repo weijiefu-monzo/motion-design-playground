@@ -1,0 +1,235 @@
+/* Header Block Styles */
+.header {
+  backdrop-filter: blur(24px);
+  background-color: var(--alpha-white-80, rgba(255, 255, 255, 0.8));
+  height: 84px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.header.inverse {
+  background-color: var(--color-navy-800, #112231);
+  border-bottom: 1px solid var(--alpha-white-10, rgba(255, 255, 255, 0.1));
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-large, 24px);
+  height: 100%;
+  max-width: 1568px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-3x-large, 64px);
+}
+
+.mobileMenu {
+  display: none;
+}
+
+.logo {
+  flex-shrink: 0;
+  color: var(--color-brand, #ff4f40);
+}
+
+.logoImage {
+  height: 24px;
+  width: 138px;
+}
+
+.navigation {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.tabContainer {
+  background-color: var(--color-grey-100, #f2f8f3);
+  border-radius: var(--corner-radius-3x-large, 128px);
+  display: flex;
+  gap: var(--spacing-small, 12px);
+  padding: var(--spacing-2x-small, 4px);
+}
+
+.header.inverse .tabContainer {
+  background-color: var(--alpha-white-10, rgba(255, 255, 255, 0.1));
+}
+
+.tab {
+  background: none;
+  border: none;
+  border-radius: var(--corner-radius-3x-large, 128px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-x-small, 8px);
+  padding: var(--spacing-x-small, 8px) var(--spacing-small, 12px);
+  transition: all var(--motion-duration-short, 150ms)
+    var(--motion-easing-linear, ease);
+  min-width: 154px;
+}
+
+.tab:hover {
+  background-color: var(--color-grey-200, #e8f0ea);
+}
+
+.header.inverse .tab:hover {
+  background-color: var(--alpha-white-20, rgba(255, 255, 255, 0.2));
+}
+
+.activeTab {
+  background-color: var(--color-white, #ffffff);
+  color: var(--semantic-content-primary, #091723);
+}
+
+.header.inverse .activeTab {
+  background-color: var(--color-navy-800, #112231);
+  color: var(--alpha-white-90, rgba(255, 255, 255, 0.9));
+}
+
+.tabIcon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-500, #75817e);
+}
+
+.activeTab .tabIcon {
+  color: var(--semantic-content-primary, #091723);
+}
+
+.header.inverse .activeTab .tabIcon {
+  color: var(--alpha-white-90, rgba(255, 255, 255, 0.9));
+}
+
+.tabLabel {
+  font-family: var(
+    --type-font-family-content,
+    "Monzo_Sans_Text:SemiBold",
+    sans-serif
+  );
+  font-size: var(--type-font-size-step-0, 16px);
+  font-weight: 600;
+  line-height: var(--type-line-height-step-0, 22px);
+  letter-spacing: 0.16px;
+  color: var(--color-grey-500, #75817e);
+  white-space: nowrap;
+}
+
+.activeTab .tabLabel {
+  color: var(--semantic-content-primary, #091723);
+}
+
+.header.inverse .activeTab .tabLabel {
+  color: var(--alpha-white-90, rgba(255, 255, 255, 0.9));
+}
+
+.chevron {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-500, #75817e);
+  margin-left: auto;
+}
+
+.activeTab .chevron {
+  color: var(--semantic-content-primary, #091723);
+}
+
+.header.inverse .activeTab .chevron {
+  color: var(--alpha-white-90, rgba(255, 255, 255, 0.9));
+}
+
+.actions {
+  flex-shrink: 0;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: var(--spacing-medium, 16px);
+  align-items: center;
+}
+
+.loginButton {
+  border: 2px solid
+    var(--semantic-inverse-action-border-secondary-default, #ffffff);
+  background: transparent;
+  color: var(--semantic-inverse-content-primary, #ffffff);
+}
+
+.signupButton {
+  /* Button styles are handled by the Button component */
+}
+
+.menuButton {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--corner-radius-3x-large, 128px);
+}
+
+/* Tablet Landscape (1040px) */
+@media (max-width: 1040px) {
+  .container {
+    padding: 0 var(--spacing-x-large, 32px);
+    max-width: 1040px;
+  }
+}
+
+/* Tablet Portrait (768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-x-large, 32px);
+    max-width: 768px;
+  }
+
+  .navigation {
+    display: none;
+  }
+
+  .mobileMenu {
+    display: flex;
+  }
+
+  .logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .actions {
+    flex-shrink: 0;
+  }
+}
+
+/* Mobile (393px) */
+@media (max-width: 393px) {
+  .header {
+    height: 64px;
+  }
+
+  .container {
+    padding: 0 var(--spacing-medium, 16px);
+    max-width: 393px;
+    gap: var(--spacing-large, 24px);
+  }
+
+  .logoImage {
+    height: 20px;
+    width: 115px;
+  }
+
+  .menuButton {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--corner-radius-3x-large, 64px);
+  }
+
+  .buttonGroup {
+    gap: var(--spacing-small, 12px);
+  }
+}
