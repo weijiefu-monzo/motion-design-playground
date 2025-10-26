@@ -1,7 +1,7 @@
 /* ClickableCard Component Styles */
 .card {
-  background-color: var(--semantic-background-primary, #ffffff);
-  border: 1px solid var(--semantic-separator, rgba(9, 23, 35, 0.1));
+  background-color: var(--background-primary, #ffffff);
+  border: 1px solid var(--separator, rgba(9, 23, 35, 0.1));
   border-radius: var(--corner-radius-large, 32px);
   width: 100%;
   height: auto;
@@ -15,34 +15,34 @@
 }
 
 .card:hover:not(.disabled) {
-  border-color: var(--semantic-neutral-light, #c9d0c6);
+  border-color: var(--neutral-light, #c9d0c6);
 }
 
 .card:active:not(.disabled) {
-  border-color: var(--semantic-neutral-dark, #75817e);
+  border-color: var(--neutral-dark, #75817e);
 }
 
 .card:focus-visible {
-  outline: 2px solid var(--semantic-action-outline-focus, #009ace);
+  outline: 2px solid var(--action-outline-focus, #009ace);
   outline-offset: 2px;
 }
 
 /* Inverse variant */
 .card.inverse {
-  background-color: var(--semantic-inverse-background-primary, #112231);
-  border-color: var(--semantic-inverse-separator, rgba(255, 255, 255, 0.1));
+  background-color: var(--inverse-background-primary, #112231);
+  border-color: var(--inverse-separator, rgba(255, 255, 255, 0.1));
 }
 
 .card.inverse:hover:not(.disabled) {
-  border-color: var(--semantic-neutral-dark, #75817e);
+  border-color: var(--neutral-dark, #75817e);
 }
 
 .card.inverse:active:not(.disabled) {
-  border-color: var(--semantic-neutral-light, #c9d0c6);
+  border-color: var(--neutral-light, #c9d0c6);
 }
 
 .card.inverse:focus-visible {
-  outline: 2px solid var(--semantic-action-outline-focus, #009ace);
+  outline: 2px solid var(--action-outline-focus, #009ace);
   outline-offset: 2px;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .title {
-  color: var(--semantic-content-primary, #091723);
+  color: var(--content-primary, #091723);
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -100,7 +100,7 @@
 }
 
 .description {
-  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+  color: var(--content-secondary, rgba(9, 23, 35, 0.6));
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -111,11 +111,11 @@
 
 /* Inverse text colors */
 .card.inverse .title {
-  color: var(--semantic-inverse-content-primary, #ffffff);
+  color: var(--inverse-content-primary, #ffffff);
 }
 
 .card.inverse .description {
-  color: var(--semantic-inverse-content-secondary, rgba(255, 255, 255, 0.9));
+  color: var(--inverse-content-secondary, rgba(255, 255, 255, 0.9));
 }
 
 /* Focus ring for better accessibility */
@@ -126,7 +126,7 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
-  border: 2px solid var(--semantic-action-outline-focus, #009ace);
+  border: 2px solid var(--action-outline-focus, #009ace);
   border-radius: 34px;
   pointer-events: none;
   z-index: 1;

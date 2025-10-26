@@ -3,10 +3,10 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: var(--semantic-background-primary);
-  border: 1px solid var(--semantic-action-border-secondary-default);
+  background: var(--background-primary);
+  border: 1px solid var(--action-border-secondary-default);
   border-radius: 8px;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
   font-family: var(--font-family-content);
   font-size: 14px;
   font-weight: 500;
@@ -19,12 +19,12 @@
 }
 
 .toggle:hover {
-  background: var(--semantic-background-secondary);
-  border-color: var(--semantic-content-primary);
+  background: var(--background-secondary);
+  border-color: var(--content-primary);
 }
 
 .toggle:focus {
-  outline: 2px solid var(--semantic-content-accent);
+  outline: 2px solid var(--content-accent);
   outline-offset: 2px;
 }
 
@@ -42,12 +42,12 @@
 
 /* Dark theme adjustments */
 [data-theme="dark"] .toggle {
-  background: var(--semantic-inverse-background-primary);
-  border-color: var(--semantic-inverse-action-border-secondary-default);
-  color: var(--semantic-inverse-content-primary);
+  background: var(--inverse-background-primary);
+  border-color: var(--inverse-action-border-secondary-default);
+  color: var(--inverse-content-primary);
 }
 
 [data-theme="dark"] .toggle:hover {
-  background: var(--semantic-inverse-background-secondary);
-  border-color: var(--semantic-inverse-content-primary);
+  background: var(--inverse-background-secondary);
+  border-color: var(--inverse-content-primary);
 }

@@ -1,6 +1,6 @@
 /* Testimonials Block Styles */
 .section {
-  background-color: var(--semantic-background-primary, #ffffff);
+  background-color: var(--background-primary, #ffffff);
   padding: var(--spacing-3x-large, 64px);
   width: 100%;
   max-width: 1568px;
@@ -48,7 +48,7 @@
 }
 
 .title {
-  color: var(--semantic-content-primary, #091723);
+  color: var(--content-primary, #091723);
   margin: 0;
   text-align: center;
   line-height: 84px;

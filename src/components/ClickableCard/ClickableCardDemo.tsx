@@ -64,8 +64,7 @@ export default function ClickableCardDemo() {
       {/* Inverse Cards */}
       <section
         style={{
-          backgroundColor:
-            "var(--semantic-inverse-background-primary, #112231)",
+          backgroundColor: "var(--inverse-background-primary, #112231)",
           padding: "var(--spacing-large)",
           borderRadius: "var(--corner-radius-medium)",
           marginTop: "var(--spacing-large)",

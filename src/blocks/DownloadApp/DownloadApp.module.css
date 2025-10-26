@@ -1,6 +1,6 @@
 /* DownloadApp Block Styles */
 .section {
-  background-color: var(--semantic-background-primary, #ffffff);
+  background-color: var(--background-primary, #ffffff);
   padding: var(--spacing-3x-large, 64px) var(--spacing-3x-large, 64px);
   width: 100%;
   max-width: 1568px;
@@ -11,7 +11,7 @@
 }
 
 .container {
-  background-color: var(--semantic-background-secondary, #f2f8f3);
+  background-color: var(--background-secondary, #f2f8f3);
   border-radius: var(--corner-radius-x-large, 64px);
   display: flex;
   align-items: center;
@@ -35,12 +35,12 @@
 }
 
 .title {
-  color: var(--semantic-content-primary, #091723);
+  color: var(--content-primary, #091723);
   margin: 0;
 }
 
 .description {
-  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+  color: var(--content-secondary, rgba(9, 23, 35, 0.6));
   margin: 0;
 }
 

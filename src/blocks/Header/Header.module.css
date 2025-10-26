@@ -80,7 +80,7 @@
 
 .activeTab {
   background-color: var(--color-white, #ffffff);
-  color: var(--semantic-content-primary, #091723);
+  color: var(--content-primary, #091723);
 }
 
 .header.inverse .activeTab {
@@ -98,7 +98,7 @@
 }
 
 .activeTab .tabIcon {
-  color: var(--semantic-content-primary, #091723);
+  color: var(--content-primary, #091723);
 }
 
 .header.inverse .activeTab .tabIcon {
@@ -120,7 +120,7 @@
 }
 
 .activeTab .tabLabel {
-  color: var(--semantic-content-primary, #091723);
+  color: var(--content-primary, #091723);
 }
 
 .header.inverse .activeTab .tabLabel {
@@ -138,7 +138,7 @@
 }
 
 .activeTab .chevron {
-  color: var(--semantic-content-primary, #091723);
+  color: var(--content-primary, #091723);
 }
 
 .header.inverse .activeTab .chevron {
@@ -156,14 +156,9 @@
 }
 
 .loginButton {
-  border: 2px solid
-    var(--semantic-inverse-action-border-secondary-default, #ffffff);
+  border: 2px solid var(--inverse-action-border-secondary-default, #ffffff);
   background: transparent;
-  color: var(--semantic-inverse-content-primary, #ffffff);
-}
-
-.signupButton {
-  /* Button styles are handled by the Button component */
+  color: var(--inverse-content-primary, #ffffff);
 }
 
 .menuButton {

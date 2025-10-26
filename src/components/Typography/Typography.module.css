@@ -164,23 +164,23 @@
 
 /* Color variants based on semantic tokens */
 .primary {
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .secondary {
-  color: var(--semantic-content-secondary);
+  color: var(--content-secondary);
 }
 
 .inverse {
-  color: var(--semantic-inverse-content-primary);
+  color: var(--inverse-content-primary);
 }
 
 .inverseSecondary {
-  color: var(--semantic-inverse-content-secondary);
+  color: var(--inverse-content-secondary);
 }
 
 .accent {
-  color: var(--semantic-content-accent);
+  color: var(--content-accent);
 }
 
 /* Utility classes for common combinations */
@@ -191,7 +191,7 @@
   line-height: var(--line-height-step-6);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .h1Primary {
@@ -201,7 +201,7 @@
   line-height: var(--line-height-step-5);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .h2Primary {
@@ -211,7 +211,7 @@
   line-height: var(--line-height-step-4);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .h3Primary {
@@ -221,7 +221,7 @@
   line-height: var(--line-height-step-3);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .h4Primary {
@@ -231,7 +231,7 @@
   line-height: var(--line-height-step-2);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .h5Primary {
@@ -241,7 +241,7 @@
   line-height: var(--line-height-step-1);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .bodyLargeRegularPrimary {
@@ -251,7 +251,7 @@
   line-height: var(--line-height-step-1);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .bodyLargeEmphasizedPrimary {
@@ -261,7 +261,7 @@
   line-height: var(--line-height-step-1);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .bodyMediumRegularPrimary {
@@ -271,7 +271,7 @@
   line-height: var(--line-height-step-0);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .bodyMediumEmphasizedPrimary {
@@ -281,7 +281,7 @@
   line-height: var(--line-height-step-0);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
 
 .bodySmallEmphasizedPrimary {
@@ -291,5 +291,5 @@
   line-height: var(--line-height-step--1);
   font-style: normal;
   margin: 0;
-  color: var(--semantic-content-primary);
+  color: var(--content-primary);
 }
