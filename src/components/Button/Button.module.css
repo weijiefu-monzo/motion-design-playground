@@ -20,7 +20,7 @@
   white-space: nowrap;
 
   /* Transitions */
-  transition: all var(--motion-duration-short) var(--motion-easing-linear);
+  transition: opacity var(--motion-duration-short) var(--motion-easing-linear);
 
   /* Focus management */
   &:focus-visible {
@@ -80,33 +80,26 @@
 /* Primary Variant */
 .primary {
   background-color: var(--action-fill-primary-default);
+  position: relative;
   color: var(--inverse-content-primary);
 }
 
-.primary:hover:not(:disabled) {
-  background-image: linear-gradient(
-      90deg,
-      var(--action-fill-primary-hover) 0%,
-      var(--action-fill-primary-hover) 100%
-    ),
-    linear-gradient(
-      90deg,
-      var(--action-fill-primary-default) 0%,
-      var(--action-fill-primary-default) 100%
-    );
+.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: var(--action-fill-primary-hover);
+  border-radius: inherit;
+  transition: opacity var(--motion-duration-short) var(--motion-easing-linear);
+}
+.primary:hover:not(:disabled)::after {
+  opacity: 1;
 }
 
-.primary:active:not(:disabled) {
-  background-image: linear-gradient(
-      90deg,
-      var(--action-fill-primary-active) 0%,
-      var(--action-fill-primary-active) 100%
-    ),
-    linear-gradient(
-      90deg,
-      var(--action-fill-primary-default) 0%,
-      var(--action-fill-primary-default) 100%
-    );
+.primary:active:not(:disabled)::after {
+  opacity: 1;
+  background: var(--action-fill-primary-active);
 }
 
 .primary:disabled {
@@ -120,30 +113,23 @@
   color: var(--content-primary);
 }
 
-.primary.inverse:hover:not(:disabled) {
-  background-image: linear-gradient(
-      90deg,
-      var(--inverse-action-fill-primary-hover) 0%,
-      var(--inverse-action-fill-primary-hover) 100%
-    ),
-    linear-gradient(
-      90deg,
-      var(--inverse-action-fill-primary-default) 0%,
-      var(--inverse-action-fill-primary-default) 100%
-    );
+.primary.inverse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: var(--inverse-action-fill-primary-hover);
+  border-radius: inherit;
+  transition: opacity var(--motion-duration-short) var(--motion-easing-linear);
 }
 
-.primary.inverse:active:not(:disabled) {
-  background-image: linear-gradient(
-      90deg,
-      var(--inverse-action-fill-primary-active) 0%,
-      var(--inverse-action-fill-primary-active) 100%
-    ),
-    linear-gradient(
-      90deg,
-      var(--inverse-action-fill-primary-default) 0%,
-      var(--inverse-action-fill-primary-default) 100%
-    );
+.primary.inverse:hover:not(:disabled)::after {
+  opacity: 1;
+}
+
+.primary.inverse:active:not(:disabled)::after {
+  opacity: 1;
+  background: var(--inverse-action-fill-primary-active);
 }
 
 .primary.inverse:disabled {
@@ -158,12 +144,23 @@
   border: 2px solid var(--action-border-secondary-default);
 }
 
-.secondary:hover:not(:disabled) {
-  background-color: var(--action-fill-secondary-hover);
+.secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: var(--action-fill-secondary-hover);
+  border-radius: inherit;
+  transition: opacity var(--motion-duration-short) var(--motion-easing-linear);
 }
 
-.secondary:active:not(:disabled) {
-  background-color: var(--action-fill-secondary-active);
+.secondary:hover:not(:disabled)::after {
+  opacity: 1;
+}
+
+.secondary:active:not(:disabled)::after {
+  opacity: 1;
+  background: var(--action-fill-secondary-active);
 }
 
 .secondary:disabled {
@@ -178,12 +175,23 @@
   border: 2px solid var(--inverse-action-border-secondary-default);
 }
 
-.secondary.inverse:hover:not(:disabled) {
-  background-color: var(--inverse-action-fill-secondary-hover);
+.secondary.inverse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: var(--inverse-action-fill-secondary-hover);
+  border-radius: inherit;
+  transition: opacity var(--motion-duration-short) var(--motion-easing-linear);
 }
 
-.secondary.inverse:active:not(:disabled) {
-  background-color: var(--inverse-action-fill-secondary-active);
+.secondary.inverse:hover:not(:disabled)::after {
+  opacity: 1;
+}
+
+.secondary.inverse:active:not(:disabled)::after {
+  opacity: 1;
+  background: var(--inverse-action-fill-secondary-active);
 }
 
 .secondary.inverse:disabled {
