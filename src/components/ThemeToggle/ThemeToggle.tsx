@@ -47,9 +47,9 @@ export const ThemeToggle: React.FC = () => {
           </svg>
         )}
       </div>
-      <span className={styles.label}>
+      {/* <span className={styles.label}>
         {theme === "light" ? "Dark" : "Light"}
-      </span>
+      </span> */}
     </button>
   );
 };

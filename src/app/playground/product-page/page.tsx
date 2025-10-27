@@ -8,6 +8,7 @@ import { Testimonials } from "@/blocks/Testimonials";
 import { LinkedArticles } from "@/blocks/LinkedArticles";
 import { FAQ } from "@/blocks/FAQ";
 import { Header } from "@/blocks/Header";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   ClickableCard,
   ClickableCardDemo,
@@ -96,6 +97,7 @@ An award-winning 0% credit card."
         }
         data-qa="faq"
       />
+      <ThemeToggle />
     </div>
   );
 }
