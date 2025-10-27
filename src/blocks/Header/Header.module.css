@@ -8,7 +8,7 @@
 
 .header {
   backdrop-filter: blur(24px);
-  background-color: var(--alpha-white-80, rgba(255, 255, 255, 0.8));
+  background-color: var(--alpha-white-80);
   height: 84px;
   width: 100%;
 }
@@ -124,7 +124,7 @@
 }
 
 .activeTab .tabLabel {
-  color: var(--content-primary, #091723);
+  color: var(--content-primary);
 }
 
 .header.inverse .activeTab .tabLabel {

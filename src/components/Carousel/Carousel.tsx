@@ -8,6 +8,7 @@ import {
   AiOutlineArrowRight,
   AiFillCaretRight,
 } from "react-icons/ai";
+import { SPRING_CONFIG } from "../../styles/springConfig";
 
 export interface CarouselProps {
   className?: string;
@@ -43,7 +44,7 @@ export default function Carousel({
   // Spring animation for carousel transitions
   const slideSpring = useSpring({
     x: -(currentIndex * 100) / children.length,
-    config: { tension: 100, friction: 30 },
+    config: SPRING_CONFIG.slow,
   });
 
   const goToSlide = useCallback(
@@ -184,7 +185,7 @@ export default function Carousel({
                 const isActive = index === currentIndex;
                 const dotSpring = useSpring({
                   width: isActive ? 32 : 8,
-                  config: { tension: 500, friction: 100 },
+                  config: SPRING_CONFIG.slow,
                 });
 
                 return (

@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
-import { animated, useSpring } from "@react-spring/web";
+import { animated, useTrail, useSpring } from "@react-spring/web";
 import styles from "./Hero.module.css";
 import { Chip } from "../../components/Chip";
 import { H1, Body, H3, H2 } from "../../components/Typography";
 import { Button } from "../../components/Button";
 import { Cell } from "../../components/Cell";
-
+import { SPRING_CONFIG } from "../../styles/springConfig";
 export interface HeroProps {
   className?: string;
   title?: string;
@@ -93,46 +93,25 @@ export default function Hero({
     },
   ];
 
-  const textSectionSpring = useSpring({
+  // Animation trail for vertical (y) animations
+  const [
+    textSectionSpring,
+    buttonSpring,
+    financialDataSpring,
+    socialProofSpring,
+    legalCopySpring,
+  ] = useTrail(5, {
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: { tension: 100, friction: 30 },
-    delay: ANIMATION_DELAY_BASE * 0,
-  });
+    config: SPRING_CONFIG.gentle,
+  }) as any;
 
-  const buttonSpring = useSpring({
-    opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 20,
-    config: { tension: 100, friction: 30 },
-    delay: ANIMATION_DELAY_BASE * 1,
-  });
-
-  const financialDataSpring = useSpring({
-    opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 20,
-    config: { tension: 100, friction: 30 },
-    delay: ANIMATION_DELAY_BASE * 2,
-  });
-
+  // Image section uses different animation (x direction)
   const imageSectionSpring = useSpring({
     opacity: isInView ? 1 : 0,
     x: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 0.5,
-  });
-
-  const socialProofSpring = useSpring({
-    opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 20,
-    config: { tension: 100, friction: 30 },
-    delay: ANIMATION_DELAY_BASE * 3,
-  });
-
-  const legalCopySpring = useSpring({
-    opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 20,
-    config: { tension: 100, friction: 30 },
-    delay: ANIMATION_DELAY_BASE * 4,
   });
 
   return (
@@ -148,7 +127,9 @@ export default function Hero({
             className={styles.textSection}
             style={{
               opacity: textSectionSpring.opacity,
-              transform: textSectionSpring.y.to((y) => `translateY(${y}px)`),
+              transform: textSectionSpring.y.to(
+                (y: number) => `translateY(${y}px)`
+              ),
             }}
           >
             {chipLabel && <Chip label={chipLabel} variant="default" />}
@@ -161,7 +142,7 @@ export default function Hero({
           <animated.div
             style={{
               opacity: buttonSpring.opacity,
-              transform: buttonSpring.y.to((y) => `translateY(${y}px)`),
+              transform: buttonSpring.y.to((y: number) => `translateY(${y}px)`),
             }}
           >
             <Button
@@ -175,7 +156,9 @@ export default function Hero({
             className={styles.financialData}
             style={{
               opacity: financialDataSpring.opacity,
-              transform: financialDataSpring.y.to((y) => `translateY(${y}px)`),
+              transform: financialDataSpring.y.to(
+                (y: number) => `translateY(${y}px)`
+              ),
             }}
           >
             {financialData.map((data, index) => (
@@ -207,7 +190,9 @@ export default function Hero({
           className={styles.imageSection}
           style={{
             opacity: imageSectionSpring.opacity,
-            transform: imageSectionSpring.x.to((x) => `translateX(${x}px)`),
+            transform: imageSectionSpring.x.to(
+              (x: number) => `translateX(${x}px)`
+            ),
           }}
         >
           <div className={styles.heroImage}>
@@ -223,7 +208,9 @@ export default function Hero({
         className={styles.socialProof}
         style={{
           opacity: socialProofSpring.opacity,
-          transform: socialProofSpring.y.to((y) => `translateY(${y}px)`),
+          transform: socialProofSpring.y.to(
+            (y: number) => `translateY(${y}px)`
+          ),
         }}
       >
         {socialProof.map((item, index) => (
@@ -261,7 +248,7 @@ export default function Hero({
       <animated.div
         style={{
           opacity: legalCopySpring.opacity,
-          transform: legalCopySpring.y.to((y) => `translateY(${y}px)`),
+          transform: legalCopySpring.y.to((y: number) => `translateY(${y}px)`),
         }}
       >
         <Body size="medium" className={styles.legalCopy}>

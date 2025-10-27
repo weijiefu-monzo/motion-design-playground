@@ -4,7 +4,7 @@ import { useSpring, animated } from "@react-spring/web";
 import styles from "./Testimonials.module.css";
 import { Button } from "../../components";
 import { H1, Body } from "../../components/Typography";
-
+import { SPRING_CONFIG } from "@/styles/springConfig";
 export interface TestimonialsProps {
   className?: string;
   title?: string;
@@ -66,8 +66,8 @@ export default function Testimonials({
 
   const contentSpring = useSpring({
     opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    y: isInView ? 0 : 20,
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 

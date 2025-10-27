@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
-import { useSpring, animated } from "@react-spring/web";
+import { useSpring, animated, useTrail } from "@react-spring/web";
 import styles from "./FAQ.module.css";
 import { Accordion } from "../../components";
 import { H2 } from "../../components/Typography";
-
+import { SPRING_CONFIG } from "@/styles/springConfig";
 export interface FAQProps {
   className?: string;
   title?: string;
@@ -52,17 +52,18 @@ export default function FAQ({
 
   const titleSpring = useSpring({
     opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    y: isInView ? 0 : 20,
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
-  const contentSpring = useSpring({
+  // Animation trail for staggered accordions
+  const accordionTrail = useTrail(questions.length, {
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 1,
-  });
+  }) as any;
 
   const handleToggle = (index: number, expanded: boolean) => {
     if (onToggle) {
@@ -87,24 +88,30 @@ export default function FAQ({
         >
           <H2 className={styles.title}>{title}</H2>
         </animated.div>
-        <animated.div
-          className={styles.content}
-          style={{
-            opacity: contentSpring.opacity,
-            transform: contentSpring.y.to((y) => `translateY(${y}px)`),
-          }}
-        >
-          {questions.map((item, index) => (
-            <Accordion
-              key={index}
-              title={item.question}
-              details={item.answer}
-              expanded={item.expanded}
-              onToggle={(expanded) => handleToggle(index, expanded)}
-              data-qa={`faq-accordion-${index}`}
-            />
-          ))}
-        </animated.div>
+        <div className={styles.content}>
+          {questions.map((item, index) => {
+            const accordionSpring = accordionTrail[index];
+            return (
+              <animated.div
+                key={index}
+                style={{
+                  opacity: accordionSpring.opacity,
+                  transform: accordionSpring.y.to(
+                    (y: number) => `translateY(${y}px)`
+                  ),
+                }}
+              >
+                <Accordion
+                  title={item.question}
+                  details={item.answer}
+                  expanded={item.expanded}
+                  onToggle={(expanded) => handleToggle(index, expanded)}
+                  data-qa={`faq-accordion-${index}`}
+                />
+              </animated.div>
+            );
+          })}
+        </div>
       </div>
     </animated.section>
   );

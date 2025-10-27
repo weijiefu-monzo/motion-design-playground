@@ -92,7 +92,7 @@ export default function Header({
 
   const spring = useSpring({
     y: isVisible ? 0 : -100,
-    config: { tension: 120, friction: 14 },
+    config: { tension: 120, friction: 14, clamp: true },
   });
 
   const handleTabChange = (tab: "Personal" | "Business") => {

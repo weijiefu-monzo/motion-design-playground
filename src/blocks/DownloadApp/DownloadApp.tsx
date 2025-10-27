@@ -4,7 +4,7 @@ import { useSpring, animated } from "@react-spring/web";
 import styles from "./DownloadApp.module.css";
 import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
-
+import { SPRING_CONFIG } from "@/styles/springConfig";
 export interface DownloadAppProps {
   className?: string;
   title?: string;
@@ -57,15 +57,15 @@ export default function DownloadApp({
   // Animation springs for staggered effect
   const contentSpring = useSpring({
     opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    y: isInView ? 0 : 20,
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
   const mediaSpring = useSpring({
     opacity: isInView ? 1 : 0,
     x: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 1,
   });
 

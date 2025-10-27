@@ -6,6 +6,7 @@ import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
 import Step from "./Step";
 import StepCard from "./StepCard";
+import { SPRING_CONFIG } from "@/styles/springConfig";
 export interface GettingStartedProps {
   className?: string;
   title?: string;
@@ -64,16 +65,9 @@ export default function GettingStarted({
   // Animation springs for staggered effect
   const headerSpring = useSpring({
     opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    y: isInView ? 0 : 20,
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
-  });
-
-  const stepsSpring = useSpring({
-    opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
-    delay: ANIMATION_DELAY_BASE * 1,
   });
 
   // Individual step animations for stagger effect
@@ -81,15 +75,15 @@ export default function GettingStarted({
     useSpring({
       opacity: isInView ? 1 : 0,
       x: isInView ? 0 : -20,
-      config: { tension: 120, friction: 30 },
+      config: SPRING_CONFIG.gentle,
       delay: ANIMATION_DELAY_BASE * 2 + index * 100,
     });
 
   // Image transition when step changes - creates new animation when key changes
   const imageSpring = useSpring({
     opacity: 1,
-    from: { opacity: 0 },
-    config: { tension: 200, friction: 20 },
+    from: { opacity: 0.75, x: isInView ? 0 : 30 },
+    config: SPRING_CONFIG.gentle,
     reset: true,
   });
 
@@ -101,7 +95,7 @@ export default function GettingStarted({
         index === currentStep
           ? "var(--neutral-darkest)"
           : "var(--neutral-dark)",
-      config: { tension: 500, friction: 100 },
+      config: SPRING_CONFIG.slow,
     });
 
   const handleButtonClick = () => {

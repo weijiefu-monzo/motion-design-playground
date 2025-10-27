@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./GettingStarted.module.css";
 import { H4, Body, Billboard } from "../../components/Typography";
-
+import { SPRING_CONFIG } from "@/styles/springConfig";
 export interface StepProps {
   className?: string;
   title: string;
@@ -42,6 +43,39 @@ export default function Step({
     [styles.currentTitle]: current,
   });
 
+  // Measure description height
+  const descriptionRef = useRef<HTMLDivElement>(null);
+  const measureRef = useRef<HTMLDivElement>(null);
+  const [descriptionHeight, setDescriptionHeight] = useState(0);
+
+  useEffect(() => {
+    const measure = () => {
+      if (measureRef.current && descriptionRef.current?.parentElement) {
+        const parentWidth = descriptionRef.current.parentElement.offsetWidth;
+        measureRef.current.style.width = `${parentWidth}px`;
+
+        // Force a reflow
+        measureRef.current.offsetHeight;
+
+        setDescriptionHeight(measureRef.current.scrollHeight);
+      }
+    };
+
+    measure();
+
+    // Re-measure when window resizes or description changes
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [description]);
+
+  // Animation spring for description transition
+  const descriptionSpring = useSpring({
+    opacity: current ? 1 : 0,
+    height: current && descriptionHeight > 0 ? descriptionHeight : 0,
+    y: current ? 0 : 20,
+    config: SPRING_CONFIG.default,
+  });
+
   return (
     <div
       className={stepClasses}
@@ -64,8 +98,37 @@ export default function Step({
       </div>
       <div className={styles.stepContent}>
         <H4 className={titleClasses}>{title}</H4>
-        {current && description && (
-          <Body className={styles.stepDescription}>{description}</Body>
+        {description && (
+          <>
+            {/* Hidden element for measurement */}
+            <div
+              ref={measureRef}
+              style={{
+                position: "absolute",
+                visibility: "hidden",
+                height: "auto",
+                top: 0,
+                left: 0,
+              }}
+            >
+              <Body className={styles.stepDescription}>{description}</Body>
+            </div>
+
+            {/* Animated description */}
+            <animated.div
+              ref={descriptionRef}
+              style={{
+                opacity: descriptionSpring.opacity,
+                height: descriptionSpring.height.to((h: number) => `${h}px`),
+                transform: descriptionSpring.y.to(
+                  (y: number) => `translateY(${y}px)`
+                ),
+                overflow: "hidden",
+              }}
+            >
+              <Body className={styles.stepDescription}>{description}</Body>
+            </animated.div>
+          </>
         )}
       </div>
     </div>

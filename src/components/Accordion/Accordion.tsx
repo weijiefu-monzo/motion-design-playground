@@ -4,7 +4,7 @@ import { useSpring, animated, config } from "@react-spring/web";
 import styles from "./Accordion.module.css";
 import { H5, Body } from "../Typography";
 import { AiOutlineDown } from "react-icons/ai";
-
+import { SPRING_CONFIG } from "@/styles/springConfig";
 export interface AccordionProps {
   className?: string;
   title: string;
@@ -59,7 +59,7 @@ export default function Accordion({
   // Icon rotation animation
   const iconSpring = useSpring({
     transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-    config: { tension: 180, friction: 20 },
+    config: SPRING_CONFIG.default,
   });
 
   // Content animation
@@ -67,7 +67,7 @@ export default function Accordion({
     height: isExpanded && details && contentHeight > 0 ? contentHeight : 0,
     opacity: isExpanded ? 1 : 0,
     marginBottom: isExpanded ? "16px" : "0px",
-    config: { tension: 180, friction: 20 },
+    config: SPRING_CONFIG.default,
   });
 
   const accordionClasses = clsx(

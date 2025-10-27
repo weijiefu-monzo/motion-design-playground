@@ -5,6 +5,7 @@ import styles from "./FeatureHighlights.module.css";
 import { Button, Card, IconButton } from "../../components";
 import { H2, Body } from "../../components/Typography";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { SPRING_CONFIG } from "@/styles/springConfig";
 
 export interface FeatureHighlightsProps {
   className?: string;
@@ -93,15 +94,15 @@ export default function FeatureHighlights({
   // Animation springs for staggered effect
   const headerSpring = useSpring({
     opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    y: isInView ? 0 : 20,
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
   const cardsSpring = useSpring({
     opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    y: isInView ? 0 : 20,
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 1,
   });
 

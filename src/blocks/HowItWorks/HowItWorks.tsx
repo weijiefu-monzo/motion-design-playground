@@ -5,6 +5,7 @@ import styles from "./HowItWorks.module.css";
 import { Carousel } from "../../components";
 import { H2 } from "../../components/Typography";
 import Card from "../../components/Card/Card";
+import { SPRING_CONFIG } from "@/styles/springConfig";
 
 export interface HowItWorksProps {
   className?: string;
@@ -100,15 +101,15 @@ export default function HowItWorks({
   // Animation springs for staggered effect
   const titleSpring = useSpring({
     opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    y: isInView ? 0 : 20,
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
   const carouselSpring = useSpring({
     opacity: isInView ? 1 : 0,
-    y: isInView ? 0 : 30,
-    config: { tension: 100, friction: 30 },
+    y: isInView ? 0 : 20,
+    config: SPRING_CONFIG.gentle,
     delay: ANIMATION_DELAY_BASE * 1,
   });
 

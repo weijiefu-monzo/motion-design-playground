@@ -19,10 +19,12 @@
 /* Slides Container */
 .slidesContainer {
   display: flex;
-  gap: var(--spacing-2x-large);
+  /* gap: var(--spacing-2x-large); */
   will-change: transform;
 }
-
+.slot {
+  margin-right: var(--spacing-2x-large);
+}
 /* Controls Container */
 .controls {
   display: flex;
