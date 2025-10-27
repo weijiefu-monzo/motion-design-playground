@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./FeatureHighlights.module.css";
 import { Button, Card, IconButton } from "../../components";
 import { H2, Body } from "../../components/Typography";
@@ -63,6 +64,47 @@ export default function FeatureHighlights({
   onCardButtonClick,
   "data-qa": dataQa,
 }: FeatureHighlightsProps) {
+  const ref = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  const ANIMATION_DELAY_BASE = 100;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  // Animation springs for staggered effect
+  const headerSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 30,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 0,
+  });
+
+  const cardsSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 30,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 1,
+  });
+
   const handleButtonClick = () => {
     if (onButtonClick) {
       onButtonClick();
@@ -78,9 +120,19 @@ export default function FeatureHighlights({
   const sectionClasses = clsx(styles.section, className);
 
   return (
-    <section className={sectionClasses} data-qa={dataQa}>
+    <animated.section
+      ref={ref as React.RefObject<HTMLElement>}
+      className={sectionClasses}
+      data-qa={dataQa}
+    >
       {/* Header Content */}
-      <div className={styles.content}>
+      <animated.div
+        className={styles.content}
+        style={{
+          opacity: headerSpring.opacity,
+          transform: headerSpring.y.to((y) => `translateY(${y}px)`),
+        }}
+      >
         <div className={styles.text}>
           <H2 className={styles.title}>{title}</H2>
           {description && (
@@ -124,10 +176,16 @@ export default function FeatureHighlights({
             </div>
           )}
         </div>
-      </div>
+      </animated.div>
 
       {/* Cards Grid */}
-      <div className={styles.cards}>
+      <animated.div
+        className={styles.cards}
+        style={{
+          opacity: cardsSpring.opacity,
+          transform: cardsSpring.y.to((y) => `translateY(${y}px)`),
+        }}
+      >
         {cards.map((card, index) => (
           <div key={index} className={styles.cardContainer}>
             <Card
@@ -145,7 +203,7 @@ export default function FeatureHighlights({
             />
           </div>
         ))}
-      </div>
-    </section>
+      </animated.div>
+    </animated.section>
   );
 }

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./FAQ.module.css";
 import { Accordion } from "../../components";
 import { H2 } from "../../components/Typography";
@@ -23,6 +24,46 @@ export default function FAQ({
   onToggle,
   "data-qa": dataQa,
 }: FAQProps) {
+  const ref = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  const ANIMATION_DELAY_BASE = 100;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  const titleSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 30,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 0,
+  });
+
+  const contentSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 30,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 1,
+  });
+
   const handleToggle = (index: number, expanded: boolean) => {
     if (onToggle) {
       onToggle(index, expanded);
@@ -32,10 +73,27 @@ export default function FAQ({
   const sectionClasses = clsx(styles.section, className);
 
   return (
-    <section className={sectionClasses} data-qa={dataQa}>
+    <animated.section
+      ref={ref as React.RefObject<HTMLElement>}
+      className={sectionClasses}
+      data-qa={dataQa}
+    >
       <div className={styles.container}>
-        <H2 className={styles.title}>{title}</H2>
-        <div className={styles.content}>
+        <animated.div
+          style={{
+            opacity: titleSpring.opacity,
+            transform: titleSpring.y.to((y) => `translateY(${y}px)`),
+          }}
+        >
+          <H2 className={styles.title}>{title}</H2>
+        </animated.div>
+        <animated.div
+          className={styles.content}
+          style={{
+            opacity: contentSpring.opacity,
+            transform: contentSpring.y.to((y) => `translateY(${y}px)`),
+          }}
+        >
           {questions.map((item, index) => (
             <Accordion
               key={index}
@@ -46,8 +104,8 @@ export default function FAQ({
               data-qa={`faq-accordion-${index}`}
             />
           ))}
-        </div>
+        </animated.div>
       </div>
-    </section>
+    </animated.section>
   );
 }

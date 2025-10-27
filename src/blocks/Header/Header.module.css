@@ -1,11 +1,15 @@
 /* Header Block Styles */
+.headerWrapper {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
 .header {
   backdrop-filter: blur(24px);
   background-color: var(--alpha-white-80, rgba(255, 255, 255, 0.8));
   height: 84px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
   width: 100%;
 }
 

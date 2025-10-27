@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./Carousel.module.css";
 import IconButton from "../IconButton/IconButton";
 import {
@@ -38,6 +39,12 @@ export default function Carousel({
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
   const totalSlides = children.length;
+
+  // Spring animation for carousel transitions
+  const slideSpring = useSpring({
+    x: -(currentIndex * 100) / children.length,
+    config: { tension: 100, friction: 30 },
+  });
 
   const goToSlide = useCallback(
     (index: number) => {
@@ -128,12 +135,10 @@ export default function Carousel({
     >
       {/* Content Row */}
       <div className={rowClasses}>
-        <div
+        <animated.div
           className={styles.slidesContainer}
           style={{
-            transform: `translateX(-${
-              (currentIndex * 100) / children.length
-            }%)`,
+            transform: slideSpring.x.to((x) => `translateX(${x}%)`),
           }}
         >
           {children.map((child, index) => (
@@ -146,7 +151,7 @@ export default function Carousel({
               {child}
             </div>
           ))}
-        </div>
+        </animated.div>
       </div>
 
       {/* Controls */}
@@ -175,25 +180,36 @@ export default function Carousel({
               role="tablist"
               aria-label="Carousel pagination"
             >
-              {children.map((_, index) => (
-                <button
-                  key={index}
-                  className={clsx(styles.dot, {
-                    [styles.active]: index === currentIndex,
-                  })}
-                  onClick={() => goToSlide(index)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      goToSlide(index);
-                    }
-                  }}
-                  role="tab"
-                  aria-label={`Go to slide ${index + 1}`}
-                  aria-selected={index === currentIndex}
-                  tabIndex={index === currentIndex ? 0 : -1}
-                />
-              ))}
+              {children.map((_, index) => {
+                const isActive = index === currentIndex;
+                const dotSpring = useSpring({
+                  width: isActive ? 32 : 8,
+                  config: { tension: 500, friction: 100 },
+                });
+
+                return (
+                  <animated.button
+                    key={index}
+                    className={clsx(styles.dot, {
+                      [styles.active]: isActive,
+                    })}
+                    style={{
+                      width: dotSpring.width.to((w) => `${w}px`),
+                    }}
+                    onClick={() => goToSlide(index)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        goToSlide(index);
+                      }
+                    }}
+                    role="tab"
+                    aria-label={`Go to slide ${index + 1}`}
+                    aria-selected={isActive}
+                    tabIndex={isActive ? 0 : -1}
+                  />
+                );
+              })}
             </div>
           )}
 

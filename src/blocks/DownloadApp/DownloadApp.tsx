@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./DownloadApp.module.css";
 import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
@@ -27,6 +28,47 @@ export default function DownloadApp({
   onButtonClick,
   "data-qa": dataQa,
 }: DownloadAppProps) {
+  const ref = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  const ANIMATION_DELAY_BASE = 100;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  // Animation springs for staggered effect
+  const contentSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 30,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 0,
+  });
+
+  const mediaSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    x: isInView ? 0 : 30,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 1,
+  });
+
   const handleButtonClick = () => {
     if (onButtonClick) {
       onButtonClick();
@@ -36,9 +78,19 @@ export default function DownloadApp({
   const sectionClasses = clsx(styles.section, className);
 
   return (
-    <section className={sectionClasses} data-qa={dataQa}>
+    <animated.section
+      ref={ref as React.RefObject<HTMLElement>}
+      className={sectionClasses}
+      data-qa={dataQa}
+    >
       <div className={styles.container}>
-        <div className={styles.content}>
+        <animated.div
+          className={styles.content}
+          style={{
+            opacity: contentSpring.opacity,
+            transform: contentSpring.y.to((y) => `translateY(${y}px)`),
+          }}
+        >
           <div className={styles.text}>
             <H2 className={styles.title}>{title}</H2>
             {description && (
@@ -56,9 +108,15 @@ export default function DownloadApp({
               className={styles.button}
             />
           )}
-        </div>
+        </animated.div>
 
-        <div className={styles.media}>
+        <animated.div
+          className={styles.media}
+          style={{
+            opacity: mediaSpring.opacity,
+            transform: mediaSpring.x.to((x) => `translateX(${x}px)`),
+          }}
+        >
           <div className={styles.videoContainer}>
             <img src="/download.png" alt="Video placeholder" />
           </div>
@@ -212,8 +270,8 @@ export default function DownloadApp({
               </div>
             </div>
           </div>
-        </div>
+        </animated.div>
       </div>
-    </section>
+    </animated.section>
   );
 }

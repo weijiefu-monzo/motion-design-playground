@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./Testimonials.module.css";
 import { Button } from "../../components";
 import { H1, Body } from "../../components/Typography";
@@ -37,6 +38,39 @@ export default function Testimonials({
   onButtonClick,
   "data-qa": dataQa,
 }: TestimonialsProps) {
+  const ref = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  const ANIMATION_DELAY_BASE = 100;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  const contentSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 30,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 0,
+  });
+
   const handleButtonClick = () => {
     if (onButtonClick) {
       onButtonClick();
@@ -46,7 +80,11 @@ export default function Testimonials({
   const sectionClasses = clsx(styles.section, className);
 
   return (
-    <section className={sectionClasses} data-qa={dataQa}>
+    <animated.section
+      ref={ref as React.RefObject<HTMLElement>}
+      className={sectionClasses}
+      data-qa={dataQa}
+    >
       <div className={styles.container}>
         {/* Trustpilot Widget */}
         <div className={styles.trustpilotWidget}>
@@ -58,7 +96,13 @@ export default function Testimonials({
         </div>
 
         {/* Content */}
-        <div className={styles.content}>
+        <animated.div
+          className={styles.content}
+          style={{
+            opacity: contentSpring.opacity,
+            transform: contentSpring.y.to((y) => `translateY(${y}px)`),
+          }}
+        >
           <div className={styles.text}>
             <div className={styles.titleRow}>
               <H1 className={styles.title}>
@@ -96,8 +140,8 @@ export default function Testimonials({
               className={styles.button}
             />
           )}
-        </div>
+        </animated.div>
       </div>
-    </section>
+    </animated.section>
   );
 }

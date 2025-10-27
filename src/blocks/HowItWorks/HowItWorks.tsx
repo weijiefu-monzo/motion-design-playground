@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./HowItWorks.module.css";
 import { Carousel } from "../../components";
 import { H2 } from "../../components/Typography";
@@ -70,6 +71,47 @@ export default function HowItWorks({
   onCardButtonClick,
   "data-qa": dataQa,
 }: HowItWorksProps) {
+  const ref = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  const ANIMATION_DELAY_BASE = 100;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  // Animation springs for staggered effect
+  const titleSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 30,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 0,
+  });
+
+  const carouselSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 30,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 1,
+  });
+
   const handleCardButtonClick = (index: number) => {
     if (onCardButtonClick) {
       onCardButtonClick(index);
@@ -145,9 +187,28 @@ export default function HowItWorks({
   };
 
   return (
-    <section className={sectionClasses} data-qa={dataQa}>
-      <H2 className={titleClasses}>{title}</H2>
-      {renderCards()}
-    </section>
+    <animated.section
+      ref={ref as React.RefObject<HTMLElement>}
+      className={sectionClasses}
+      data-qa={dataQa}
+    >
+      <animated.div
+        style={{
+          opacity: titleSpring.opacity,
+          transform: titleSpring.y.to((y) => `translateY(${y}px)`),
+        }}
+      >
+        <H2 className={titleClasses}>{title}</H2>
+      </animated.div>
+
+      <animated.div
+        style={{
+          opacity: carouselSpring.opacity,
+          transform: carouselSpring.y.to((y) => `translateY(${y}px)`),
+        }}
+      >
+        {renderCards()}
+      </animated.div>
+    </animated.section>
   );
 }

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
+import { animated, useSpring } from "@react-spring/web";
 import styles from "./Hero.module.css";
 import { Chip } from "../../components/Chip";
 import { H1, Body, H3, H2 } from "../../components/Typography";
@@ -28,6 +29,32 @@ export default function Hero({
   "data-qa": dataQa,
 }: HeroProps) {
   const heroClasses = clsx(styles.hero, className);
+  const ref = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  // Animation delays for staggered effect (in milliseconds)
+  const ANIMATION_DELAY_BASE = 100;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
 
   const features = [
     "Main list item content",
@@ -66,25 +93,91 @@ export default function Hero({
     },
   ];
 
+  const textSectionSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 0,
+  });
+
+  const buttonSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 1,
+  });
+
+  const financialDataSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 2,
+  });
+
+  const imageSectionSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    x: isInView ? 0 : 30,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 0.5,
+  });
+
+  const socialProofSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 3,
+  });
+
+  const legalCopySpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: { tension: 100, friction: 30 },
+    delay: ANIMATION_DELAY_BASE * 4,
+  });
+
   return (
-    <div className={heroClasses} aria-label={ariaLabel} data-qa={dataQa}>
+    <div
+      ref={ref}
+      className={heroClasses}
+      aria-label={ariaLabel}
+      data-qa={dataQa}
+    >
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.textSection}>
+          <animated.div
+            className={styles.textSection}
+            style={{
+              opacity: textSectionSpring.opacity,
+              transform: textSectionSpring.y.to((y) => `translateY(${y}px)`),
+            }}
+          >
             {chipLabel && <Chip label={chipLabel} variant="default" />}
             <H2>{title}</H2>
             <Body size="large" style={{ color: "var(--content-secondary)" }}>
               {description}
             </Body>
-          </div>
+          </animated.div>
 
-          <Button
-            label={ctaLabel}
-            onClick={ctaOnClick}
-            className={styles.ctaButton}
-          />
+          <animated.div
+            style={{
+              opacity: buttonSpring.opacity,
+              transform: buttonSpring.y.to((y) => `translateY(${y}px)`),
+            }}
+          >
+            <Button
+              label={ctaLabel}
+              onClick={ctaOnClick}
+              className={styles.ctaButton}
+            />
+          </animated.div>
 
-          <div className={styles.financialData}>
+          <animated.div
+            className={styles.financialData}
+            style={{
+              opacity: financialDataSpring.opacity,
+              transform: financialDataSpring.y.to((y) => `translateY(${y}px)`),
+            }}
+          >
             {financialData.map((data, index) => (
               <React.Fragment key={index}>
                 <div className={styles.dataItem}>
@@ -107,20 +200,32 @@ export default function Hero({
                 )}
               </React.Fragment>
             ))}
-          </div>
+          </animated.div>
         </div>
 
-        <div className={styles.imageSection}>
+        <animated.div
+          className={styles.imageSection}
+          style={{
+            opacity: imageSectionSpring.opacity,
+            transform: imageSectionSpring.x.to((x) => `translateX(${x}px)`),
+          }}
+        >
           <div className={styles.heroImage}>
             <img src="/hero-image.png" alt="Hero image" />
             <div className={styles.bankCard}>
               <img src="/bank-card.png" alt="Bank card" />
             </div>
           </div>
-        </div>
+        </animated.div>
       </div>
 
-      <div className={styles.socialProof}>
+      <animated.div
+        className={styles.socialProof}
+        style={{
+          opacity: socialProofSpring.opacity,
+          transform: socialProofSpring.y.to((y) => `translateY(${y}px)`),
+        }}
+      >
         {socialProof.map((item, index) => (
           <Cell key={index} className={styles.socialProofItem}>
             {item.icon && <div className={styles.socialIcon}>{item.icon}</div>}
@@ -151,11 +256,18 @@ export default function Hero({
             )}
           </Cell>
         ))}
-      </div>
+      </animated.div>
 
-      <Body size="medium" className={styles.legalCopy}>
-        Legal copy
-      </Body>
+      <animated.div
+        style={{
+          opacity: legalCopySpring.opacity,
+          transform: legalCopySpring.y.to((y) => `translateY(${y}px)`),
+        }}
+      >
+        <Body size="medium" className={styles.legalCopy}>
+          Legal copy
+        </Body>
+      </animated.div>
     </div>
   );
 }
