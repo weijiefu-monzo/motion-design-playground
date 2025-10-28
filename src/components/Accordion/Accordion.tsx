@@ -59,7 +59,7 @@ export default function Accordion({
   // Icon rotation animation
   const iconSpring = useSpring({
     transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-    config: SPRING_CONFIG.default,
+    config: SPRING_CONFIG.gentle,
   });
 
   // Content animation
