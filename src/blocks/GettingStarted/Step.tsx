@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { useSpring, animated } from "@react-spring/web";
 import styles from "./GettingStarted.module.css";
 import { H4, Body, Billboard } from "../../components/Typography";
-import { SPRING_CONFIG } from "@/styles/springConfig";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
 export interface StepProps {
   className?: string;
   title: string;
@@ -47,6 +47,7 @@ export default function Step({
   const descriptionRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
   const [descriptionHeight, setDescriptionHeight] = useState(0);
+  const springConfig = useSpringConfig();
 
   useEffect(() => {
     const measure = () => {
@@ -73,7 +74,7 @@ export default function Step({
     opacity: current ? 1 : 0,
     height: current && descriptionHeight > 0 ? descriptionHeight : 0,
     y: current ? 0 : 20,
-    config: SPRING_CONFIG.default,
+    config: springConfig.default,
   });
 
   return (

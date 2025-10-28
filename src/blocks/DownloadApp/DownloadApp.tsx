@@ -4,7 +4,7 @@ import { useSpring, animated } from "@react-spring/web";
 import styles from "./DownloadApp.module.css";
 import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
-import { SPRING_CONFIG } from "@/styles/springConfig";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
 export interface DownloadAppProps {
   className?: string;
   title?: string;
@@ -30,6 +30,7 @@ export default function DownloadApp({
 }: DownloadAppProps) {
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const springConfig = useSpringConfig();
 
   const ANIMATION_DELAY_BASE = 100;
 
@@ -58,14 +59,14 @@ export default function DownloadApp({
   const contentSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: SPRING_CONFIG.gentle,
+    config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
   const mediaSpring = useSpring({
     opacity: isInView ? 1 : 0,
     x: isInView ? 0 : 30,
-    config: SPRING_CONFIG.gentle,
+    config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 1,
   });
 

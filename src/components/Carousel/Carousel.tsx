@@ -8,7 +8,7 @@ import {
   AiOutlineArrowRight,
   AiFillCaretRight,
 } from "react-icons/ai";
-import { SPRING_CONFIG } from "../../styles/springConfig";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
 
 export interface CarouselProps {
   className?: string;
@@ -38,14 +38,23 @@ export default function Carousel({
   const [isHovered, setIsHovered] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+  const springConfig = useSpringConfig();
 
   const totalSlides = children.length;
 
   // Spring animation for carousel transitions
-  const slideSpring = useSpring({
+  const [slideSpring, slideApi] = useSpring(() => ({
     x: -(currentIndex * 100) / children.length,
-    config: SPRING_CONFIG.slow,
-  });
+    config: springConfig.slow,
+  }));
+
+  // Restart animation when config changes
+  useEffect(() => {
+    slideApi.start({
+      x: -(currentIndex * 100) / children.length,
+      config: springConfig.slow,
+    });
+  }, [springConfig.slow, slideApi, currentIndex, children.length]);
 
   const goToSlide = useCallback(
     (index: number) => {
@@ -185,7 +194,7 @@ export default function Carousel({
                 const isActive = index === currentIndex;
                 const dotSpring = useSpring({
                   width: isActive ? 32 : 8,
-                  config: SPRING_CONFIG.slow,
+                  config: springConfig.slow,
                 });
 
                 return (

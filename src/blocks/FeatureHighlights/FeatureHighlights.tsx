@@ -5,7 +5,7 @@ import styles from "./FeatureHighlights.module.css";
 import { Button, Card, IconButton } from "../../components";
 import { H2, Body } from "../../components/Typography";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { SPRING_CONFIG } from "@/styles/springConfig";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
 
 export interface FeatureHighlightsProps {
   className?: string;
@@ -67,6 +67,7 @@ export default function FeatureHighlights({
 }: FeatureHighlightsProps) {
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const springConfig = useSpringConfig();
 
   const ANIMATION_DELAY_BASE = 100;
 
@@ -95,14 +96,14 @@ export default function FeatureHighlights({
   const headerSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: SPRING_CONFIG.gentle,
+    config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
   const cardsSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: SPRING_CONFIG.gentle,
+    config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 1,
   });
 

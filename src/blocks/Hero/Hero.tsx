@@ -6,7 +6,7 @@ import { Chip } from "../../components/Chip";
 import { H1, Body, H3, H2 } from "../../components/Typography";
 import { Button } from "../../components/Button";
 import { Cell } from "../../components/Cell";
-import { SPRING_CONFIG } from "../../styles/springConfig";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
 export interface HeroProps {
   className?: string;
   title?: string;
@@ -31,6 +31,10 @@ export default function Hero({
   const heroClasses = clsx(styles.hero, className);
   const ref = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const springConfig = useSpringConfig();
+
+  // Debug logging
+  console.log("Hero component springConfig:", springConfig);
 
   // Animation delays for staggered effect (in milliseconds)
   const ANIMATION_DELAY_BASE = 100;
@@ -103,14 +107,14 @@ export default function Hero({
   ] = useTrail(5, {
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: SPRING_CONFIG.gentle,
+    config: springConfig.gentle,
   }) as any;
 
   // Image section uses different animation (x direction)
   const imageSectionSpring = useSpring({
     opacity: isInView ? 1 : 0,
     x: isInView ? 0 : 30,
-    config: SPRING_CONFIG.gentle,
+    config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 0.5,
   });
 

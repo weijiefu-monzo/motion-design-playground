@@ -4,7 +4,7 @@ import { useSpring, animated, useTrail } from "@react-spring/web";
 import styles from "./FAQ.module.css";
 import { Accordion } from "../../components";
 import { H2 } from "../../components/Typography";
-import { SPRING_CONFIG } from "@/styles/springConfig";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
 export interface FAQProps {
   className?: string;
   title?: string;
@@ -26,6 +26,7 @@ export default function FAQ({
 }: FAQProps) {
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const springConfig = useSpringConfig();
 
   const ANIMATION_DELAY_BASE = 100;
 
@@ -53,7 +54,7 @@ export default function FAQ({
   const titleSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: SPRING_CONFIG.gentle,
+    config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
@@ -61,7 +62,7 @@ export default function FAQ({
   const accordionTrail = useTrail(questions.length, {
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 30,
-    config: SPRING_CONFIG.gentle,
+    config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 1,
   }) as any;
 

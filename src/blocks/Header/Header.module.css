@@ -2,7 +2,7 @@
 .headerWrapper {
   position: fixed;
   top: 0;
-  z-index: 1000;
+  z-index: 1200;
   width: 100%;
 }
 
@@ -54,6 +54,7 @@
   display: flex;
   gap: var(--spacing-small, 12px);
   padding: var(--spacing-2x-small, 4px);
+  position: relative;
 }
 
 .header.inverse .tabContainer {
@@ -72,10 +73,13 @@
   transition: all var(--motion-duration-short, 150ms)
     var(--motion-easing-linear, ease);
   min-width: 154px;
+  color: var(--color-grey-500);
 }
 
-.tab:hover {
-  background-color: var(--color-grey-200, #e8f0ea);
+.tab:hover,
+.tab:hover .tabIcon,
+.tab:hover .chevron {
+  color: var(--color-navy-900);
 }
 
 .header.inverse .tab:hover {
@@ -84,12 +88,10 @@
 
 .activeTab {
   background-color: var(--color-white, #ffffff);
-  color: var(--content-primary, #091723);
 }
 
 .header.inverse .activeTab {
   background-color: var(--color-navy-800, #112231);
-  color: var(--alpha-white-90, rgba(255, 255, 255, 0.9));
 }
 
 .tabIcon {
@@ -102,32 +104,18 @@
 }
 
 .activeTab .tabIcon {
-  color: var(--content-primary, #091723);
+  color: var(--color-grey-500, #75817e);
 }
 
 .header.inverse .activeTab .tabIcon {
   color: var(--alpha-white-90, rgba(255, 255, 255, 0.9));
 }
 
-.tabLabel {
-  font-family: var(
-    --type-font-family-content,
-    "Monzo_Sans_Text:SemiBold",
-    sans-serif
-  );
-  font-size: var(--type-font-size-step-0, 16px);
-  font-weight: 600;
-  line-height: var(--type-line-height-step-0, 22px);
-  letter-spacing: 0.16px;
+.activeTab {
   color: var(--color-grey-500, #75817e);
-  white-space: nowrap;
 }
 
-.activeTab .tabLabel {
-  color: var(--content-primary);
-}
-
-.header.inverse .activeTab .tabLabel {
+.header.inverse .activeTab {
   color: var(--alpha-white-90, rgba(255, 255, 255, 0.9));
 }
 
@@ -142,7 +130,7 @@
 }
 
 .activeTab .chevron {
-  color: var(--content-primary, #091723);
+  color: var(--color-grey-500, #75817e);
 }
 
 .header.inverse .activeTab .chevron {

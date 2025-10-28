@@ -6,7 +6,7 @@ import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
 import Step from "./Step";
 import StepCard from "./StepCard";
-import { SPRING_CONFIG } from "@/styles/springConfig";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
 export interface GettingStartedProps {
   className?: string;
   title?: string;
@@ -38,6 +38,7 @@ export default function GettingStarted({
 }: GettingStartedProps) {
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const springConfig = useSpringConfig();
 
   const ANIMATION_DELAY_BASE = 100;
 
@@ -63,40 +64,44 @@ export default function GettingStarted({
   }, []);
 
   // Animation springs for staggered effect
-  const headerSpring = useSpring({
+  const [headerSpring] = useSpring(() => ({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: SPRING_CONFIG.gentle,
+    config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
-  });
+  }));
 
   // Individual step animations for stagger effect
-  const getStepSpring = (index: number) =>
-    useSpring({
+  const getStepSpring = (index: number) => {
+    const [spring] = useSpring(() => ({
       opacity: isInView ? 1 : 0,
       x: isInView ? 0 : -20,
-      config: SPRING_CONFIG.gentle,
+      config: springConfig.gentle,
       delay: ANIMATION_DELAY_BASE * 2 + index * 100,
-    });
+    }));
+    return spring;
+  };
 
   // Image transition when step changes - creates new animation when key changes
-  const imageSpring = useSpring({
+  const [imageSpring] = useSpring(() => ({
     opacity: 1,
     from: { opacity: 0.75, x: isInView ? 0 : 30 },
-    config: SPRING_CONFIG.gentle,
+    config: springConfig.gentle,
     reset: true,
-  });
+  }));
 
   // Dot animations
-  const getDotSpring = (index: number) =>
-    useSpring({
+  const getDotSpring = (index: number) => {
+    const [spring] = useSpring(() => ({
       height: index === currentStep ? 32 : 8,
       backgroundColor:
         index === currentStep
           ? "var(--neutral-darkest)"
           : "var(--neutral-dark)",
-      config: SPRING_CONFIG.slow,
-    });
+      config: springConfig.slow,
+    }));
+    return spring;
+  };
 
   const handleButtonClick = () => {
     if (onButtonClick) {

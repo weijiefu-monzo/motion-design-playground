@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
-import { useSpring, animated, config } from "@react-spring/web";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./Accordion.module.css";
 import { H5, Body } from "../Typography";
 import { AiOutlineDown } from "react-icons/ai";
-import { SPRING_CONFIG } from "@/styles/springConfig";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
 export interface AccordionProps {
   className?: string;
   title: string;
@@ -30,6 +30,7 @@ export default function Accordion({
   const contentRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
+  const springConfig = useSpringConfig();
 
   useEffect(() => {
     if (measureRef.current) {
@@ -57,18 +58,35 @@ export default function Accordion({
   };
 
   // Icon rotation animation
-  const iconSpring = useSpring({
+  const [iconSpring, iconApi] = useSpring(() => ({
     transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-    config: SPRING_CONFIG.gentle,
-  });
+    config: springConfig.gentle,
+  }));
 
   // Content animation
-  const contentSpring = useSpring({
+  const [contentSpring, contentApi] = useSpring(() => ({
     height: isExpanded && details && contentHeight > 0 ? contentHeight : 0,
     opacity: isExpanded ? 1 : 0,
     marginBottom: isExpanded ? "16px" : "0px",
-    config: SPRING_CONFIG.default,
-  });
+    config: springConfig.default,
+  }));
+
+  // Restart animations when config changes
+  useEffect(() => {
+    iconApi.start({
+      transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+      config: springConfig.gentle,
+    });
+  }, [springConfig.gentle, iconApi, isExpanded]);
+
+  useEffect(() => {
+    contentApi.start({
+      height: isExpanded && details && contentHeight > 0 ? contentHeight : 0,
+      opacity: isExpanded ? 1 : 0,
+      marginBottom: isExpanded ? "16px" : "0px",
+      config: springConfig.default,
+    });
+  }, [springConfig.default, contentApi, isExpanded, details, contentHeight]);
 
   const accordionClasses = clsx(
     styles.accordion,
