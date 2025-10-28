@@ -23,7 +23,6 @@ import { RemountWrapper } from "@/components/RemountWrapper";
 export default function ProductPage() {
   return (
     <SpringConfigProvider>
-      <RemountIndicator />
       <div style={{ position: "fixed", top: 0, right: 0, zIndex: 2000 }}>
         <Leva
           theme={{
