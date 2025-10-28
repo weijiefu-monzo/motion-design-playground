@@ -5,6 +5,7 @@ import styles from "./Accordion.module.css";
 import { H5, Body } from "../Typography";
 import { AiOutlineDown } from "react-icons/ai";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface AccordionProps {
   className?: string;
   title: string;
@@ -109,6 +110,9 @@ export default function Accordion({
       aria-expanded={isExpanded}
       aria-label={ariaLabel}
       data-qa={dataQa}
+      style={{
+        ...getAnimationHighlightStyle("default", springConfig.showHighlights),
+      }}
     >
       <animated.div
         className={headerClasses}

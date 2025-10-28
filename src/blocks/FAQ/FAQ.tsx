@@ -5,6 +5,7 @@ import styles from "./FAQ.module.css";
 import { Accordion } from "../../components";
 import { H2 } from "../../components/Typography";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface FAQProps {
   className?: string;
   title?: string;
@@ -85,6 +86,10 @@ export default function FAQ({
           style={{
             opacity: titleSpring.opacity,
             transform: titleSpring.y.to((y) => `translateY(${y}px)`),
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights
+            ),
           }}
         >
           <H2 className={styles.title}>{title}</H2>

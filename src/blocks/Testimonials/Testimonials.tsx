@@ -5,6 +5,7 @@ import styles from "./Testimonials.module.css";
 import { Button } from "../../components";
 import { H1, Body } from "../../components/Typography";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface TestimonialsProps {
   className?: string;
   title?: string;
@@ -102,6 +103,10 @@ export default function Testimonials({
           style={{
             opacity: contentSpring.opacity,
             transform: contentSpring.y.to((y) => `translateY(${y}px)`),
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights
+            ),
           }}
         >
           <div className={styles.text}>

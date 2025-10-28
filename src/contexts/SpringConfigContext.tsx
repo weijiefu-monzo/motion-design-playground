@@ -10,6 +10,7 @@ interface SpringConfig {
   slow: { tension: number; friction: number };
   molasses: { tension: number; friction: number };
   remountKey: number;
+  showHighlights: boolean;
 }
 
 const SpringConfigContext = createContext<SpringConfig | null>(null);
@@ -34,84 +35,131 @@ export const SpringConfigProvider = ({
   const [remountKey, setRemountKey] = useState(0);
 
   const config = useControls("Spring Config", {
-    gentleTension: {
-      value: 120,
-      min: 5,
-      max: 300,
-      step: 10,
-    },
-    gentleFriction: {
-      value: 14,
-      min: 5,
-      max: 300,
-      step: 1,
-    },
-    defaultTension: {
-      value: 170,
-      min: 5,
-      max: 300,
-      step: 10,
-    },
-    defaultFriction: {
-      value: 26,
-      min: 5,
-      max: 300,
-      step: 1,
-    },
-    wobblyTension: {
-      value: 180,
-      min: 5,
-      max: 300,
-      step: 10,
-    },
-    wobblyFriction: {
-      value: 12,
-      min: 5,
-      max: 300,
-      step: 1,
-    },
-    stiffTension: {
-      value: 210,
-      min: 5,
-      max: 300,
-      step: 10,
-    },
-    stiffFriction: {
-      value: 20,
-      min: 5,
-      max: 300,
-      step: 1,
-    },
-    slowTension: {
-      value: 280,
-      min: 5,
-      max: 300,
-      step: 10,
-    },
-    slowFriction: {
-      value: 60,
-      min: 5,
-      max: 300,
-      step: 5,
-    },
-    molassesTension: {
-      value: 280,
-      min: 5,
-      max: 300,
-      step: 10,
-    },
-    molassesFriction: {
-      value: 120,
-      min: 5,
-      max: 300,
-      step: 10,
-    },
-    remountComponents: {
-      value: false,
-      onChange: () => {
-        setRemountKey((prev) => prev + 1);
+    "🟢 Gentle": folder(
+      {
+        gentleTension: {
+          value: 120,
+          min: 5,
+          max: 300,
+          step: 10,
+          label: "Tension",
+        },
+        gentleFriction: {
+          value: 14,
+          min: 5,
+          max: 300,
+          step: 1,
+          label: "Friction",
+        },
       },
-    },
+      { color: "#10B981" }
+    ),
+    "🔵 Default": folder(
+      {
+        defaultTension: {
+          value: 170,
+          min: 5,
+          max: 300,
+          step: 10,
+          label: "Tension",
+        },
+        defaultFriction: {
+          value: 26,
+          min: 5,
+          max: 300,
+          step: 1,
+          label: "Friction",
+        },
+      },
+      { color: "#3B82F6" }
+    ),
+    "🟡 Wobbly": folder(
+      {
+        wobblyTension: {
+          value: 180,
+          min: 5,
+          max: 300,
+          step: 10,
+          label: "Tension",
+        },
+        wobblyFriction: {
+          value: 12,
+          min: 5,
+          max: 300,
+          step: 1,
+          label: "Friction",
+        },
+      },
+      { color: "#F59E0B" }
+    ),
+    "🔴 Stiff": folder(
+      {
+        stiffTension: {
+          value: 210,
+          min: 5,
+          max: 300,
+          step: 10,
+          label: "Tension",
+        },
+        stiffFriction: {
+          value: 20,
+          min: 5,
+          max: 300,
+          step: 1,
+          label: "Friction",
+        },
+      },
+      { color: "#EF4444" }
+    ),
+    "🟣 Slow": folder(
+      {
+        slowTension: {
+          value: 280,
+          min: 5,
+          max: 300,
+          step: 10,
+          label: "Tension",
+        },
+        slowFriction: {
+          value: 60,
+          min: 5,
+          max: 300,
+          step: 5,
+          label: "Friction",
+        },
+      },
+      { color: "#8B5CF6" }
+    ),
+    "⚫ Molasses": folder(
+      {
+        molassesTension: {
+          value: 280,
+          min: 5,
+          max: 300,
+          step: 10,
+          label: "Tension",
+        },
+        molassesFriction: {
+          value: 120,
+          min: 5,
+          max: 300,
+          step: 10,
+          label: "Friction",
+        },
+      },
+      { color: "#6B7280" }
+    ),
+    Controls: folder({
+      remountComponents: {
+        value: false,
+        onChange: () => {
+          setRemountKey((prev) => prev + 1);
+        },
+      },
+      showHighlights: {
+        value: false,
+      },
+    }),
   }) as {
     gentleTension: number;
     gentleFriction: number;
@@ -126,6 +174,7 @@ export const SpringConfigProvider = ({
     molassesTension: number;
     molassesFriction: number;
     remountComponents: boolean;
+    showHighlights: boolean;
   };
 
   // Create the spring config object - this will be reactive to config changes
@@ -156,6 +205,7 @@ export const SpringConfigProvider = ({
         friction: config.molassesFriction,
       },
       remountKey,
+      showHighlights: config.showHighlights,
     }),
     [
       config.gentleTension,
@@ -171,6 +221,7 @@ export const SpringConfigProvider = ({
       config.molassesTension,
       config.molassesFriction,
       remountKey,
+      config.showHighlights,
     ]
   );
 

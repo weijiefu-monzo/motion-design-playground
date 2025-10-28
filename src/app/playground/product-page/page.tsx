@@ -25,7 +25,15 @@ export default function ProductPage() {
     <SpringConfigProvider>
       <RemountIndicator />
       <div style={{ position: "fixed", top: 0, right: 0, zIndex: 2000 }}>
-        <Leva />
+        <Leva
+          theme={{
+            colors: {
+              accent1: "#3B82F6", // Blue 500 - matches default highlight
+              accent2: "#60A5FA", // Blue 400 - lighter shade for hover
+              accent3: "#2563EB", // Blue 600 - darker shade
+            },
+          }}
+        />
       </div>
       <div style={{ height: "100vh", overflowY: "scroll" }}>
         <RemountWrapper>

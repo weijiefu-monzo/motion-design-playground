@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
-import { useSpring, animated } from "@react-spring/web";
+import { useSpring, useTrail, animated } from "@react-spring/web";
 import styles from "./GettingStarted.module.css";
 import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
 import Step from "./Step";
 import StepCard from "./StepCard";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface GettingStartedProps {
   className?: string;
   title?: string;
@@ -64,23 +65,20 @@ export default function GettingStarted({
   }, []);
 
   // Animation springs for staggered effect
-  const [headerSpring] = useSpring(() => ({
+  const headerSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
     config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
-  }));
+  });
 
-  // Individual step animations for stagger effect
-  const getStepSpring = (index: number) => {
-    const [spring] = useSpring(() => ({
-      opacity: isInView ? 1 : 0,
-      x: isInView ? 0 : -20,
-      config: springConfig.gentle,
-      delay: ANIMATION_DELAY_BASE * 2 + index * 100,
-    }));
-    return spring;
-  };
+  // Individual step animations for stagger effect using useTrail
+  const stepTrail = useTrail(steps.length, {
+    opacity: isInView ? 1 : 0,
+    x: isInView ? 0 : -20,
+    config: springConfig.gentle,
+    delay: ANIMATION_DELAY_BASE * 2,
+  });
 
   // Image transition when step changes - creates new animation when key changes
   const [imageSpring] = useSpring(() => ({
@@ -126,6 +124,10 @@ export default function GettingStarted({
         <animated.div
           className={styles.content}
           style={{
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights && isInView
+            ),
             opacity: headerSpring.opacity,
             transform: headerSpring.y.to((y) => `translateY(${y}px)`),
           }}
@@ -152,8 +154,8 @@ export default function GettingStarted({
           {/* Desktop/Tablet Landscape - Horizontal Steps */}
           <div className={styles.stepsHorizontal}>
             <div className={styles.stepLabels}>
-              {steps.map((step, index) => {
-                const stepSpring = getStepSpring(index);
+              {stepTrail.map((stepSpring, index) => {
+                const step = steps[index];
                 return (
                   <animated.div
                     key={index}
@@ -169,6 +171,7 @@ export default function GettingStarted({
                       current={index === currentStep}
                       onClick={() => handleStepClick(index)}
                       className={styles.step}
+                      isInView={isInView}
                     />
                   </animated.div>
                 );
@@ -208,8 +211,8 @@ export default function GettingStarted({
 
           {/* Mobile/Tablet Portrait - Vertical Cards */}
           <div className={styles.stepsVertical}>
-            {steps.map((step, index) => {
-              const stepSpring = getStepSpring(index);
+            {stepTrail.map((stepSpring, index) => {
+              const step = steps[index];
               return (
                 <animated.div
                   key={index}

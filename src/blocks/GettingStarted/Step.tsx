@@ -4,6 +4,7 @@ import { useSpring, animated } from "@react-spring/web";
 import styles from "./GettingStarted.module.css";
 import { H4, Body, Billboard } from "../../components/Typography";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface StepProps {
   className?: string;
   title: string;
@@ -13,6 +14,7 @@ export interface StepProps {
   state?: "default" | "hover" | "focus";
   onClick?: () => void;
   "data-qa"?: string;
+  isInView?: boolean;
 }
 
 export default function Step({
@@ -24,6 +26,7 @@ export default function Step({
   state = "default",
   onClick,
   "data-qa": dataQa,
+  isInView = true,
 }: StepProps) {
   const stepClasses = clsx(
     styles.step,
@@ -89,6 +92,12 @@ export default function Step({
           e.preventDefault();
           onClick?.();
         }
+      }}
+      style={{
+        ...getAnimationHighlightStyle(
+          "default",
+          springConfig.showHighlights && isInView
+        ),
       }}
     >
       <div className={indexClasses}>

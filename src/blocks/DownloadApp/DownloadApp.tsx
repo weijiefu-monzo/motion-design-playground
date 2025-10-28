@@ -5,6 +5,7 @@ import styles from "./DownloadApp.module.css";
 import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface DownloadAppProps {
   className?: string;
   title?: string;
@@ -90,6 +91,10 @@ export default function DownloadApp({
           style={{
             opacity: contentSpring.opacity,
             transform: contentSpring.y.to((y) => `translateY(${y}px)`),
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights
+            ),
           }}
         >
           <div className={styles.text}>
@@ -116,6 +121,10 @@ export default function DownloadApp({
           style={{
             opacity: mediaSpring.opacity,
             transform: mediaSpring.x.to((x) => `translateX(${x}px)`),
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights
+            ),
           }}
         >
           <div className={styles.videoContainer}>

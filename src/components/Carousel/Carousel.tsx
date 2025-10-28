@@ -9,6 +9,7 @@ import {
   AiFillCaretRight,
 } from "react-icons/ai";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 
 export interface CarouselProps {
   className?: string;
@@ -142,6 +143,9 @@ export default function Carousel({
       tabIndex={0}
       role="region"
       aria-label="Carousel"
+      style={{
+        ...getAnimationHighlightStyle("slow", springConfig.showHighlights),
+      }}
     >
       {/* Content Row */}
       <div className={rowClasses}>

@@ -6,6 +6,7 @@ import { Carousel } from "../../components";
 import { H2 } from "../../components/Typography";
 import Card from "../../components/Card/Card";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 
 export interface HowItWorksProps {
   className?: string;
@@ -198,6 +199,7 @@ export default function HowItWorks({
         style={{
           opacity: titleSpring.opacity,
           transform: titleSpring.y.to((y) => `translateY(${y}px)`),
+          ...getAnimationHighlightStyle("gentle", springConfig.showHighlights),
         }}
       >
         <H2 className={titleClasses}>{title}</H2>
@@ -207,6 +209,7 @@ export default function HowItWorks({
         style={{
           opacity: carouselSpring.opacity,
           transform: carouselSpring.y.to((y) => `translateY(${y}px)`),
+          ...getAnimationHighlightStyle("gentle", springConfig.showHighlights),
         }}
       >
         {renderCards()}

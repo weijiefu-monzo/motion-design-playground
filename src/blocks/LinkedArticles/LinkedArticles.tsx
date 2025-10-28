@@ -6,6 +6,7 @@ import { Button, ClickableCard, IconButton } from "../../components";
 import { H2, Body } from "../../components/Typography";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface LinkedArticlesProps {
   className?: string;
   title?: string;
@@ -123,6 +124,10 @@ export default function LinkedArticles({
           style={{
             opacity: headerSpring.opacity,
             transform: headerSpring.y.to((y) => `translateY(${y}px)`),
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights
+            ),
           }}
         >
           <div className={styles.text}>
@@ -174,6 +179,10 @@ export default function LinkedArticles({
           style={{
             opacity: cardsSpring.opacity,
             transform: cardsSpring.y.to((y) => `translateY(${y}px)`),
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights
+            ),
           }}
         >
           {visibleCards.map((card, index) => (
