@@ -66,11 +66,18 @@ export default function Testimonials({
     };
   }, []);
 
-  const contentSpring = useSpring({
+  const trustpilotSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
     config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 0,
+  });
+
+  const contentSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: springConfig.gentle,
+    delay: ANIMATION_DELAY_BASE * 1,
   });
 
   const handleButtonClick = () => {
@@ -89,13 +96,23 @@ export default function Testimonials({
     >
       <div className={styles.container}>
         {/* Trustpilot Widget */}
-        <div className={styles.trustpilotWidget}>
+        <animated.div
+          className={styles.trustpilotWidget}
+          style={{
+            opacity: trustpilotSpring.opacity,
+            transform: trustpilotSpring.y.to((y) => `translateY(${y}px)`),
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights && isInView
+            ),
+          }}
+        >
           <img
             src="/trustpilot.png"
             alt="Trustpilot"
             className={styles.trustpilotLogo}
           />
-        </div>
+        </animated.div>
 
         {/* Content */}
         <animated.div
@@ -105,7 +122,7 @@ export default function Testimonials({
             transform: contentSpring.y.to((y) => `translateY(${y}px)`),
             ...getAnimationHighlightStyle(
               "gentle",
-              springConfig.showHighlights
+              springConfig.showHighlights && isInView
             ),
           }}
         >

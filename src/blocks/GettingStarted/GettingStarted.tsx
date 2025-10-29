@@ -1,6 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
-import { useSpring, useTrail, animated } from "@react-spring/web";
+import {
+  useSpring,
+  useTrail,
+  useTransition,
+  useSprings,
+  animated,
+} from "@react-spring/web";
 import styles from "./GettingStarted.module.css";
 import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
@@ -39,6 +45,7 @@ export default function GettingStarted({
 }: GettingStartedProps) {
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
   const springConfig = useSpringConfig();
 
   const ANIMATION_DELAY_BASE = 100;
@@ -75,38 +82,38 @@ export default function GettingStarted({
   // Individual step animations for stagger effect using useTrail
   const stepTrail = useTrail(steps.length, {
     opacity: isInView ? 1 : 0,
-    x: isInView ? 0 : -20,
+    y: isInView ? 0 : 20,
     config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 2,
   });
 
-  // Image transition when step changes - creates new animation when key changes
-  const [imageSpring] = useSpring(() => ({
-    opacity: 1,
-    from: { opacity: 0.75, x: isInView ? 0 : 30 },
-    config: springConfig.gentle,
-    reset: true,
-  }));
+  // Image transition when step changes - fade out then fade in
+  const imageTransitions = useTransition(currentStep, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: springConfig.default,
+  });
 
-  // Dot animations
-  const getDotSpring = (index: number) => {
-    const [spring] = useSpring(() => ({
+  // Dot animations - create springs for each dot that react to currentStep
+  const dotSprings = useSprings(
+    steps.length,
+    steps.map((_, index) => ({
       height: index === currentStep ? 32 : 8,
       backgroundColor:
         index === currentStep
           ? "var(--neutral-darkest)"
           : "var(--neutral-dark)",
       config: springConfig.slow,
-    }));
-    return spring;
-  };
+    }))
+  );
 
   const handleButtonClick = () => {
     if (onButtonClick) {
       onButtonClick();
     }
   };
-  const [currentStep, setCurrentStep] = useState(0);
+
   const handleStepClick = (index: number) => {
     setCurrentStep(index);
   };
@@ -161,7 +168,7 @@ export default function GettingStarted({
                     key={index}
                     style={{
                       opacity: stepSpring.opacity,
-                      transform: stepSpring.x.to((x) => `translateX(${x}px)`),
+                      transform: stepSpring.y.to((y) => `translateY(${y}px)`),
                     }}
                   >
                     <Step
@@ -178,33 +185,53 @@ export default function GettingStarted({
               })}
             </div>
             {image && (
-              <animated.div
+              <div
                 className={styles.stepImage}
-                key={currentStep}
-                style={{
-                  opacity: imageSpring.opacity,
-                }}
+                style={{ position: "relative" }}
               >
-                <img src={steps[currentStep].imageSrc} alt="Step image" />
-              </animated.div>
+                {imageTransitions((style, stepIndex) => (
+                  <animated.div
+                    style={{
+                      ...style,
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      ...getAnimationHighlightStyle(
+                        "gentle",
+                        springConfig.showHighlights && isInView
+                      ),
+                    }}
+                  >
+                    <img
+                      src={steps[stepIndex].imageSrc}
+                      alt="Step image"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: "var(--corner-radius-large)",
+                      }}
+                    />
+                  </animated.div>
+                ))}
+              </div>
             )}
             <div className={styles.pageControl}>
               <div className={styles.dots}>
-                {steps.map((_, index) => {
-                  const dotSpring = getDotSpring(index);
-                  return (
-                    <animated.button
-                      key={index}
-                      className={styles.dot}
-                      style={{
-                        height: dotSpring.height.to((h) => `${h}px`),
-                        backgroundColor: dotSpring.backgroundColor,
-                      }}
-                      onClick={() => handleStepClick(index)}
-                      aria-label={`Go to step ${index + 1}`}
-                    />
-                  );
-                })}
+                {dotSprings.map((style, index) => (
+                  <animated.button
+                    key={index}
+                    className={styles.dot}
+                    style={{
+                      height: style.height.to((h) => `${h}px`),
+                      backgroundColor: style.backgroundColor,
+                    }}
+                    onClick={() => handleStepClick(index)}
+                    aria-label={`Go to step ${index + 1}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -218,7 +245,7 @@ export default function GettingStarted({
                   key={index}
                   style={{
                     opacity: stepSpring.opacity,
-                    transform: stepSpring.x.to((x) => `translateX(${x}px)`),
+                    transform: stepSpring.y.to((y) => `translateY(${y}px)`),
                   }}
                 >
                   <StepCard

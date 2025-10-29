@@ -77,3 +77,19 @@
 .dot.active:hover {
   background-color: var(--neutral-darkest);
 }
+
+/* Progress fill for active dot when autoplay is active */
+.dotProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: var(--neutral-darkest);
+  border-radius: var(--corner-radius-3x-large);
+  pointer-events: none;
+}
+
+/* When showing progress, active dot background should match inactive dots */
+.dot.active:has(.dotProgress) {
+  background-color: var(--neutral-dark);
+}

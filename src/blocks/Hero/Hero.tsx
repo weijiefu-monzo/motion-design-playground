@@ -114,9 +114,17 @@ export default function Hero({
   // Image section uses different animation (x direction)
   const imageSectionSpring = useSpring({
     opacity: isInView ? 1 : 0,
-    x: isInView ? 0 : 30,
+    y: isInView ? 0 : 20,
     config: springConfig.gentle,
     delay: ANIMATION_DELAY_BASE * 0.5,
+  });
+
+  // Bank card slides in separately with 1 second delay
+  const bankCardSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: springConfig.gentle,
+    delay: ANIMATION_DELAY_BASE * 0.5, // 1 second delay
   });
 
   return (
@@ -207,8 +215,8 @@ export default function Hero({
           className={styles.imageSection}
           style={{
             opacity: imageSectionSpring.opacity,
-            transform: imageSectionSpring.x.to(
-              (x: number) => `translateX(${x}px)`
+            transform: imageSectionSpring.y.to(
+              (y: number) => `translateY(${y}px)`
             ),
             ...getAnimationHighlightStyle(
               "gentle",
@@ -218,9 +226,21 @@ export default function Hero({
         >
           <div className={styles.heroImage}>
             <img src="/hero-image.png" alt="Hero image" />
-            <div className={styles.bankCard}>
+            <animated.div
+              className={styles.bankCard}
+              style={{
+                opacity: bankCardSpring.opacity,
+                transform: bankCardSpring.y.to(
+                  (y: number) => `translateY(${y}px)`
+                ),
+                ...getAnimationHighlightStyle(
+                  "gentle",
+                  springConfig.showHighlights && isInView
+                ),
+              }}
+            >
               <img src="/bank-card.png" alt="Bank card" />
-            </div>
+            </animated.div>
           </div>
         </animated.div>
       </div>

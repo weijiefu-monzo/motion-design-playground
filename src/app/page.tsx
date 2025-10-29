@@ -9,19 +9,13 @@ import CardDemo from "@/components/Card/CardDemo";
 import CarouselDemo from "@/components/Carousel/CarouselDemo";
 import { ClickableCardDemo } from "@/components";
 import { AccordionDemo } from "@/components";
-import { TestSpringConfig } from "@/components/TestSpringConfig";
-import { RemountIndicator } from "@/components/RemountIndicator";
 import { RemountWrapper } from "@/components/RemountWrapper";
-import {
-  SpringConfigProvider,
-  useSpringConfig,
-} from "@/contexts/SpringConfigContext";
+import { SpringConfigProvider } from "@/contexts/SpringConfigContext";
 
 export default function Home() {
   return (
     <div>
       <SpringConfigProvider>
-        <RemountIndicator />
         <RemountWrapper>
           <TypographyDemo />
           <ButtonDemo />

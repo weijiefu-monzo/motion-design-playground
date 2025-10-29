@@ -3,12 +3,12 @@ import { createContext, useContext, ReactNode, useMemo, useState } from "react";
 import { useControls, folder } from "leva";
 
 interface SpringConfig {
-  gentle: { tension: number; friction: number };
-  default: { tension: number; friction: number };
-  wobbly: { tension: number; friction: number };
-  stiff: { tension: number; friction: number };
-  slow: { tension: number; friction: number };
-  molasses: { tension: number; friction: number };
+  gentle: { tension: number; friction: number; clamp: boolean };
+  default: { tension: number; friction: number; clamp: boolean };
+  wobbly: { tension: number; friction: number; clamp: boolean };
+  stiff: { tension: number; friction: number; clamp: boolean };
+  slow: { tension: number; friction: number; clamp: boolean };
+  molasses: { tension: number; friction: number; clamp: boolean };
   remountKey: number;
   showHighlights: boolean;
 }
@@ -51,6 +51,10 @@ export const SpringConfigProvider = ({
           step: 1,
           label: "Friction",
         },
+        gentleClamp: {
+          value: true,
+          label: "Clamp",
+        },
       },
       { color: "#10B981" }
     ),
@@ -69,6 +73,10 @@ export const SpringConfigProvider = ({
           max: 300,
           step: 1,
           label: "Friction",
+        },
+        defaultClamp: {
+          value: true,
+          label: "Clamp",
         },
       },
       { color: "#3B82F6" }
@@ -89,6 +97,10 @@ export const SpringConfigProvider = ({
           step: 1,
           label: "Friction",
         },
+        wobblyClamp: {
+          value: false,
+          label: "Clamp",
+        },
       },
       { color: "#F59E0B" }
     ),
@@ -107,6 +119,10 @@ export const SpringConfigProvider = ({
           max: 300,
           step: 1,
           label: "Friction",
+        },
+        stiffClamp: {
+          value: true,
+          label: "Clamp",
         },
       },
       { color: "#EF4444" }
@@ -127,6 +143,10 @@ export const SpringConfigProvider = ({
           step: 5,
           label: "Friction",
         },
+        slowClamp: {
+          value: true,
+          label: "Clamp",
+        },
       },
       { color: "#8B5CF6" }
     ),
@@ -146,6 +166,10 @@ export const SpringConfigProvider = ({
           step: 10,
           label: "Friction",
         },
+        molassesClamp: {
+          value: true,
+          label: "Clamp",
+        },
       },
       { color: "#6B7280" }
     ),
@@ -163,16 +187,22 @@ export const SpringConfigProvider = ({
   }) as {
     gentleTension: number;
     gentleFriction: number;
+    gentleClamp: boolean;
     defaultTension: number;
     defaultFriction: number;
+    defaultClamp: boolean;
     wobblyTension: number;
     wobblyFriction: number;
+    wobblyClamp: boolean;
     stiffTension: number;
     stiffFriction: number;
+    stiffClamp: boolean;
     slowTension: number;
     slowFriction: number;
+    slowClamp: boolean;
     molassesTension: number;
     molassesFriction: number;
+    molassesClamp: boolean;
     remountComponents: boolean;
     showHighlights: boolean;
   };
@@ -183,26 +213,32 @@ export const SpringConfigProvider = ({
       gentle: {
         tension: config.gentleTension,
         friction: config.gentleFriction,
+        clamp: config.gentleClamp,
       },
       default: {
         tension: config.defaultTension,
         friction: config.defaultFriction,
+        clamp: config.defaultClamp,
       },
       wobbly: {
         tension: config.wobblyTension,
         friction: config.wobblyFriction,
+        clamp: config.wobblyClamp,
       },
       stiff: {
         tension: config.stiffTension,
         friction: config.stiffFriction,
+        clamp: config.stiffClamp,
       },
       slow: {
         tension: config.slowTension,
         friction: config.slowFriction,
+        clamp: config.slowClamp,
       },
       molasses: {
         tension: config.molassesTension,
         friction: config.molassesFriction,
+        clamp: config.molassesClamp,
       },
       remountKey,
       showHighlights: config.showHighlights,
@@ -210,16 +246,22 @@ export const SpringConfigProvider = ({
     [
       config.gentleTension,
       config.gentleFriction,
+      config.gentleClamp,
       config.defaultTension,
       config.defaultFriction,
+      config.defaultClamp,
       config.wobblyTension,
       config.wobblyFriction,
+      config.wobblyClamp,
       config.stiffTension,
       config.stiffFriction,
+      config.stiffClamp,
       config.slowTension,
       config.slowFriction,
+      config.slowClamp,
       config.molassesTension,
       config.molassesFriction,
+      config.molassesClamp,
       remountKey,
       config.showHighlights,
     ]

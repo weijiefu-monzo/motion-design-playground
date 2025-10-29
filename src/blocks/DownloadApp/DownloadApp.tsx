@@ -66,9 +66,9 @@ export default function DownloadApp({
 
   const mediaSpring = useSpring({
     opacity: isInView ? 1 : 0,
-    x: isInView ? 0 : 30,
-    config: springConfig.gentle,
-    delay: ANIMATION_DELAY_BASE * 1,
+    y: isInView ? 0 : 20,
+    config: springConfig.slow,
+    delay: ANIMATION_DELAY_BASE * 2.5,
   });
 
   const handleButtonClick = () => {
@@ -120,7 +120,7 @@ export default function DownloadApp({
           className={styles.media}
           style={{
             opacity: mediaSpring.opacity,
-            transform: mediaSpring.x.to((x) => `translateX(${x}px)`),
+            // transform: mediaSpring.y.to((y) => `translateY(${y}px)`),
             ...getAnimationHighlightStyle(
               "gentle",
               springConfig.showHighlights
