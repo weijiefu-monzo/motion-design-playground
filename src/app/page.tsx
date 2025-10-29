@@ -9,20 +9,25 @@ import CardDemo from "@/components/Card/CardDemo";
 import CarouselDemo from "@/components/Carousel/CarouselDemo";
 import { ClickableCardDemo } from "@/components";
 import { AccordionDemo } from "@/components";
+import { RemountWrapper } from "@/components/RemountWrapper";
+import { SpringConfigProvider } from "@/contexts/SpringConfigContext";
 
 export default function Home() {
   return (
     <div>
-      <ThemeToggle />
-      <TypographyDemo />
-      <ButtonDemo />
-      <IconButtonDemo />
-      <ChipDemo />
-      <CellDemo />
-      <CardDemo />
-      <CarouselDemo />
-      <ClickableCardDemo />
-      <AccordionDemo />
+      <SpringConfigProvider>
+        <RemountWrapper>
+          <TypographyDemo />
+          <ButtonDemo />
+          <IconButtonDemo />
+          <ChipDemo />
+          <CellDemo />
+          <CardDemo />
+          <CarouselDemo />
+          <ClickableCardDemo />
+          <AccordionDemo />
+        </RemountWrapper>
+      </SpringConfigProvider>
     </div>
   );
 }

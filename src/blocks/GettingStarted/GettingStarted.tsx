@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
+import {
+  useSpring,
+  useTrail,
+  useTransition,
+  useSprings,
+  animated,
+} from "@react-spring/web";
 import styles from "./GettingStarted.module.css";
 import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
 import Step from "./Step";
 import StepCard from "./StepCard";
-import { useState } from "react";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface GettingStartedProps {
   className?: string;
   title?: string;
@@ -35,12 +43,77 @@ export default function GettingStarted({
   onStepClick,
   "data-qa": dataQa,
 }: GettingStartedProps) {
+  const ref = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  const springConfig = useSpringConfig();
+
+  const ANIMATION_DELAY_BASE = 100;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  // Animation springs for staggered effect
+  const headerSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: springConfig.gentle,
+    delay: ANIMATION_DELAY_BASE * 0,
+  });
+
+  // Individual step animations for stagger effect using useTrail
+  const stepTrail = useTrail(steps.length, {
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: springConfig.gentle,
+    delay: ANIMATION_DELAY_BASE * 2,
+  });
+
+  // Image transition when step changes - fade out then fade in
+  const imageTransitions = useTransition(currentStep, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: springConfig.default,
+  });
+
+  // Dot animations - create springs for each dot that react to currentStep
+  const dotSprings = useSprings(
+    steps.length,
+    steps.map((_, index) => ({
+      height: index === currentStep ? 32 : 8,
+      backgroundColor:
+        index === currentStep
+          ? "var(--neutral-darkest)"
+          : "var(--neutral-dark)",
+      config: springConfig.slow,
+    }))
+  );
+
   const handleButtonClick = () => {
     if (onButtonClick) {
       onButtonClick();
     }
   };
-  const [currentStep, setCurrentStep] = useState(0);
+
   const handleStepClick = (index: number) => {
     setCurrentStep(index);
   };
@@ -48,10 +121,24 @@ export default function GettingStarted({
   const sectionClasses = clsx(styles.section, className);
 
   return (
-    <section className={sectionClasses} data-qa={dataQa}>
+    <animated.section
+      ref={ref as React.RefObject<HTMLElement>}
+      className={sectionClasses}
+      data-qa={dataQa}
+    >
       <div className={styles.container}>
         {/* Header Content */}
-        <div className={styles.content}>
+        <animated.div
+          className={styles.content}
+          style={{
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights && isInView
+            ),
+            opacity: headerSpring.opacity,
+            transform: headerSpring.y.to((y) => `translateY(${y}px)`),
+          }}
+        >
           <div className={styles.text}>
             <H2 className={styles.title}>{title}</H2>
             {description && (
@@ -67,38 +154,80 @@ export default function GettingStarted({
               className={styles.button}
             />
           )}
-        </div>
+        </animated.div>
 
         {/* Steps Section */}
         <div className={styles.steps}>
           {/* Desktop/Tablet Landscape - Horizontal Steps */}
           <div className={styles.stepsHorizontal}>
             <div className={styles.stepLabels}>
-              {steps.map((step, index) => (
-                <Step
-                  key={index}
-                  title={step.title}
-                  description={step.description}
-                  index={step.index}
-                  current={index === currentStep}
-                  onClick={() => handleStepClick(index)}
-                  className={styles.step}
-                />
-              ))}
+              {stepTrail.map((stepSpring, index) => {
+                const step = steps[index];
+                return (
+                  <animated.div
+                    key={index}
+                    style={{
+                      opacity: stepSpring.opacity,
+                      transform: stepSpring.y.to((y) => `translateY(${y}px)`),
+                    }}
+                  >
+                    <Step
+                      title={step.title}
+                      description={step.description}
+                      index={step.index}
+                      current={index === currentStep}
+                      onClick={() => handleStepClick(index)}
+                      className={styles.step}
+                      isInView={isInView}
+                    />
+                  </animated.div>
+                );
+              })}
             </div>
             {image && (
-              <div className={styles.stepImage}>
-                <img src={steps[currentStep].imageSrc} alt="Step image" />
+              <div
+                className={styles.stepImage}
+                style={{ position: "relative" }}
+              >
+                {imageTransitions((style, stepIndex) => (
+                  <animated.div
+                    style={{
+                      ...style,
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      ...getAnimationHighlightStyle(
+                        "gentle",
+                        springConfig.showHighlights && isInView
+                      ),
+                    }}
+                  >
+                    <img
+                      src={steps[stepIndex].imageSrc}
+                      alt="Step image"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: "var(--corner-radius-large)",
+                      }}
+                    />
+                  </animated.div>
+                ))}
               </div>
             )}
             <div className={styles.pageControl}>
               <div className={styles.dots}>
-                {steps.map((_, index) => (
-                  <button
+                {dotSprings.map((style, index) => (
+                  <animated.button
                     key={index}
-                    className={clsx(styles.dot, {
-                      [styles.activeDot]: index === currentStep,
-                    })}
+                    className={styles.dot}
+                    style={{
+                      height: style.height.to((h) => `${h}px`),
+                      backgroundColor: style.backgroundColor,
+                    }}
                     onClick={() => handleStepClick(index)}
                     aria-label={`Go to step ${index + 1}`}
                   />
@@ -109,20 +238,30 @@ export default function GettingStarted({
 
           {/* Mobile/Tablet Portrait - Vertical Cards */}
           <div className={styles.stepsVertical}>
-            {steps.map((step, index) => (
-              <StepCard
-                key={index}
-                index={step.index}
-                title={step.title}
-                description={step.description}
-                imageSrc={step.imageSrc}
-                imageAlt={step.imageAlt}
-                className={styles.stepCard}
-              />
-            ))}
+            {stepTrail.map((stepSpring, index) => {
+              const step = steps[index];
+              return (
+                <animated.div
+                  key={index}
+                  style={{
+                    opacity: stepSpring.opacity,
+                    transform: stepSpring.y.to((y) => `translateY(${y}px)`),
+                  }}
+                >
+                  <StepCard
+                    index={step.index}
+                    title={step.title}
+                    description={step.description}
+                    imageSrc={step.imageSrc}
+                    imageAlt={step.imageAlt}
+                    className={styles.stepCard}
+                  />
+                </animated.div>
+              );
+            })}
           </div>
         </div>
       </div>
-    </section>
+    </animated.section>
   );
 }

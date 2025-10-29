@@ -9,96 +9,116 @@ import { LinkedArticles } from "@/blocks/LinkedArticles";
 import { FAQ } from "@/blocks/FAQ";
 import { Header } from "@/blocks/Header";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { TestSpringConfig } from "@/components/TestSpringConfig";
 import {
   ClickableCard,
   ClickableCardDemo,
   Accordion,
   AccordionDemo,
 } from "@/components";
+import { SpringConfigProvider } from "@/contexts/SpringConfigContext";
+import { Leva } from "leva";
+import { RemountIndicator } from "@/components/RemountIndicator";
+import { RemountWrapper } from "@/components/RemountWrapper";
 export default function ProductPage() {
   return (
-    <div style={{ height: "100vh", overflowY: "scroll" }}>
-      <Header
-        inverse={false}
-        currentTab="Personal"
-        onTabChange={(tab) => console.log(`Tab changed to: ${tab}`)}
-        onSignUp={() => console.log("Sign up clicked")}
-        onLogIn={() => console.log("Log in clicked")}
-        onMenuToggle={() => console.log("Menu toggled")}
-        data-qa="header"
-      />
-      <Hero
-        title="Flex Purchase.
+    <SpringConfigProvider>
+      <div style={{ position: "fixed", top: 0, right: 0, zIndex: 2000 }}>
+        <Leva
+          theme={{
+            colors: {
+              accent1: "#3B82F6", // Blue 500 - matches default highlight
+              accent2: "#60A5FA", // Blue 400 - lighter shade for hover
+              accent3: "#2563EB", // Blue 600 - darker shade
+            },
+          }}
+        />
+      </div>
+      <div style={{ height: "100vh", overflowY: "scroll" }}>
+        <RemountWrapper>
+          <Header
+            inverse={false}
+            currentTab="Personal"
+            onTabChange={(tab) => console.log(`Tab changed to: ${tab}`)}
+            onSignUp={() => console.log("Sign up clicked")}
+            onLogIn={() => console.log("Log in clicked")}
+            onMenuToggle={() => console.log("Menu toggled")}
+            data-qa="header"
+          />
+          <Hero
+            title="Flex Purchase.
 An award-winning 0% credit card."
-        chipLabel="Credit card"
-        description="With 0% interest you can use again and again, and credit limits up to £10,000. It’s a credit card with Monzo magic."
-      />
-      <HowItWorks
-        title="Not your average credit card"
-        cards={HowItWorksCards}
-        data-qa="how-it-works-desktop"
-      />
-      <FeatureHighlights
-        title="The best of Monzo in a credit card"
-        description="Get instant notifications, real-time balance updates and freeze and defrost your card, all from the app. No hidden fees or confusing terms, just a flexible, transparent payment plan for every purchase. "
-        buttonLabel="Open a free Monzo account"
-        cards={FeatureHighlightsCards}
-        data-qa="feature-highlights-desktop"
-      />
-      <GettingStarted
-        image={true}
-        title="Get Started with Monzo"
-        description="Join millions of people who are already banking with Monzo. It takes just a few minutes to get started."
-        buttonLabel="Open Account"
-        steps={steps}
-        data-qa="getting-started-default"
-      />
-      <FeatureHighlights
-        title="Capitalise on your credit"
-        description="Find out how credit has you covered for the big stuff. "
-        buttonLabel="Open a free Monzo account"
-        cards={FeatureHighlightsCards2}
-        data-qa="feature-highlights-desktop"
-      />
-      <DownloadApp
-        title="Open a free Monzo account and see if you are eligible"
-        description="Body copy in a couple of sentences."
-        buttonLabel="Open a free Monzo account"
-        customerCount="13 million customers"
-        appStoreRating="4.9"
-        googlePlayRating="4.9"
-        data-qa="download-app"
-      />
-      <Testimonials
-        title="13 million personal and business customers have changed the way they bank"
-        buttonLabel="Open a free Monzo account"
-        trustScore="4.8"
-        reviewCount="57k"
-        data-qa="testimonials"
-      />
+            chipLabel="Credit card"
+            description="With 0% interest you can use again and again, and credit limits up to £10,000. It's a credit card with Monzo magic."
+          />
+          <HowItWorks
+            title="Not your average credit card"
+            cards={HowItWorksCards}
+            data-qa="how-it-works-desktop"
+          />
+          <FeatureHighlights
+            title="The best of Monzo in a credit card"
+            description="Get instant notifications, real-time balance updates and freeze and defrost your card, all from the app. No hidden fees or confusing terms, just a flexible, transparent payment plan for every purchase. "
+            buttonLabel="Open a free Monzo account"
+            cards={FeatureHighlightsCards}
+            data-qa="feature-highlights-desktop"
+          />
+          <GettingStarted
+            image={true}
+            title="Get Started with Monzo"
+            description="Join millions of people who are already banking with Monzo. It takes just a few minutes to get started."
+            buttonLabel="Open Account"
+            steps={steps}
+            data-qa="getting-started-default"
+          />
+          <FeatureHighlights
+            title="Capitalise on your credit"
+            description="Find out how credit has you covered for the big stuff. "
+            buttonLabel="Open a free Monzo account"
+            cards={FeatureHighlightsCards2}
+            data-qa="feature-highlights-desktop"
+          />
+          <DownloadApp
+            title="Open a free Monzo account and see if you are eligible"
+            description="Body copy in a couple of sentences."
+            buttonLabel="Open a free Monzo account"
+            customerCount="13 million customers"
+            appStoreRating="4.9"
+            googlePlayRating="4.9"
+            data-qa="download-app"
+          />
+          <Testimonials
+            title="13 million personal and business customers have changed the way they bank"
+            buttonLabel="Open a free Monzo account"
+            trustScore="4.8"
+            reviewCount="57k"
+            data-qa="testimonials"
+          />
 
-      <LinkedArticles
-        title="Other useful products"
-        description="See how else Monzo can help with the big life steps and safety nets."
-        buttonLabel="Open a free Monzo account"
-        showDescription={true}
-        showPageControl={true}
-        cards={articles}
-        onButtonClick={() => console.log("View all articles clicked")}
-        onCardClick={(index) => console.log(`Card ${index} clicked`)}
-        data-qa="linked-articles"
-      />
+          <LinkedArticles
+            title="Other useful products"
+            description="See how else Monzo can help with the big life steps and safety nets."
+            buttonLabel="Open a free Monzo account"
+            showDescription={true}
+            showPageControl={true}
+            cards={articles}
+            onButtonClick={() => console.log("View all articles clicked")}
+            onCardClick={(index) => console.log(`Card ${index} clicked`)}
+            data-qa="linked-articles"
+          />
 
-      <FAQ
-        title="Questions?Answers."
-        questions={questions}
-        onToggle={(index, expanded) =>
-          console.log(`FAQ ${index} ${expanded ? "expanded" : "collapsed"}`)
-        }
-        data-qa="faq"
-      />
-      <ThemeToggle />
-    </div>
+          <FAQ
+            title="Questions?Answers."
+            questions={questions}
+            onToggle={(index, expanded) =>
+              console.log(`FAQ ${index} ${expanded ? "expanded" : "collapsed"}`)
+            }
+            data-qa="faq"
+          />
+          <ThemeToggle />
+        </RemountWrapper>
+      </div>
+    </SpringConfigProvider>
   );
 }
 const HowItWorksCards = [

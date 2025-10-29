@@ -3,7 +3,8 @@
   flex-direction: column;
   gap: var(--spacing-x-large);
   align-items: center;
-  padding: var(--spacing-medium) var(--spacing-3x-large) var(--spacing-3x-large);
+  padding: calc(var(--spacing-medium) + 84px) var(--spacing-3x-large)
+    var(--spacing-3x-large);
   background-color: var(--background-primary);
   color: var(--content-primary);
 }
@@ -278,6 +279,7 @@
 @media (max-width: 393px) {
   .hero {
     padding: 0;
+    padding-top: 64px;
   }
 
   .container {

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./Accordion.module.css";
 import { H5, Body } from "../Typography";
 import { AiOutlineDown } from "react-icons/ai";
-
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface AccordionProps {
   className?: string;
   title: string;
@@ -26,6 +28,18 @@ export default function Accordion({
   "data-qa": dataQa,
 }: AccordionProps) {
   const [isExpanded, setIsExpanded] = useState(expanded);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const measureRef = useRef<HTMLDivElement>(null);
+  const [contentHeight, setContentHeight] = useState(0);
+  const springConfig = useSpringConfig();
+
+  useEffect(() => {
+    if (measureRef.current) {
+      // Measure the content from a hidden element that's always fully rendered
+      const height = measureRef.current.scrollHeight;
+      setContentHeight(height);
+    }
+  }, [details]);
 
   const handleToggle = () => {
     if (!disabled) {
@@ -44,6 +58,37 @@ export default function Accordion({
     }
   };
 
+  // Icon rotation animation
+  const [iconSpring, iconApi] = useSpring(() => ({
+    transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+    config: springConfig.gentle,
+  }));
+
+  // Content animation
+  const [contentSpring, contentApi] = useSpring(() => ({
+    height: isExpanded && details && contentHeight > 0 ? contentHeight : 0,
+    opacity: isExpanded ? 1 : 0,
+    marginBottom: isExpanded ? "16px" : "0px",
+    config: springConfig.default,
+  }));
+
+  // Restart animations when config changes
+  useEffect(() => {
+    iconApi.start({
+      transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+      config: springConfig.gentle,
+    });
+  }, [springConfig.gentle, iconApi, isExpanded]);
+
+  useEffect(() => {
+    contentApi.start({
+      height: isExpanded && details && contentHeight > 0 ? contentHeight : 0,
+      opacity: isExpanded ? 1 : 0,
+      marginBottom: isExpanded ? "16px" : "0px",
+      config: springConfig.default,
+    });
+  }, [springConfig.default, contentApi, isExpanded, details, contentHeight]);
+
   const accordionClasses = clsx(
     styles.accordion,
     {
@@ -53,13 +98,7 @@ export default function Accordion({
     className
   );
 
-  const headerClasses = clsx(styles.header, {
-    [styles.expandedHeader]: isExpanded,
-  });
-
-  const iconClasses = clsx(styles.icon, {
-    [styles.expandedIcon]: isExpanded,
-  });
+  const headerClasses = styles.header;
 
   return (
     <div
@@ -71,10 +110,23 @@ export default function Accordion({
       aria-expanded={isExpanded}
       aria-label={ariaLabel}
       data-qa={dataQa}
+      style={{
+        ...getAnimationHighlightStyle("default", springConfig.showHighlights),
+      }}
     >
-      <div className={headerClasses}>
+      <animated.div
+        className={headerClasses}
+        style={{
+          marginBottom: contentSpring.marginBottom,
+        }}
+      >
         <H5 className={styles.title}>{title}</H5>
-        <div className={iconClasses}>
+        <animated.div
+          className={styles.icon}
+          style={{
+            transform: iconSpring.transform,
+          }}
+        >
           <svg
             width="44"
             height="44"
@@ -87,13 +139,36 @@ export default function Accordion({
               fill="currentColor"
             />
           </svg>
-        </div>
-      </div>
+        </animated.div>
+      </animated.div>
 
-      {isExpanded && details && (
-        <div className={styles.content}>
-          <Body className={styles.details}>{details}</Body>
-        </div>
+      {details && (
+        <>
+          {/* Hidden element for measurement */}
+          <div
+            ref={measureRef}
+            style={{
+              position: "absolute",
+              visibility: "hidden",
+              height: "auto",
+              width: "100%",
+            }}
+          >
+            <Body className={styles.details}>{details}</Body>
+          </div>
+
+          {/* Animated content */}
+          <animated.div
+            ref={contentRef}
+            className={styles.content}
+            style={{
+              height: contentSpring.height.to((h) => `${h}px`),
+              opacity: contentSpring.opacity,
+            }}
+          >
+            <Body className={styles.details}>{details}</Body>
+          </animated.div>
+        </>
       )}
     </div>
   );

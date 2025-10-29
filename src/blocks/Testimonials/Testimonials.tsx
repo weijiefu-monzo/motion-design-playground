@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./Testimonials.module.css";
 import { Button } from "../../components";
 import { H1, Body } from "../../components/Typography";
-
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface TestimonialsProps {
   className?: string;
   title?: string;
@@ -37,6 +39,47 @@ export default function Testimonials({
   onButtonClick,
   "data-qa": dataQa,
 }: TestimonialsProps) {
+  const ref = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+  const springConfig = useSpringConfig();
+
+  const ANIMATION_DELAY_BASE = 100;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  const trustpilotSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: springConfig.gentle,
+    delay: ANIMATION_DELAY_BASE * 0,
+  });
+
+  const contentSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: springConfig.gentle,
+    delay: ANIMATION_DELAY_BASE * 1,
+  });
+
   const handleButtonClick = () => {
     if (onButtonClick) {
       onButtonClick();
@@ -46,19 +89,43 @@ export default function Testimonials({
   const sectionClasses = clsx(styles.section, className);
 
   return (
-    <section className={sectionClasses} data-qa={dataQa}>
+    <animated.section
+      ref={ref as React.RefObject<HTMLElement>}
+      className={sectionClasses}
+      data-qa={dataQa}
+    >
       <div className={styles.container}>
         {/* Trustpilot Widget */}
-        <div className={styles.trustpilotWidget}>
+        <animated.div
+          className={styles.trustpilotWidget}
+          style={{
+            opacity: trustpilotSpring.opacity,
+            transform: trustpilotSpring.y.to((y) => `translateY(${y}px)`),
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights && isInView
+            ),
+          }}
+        >
           <img
             src="/trustpilot.png"
             alt="Trustpilot"
             className={styles.trustpilotLogo}
           />
-        </div>
+        </animated.div>
 
         {/* Content */}
-        <div className={styles.content}>
+        <animated.div
+          className={styles.content}
+          style={{
+            opacity: contentSpring.opacity,
+            transform: contentSpring.y.to((y) => `translateY(${y}px)`),
+            ...getAnimationHighlightStyle(
+              "gentle",
+              springConfig.showHighlights && isInView
+            ),
+          }}
+        >
           <div className={styles.text}>
             <div className={styles.titleRow}>
               <H1 className={styles.title}>
@@ -96,8 +163,8 @@ export default function Testimonials({
               className={styles.button}
             />
           )}
-        </div>
+        </animated.div>
       </div>
-    </section>
+    </animated.section>
   );
 }

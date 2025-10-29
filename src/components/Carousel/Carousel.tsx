@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./Carousel.module.css";
 import IconButton from "../IconButton/IconButton";
 import {
@@ -7,6 +8,8 @@ import {
   AiOutlineArrowRight,
   AiFillCaretRight,
 } from "react-icons/ai";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
+import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 
 export interface CarouselProps {
   className?: string;
@@ -36,8 +39,29 @@ export default function Carousel({
   const [isHovered, setIsHovered] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+  const springConfig = useSpringConfig();
+
+  // Progress animation for active dot countdown
+  const [progressSpring, progressApi] = useSpring(() => ({
+    progress: 0,
+    config: { duration: autoplayInterval },
+  }));
 
   const totalSlides = children.length;
+
+  // Spring animation for carousel transitions
+  const [slideSpring, slideApi] = useSpring(() => ({
+    x: -(currentIndex * 100) / children.length,
+    config: springConfig.stiff,
+  }));
+
+  // Restart animation when config changes
+  useEffect(() => {
+    slideApi.start({
+      x: -(currentIndex * 100) / children.length,
+      config: springConfig.slow,
+    });
+  }, [springConfig.slow, slideApi, currentIndex, children.length]);
 
   const goToSlide = useCallback(
     (index: number) => {
@@ -83,6 +107,31 @@ export default function Carousel({
     [prevSlide, nextSlide, toggleAutoplay]
   );
 
+  // Progress animation effect
+  useEffect(() => {
+    if (isAutoplayActive && !isHovered && totalSlides > 1) {
+      // Start progress animation
+      progressApi.start({
+        from: { progress: 0 },
+        to: { progress: 100 },
+        config: { duration: autoplayInterval },
+      });
+    } else {
+      // Reset progress when paused or hovered
+      progressApi.start({
+        progress: 0,
+        immediate: true,
+      });
+    }
+  }, [
+    currentIndex,
+    isAutoplayActive,
+    isHovered,
+    autoplayInterval,
+    totalSlides,
+    progressApi,
+  ]);
+
   // Autoplay effect
   useEffect(() => {
     if (isAutoplayActive && !isHovered && totalSlides > 1) {
@@ -125,15 +174,16 @@ export default function Carousel({
       tabIndex={0}
       role="region"
       aria-label="Carousel"
+      style={{
+        ...getAnimationHighlightStyle("slow", springConfig.showHighlights),
+      }}
     >
       {/* Content Row */}
       <div className={rowClasses}>
-        <div
+        <animated.div
           className={styles.slidesContainer}
           style={{
-            transform: `translateX(-${
-              (currentIndex * 100) / children.length
-            }%)`,
+            transform: slideSpring.x.to((x) => `translateX(${x}%)`),
           }}
         >
           {children.map((child, index) => (
@@ -146,7 +196,7 @@ export default function Carousel({
               {child}
             </div>
           ))}
-        </div>
+        </animated.div>
       </div>
 
       {/* Controls */}
@@ -175,25 +225,45 @@ export default function Carousel({
               role="tablist"
               aria-label="Carousel pagination"
             >
-              {children.map((_, index) => (
-                <button
-                  key={index}
-                  className={clsx(styles.dot, {
-                    [styles.active]: index === currentIndex,
-                  })}
-                  onClick={() => goToSlide(index)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      goToSlide(index);
-                    }
-                  }}
-                  role="tab"
-                  aria-label={`Go to slide ${index + 1}`}
-                  aria-selected={index === currentIndex}
-                  tabIndex={index === currentIndex ? 0 : -1}
-                />
-              ))}
+              {children.map((_, index) => {
+                const isActive = index === currentIndex;
+                const dotSpring = useSpring({
+                  width: isActive ? 32 : 8,
+                  config: springConfig.stiff,
+                });
+
+                return (
+                  <animated.button
+                    key={index}
+                    className={clsx(styles.dot, {
+                      [styles.active]: isActive,
+                    })}
+                    style={{
+                      width: dotSpring.width.to((w) => `${w}px`),
+                    }}
+                    onClick={() => goToSlide(index)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        goToSlide(index);
+                      }
+                    }}
+                    role="tab"
+                    aria-label={`Go to slide ${index + 1}`}
+                    aria-selected={isActive}
+                    tabIndex={isActive ? 0 : -1}
+                  >
+                    {isActive && isAutoplayActive && !isHovered && (
+                      <animated.div
+                        className={styles.dotProgress}
+                        style={{
+                          width: progressSpring.progress.to((p) => `${p}%`),
+                        }}
+                      />
+                    )}
+                  </animated.button>
+                );
+              })}
             </div>
           )}
 

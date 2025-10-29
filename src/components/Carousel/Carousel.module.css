@@ -19,12 +19,12 @@
 /* Slides Container */
 .slidesContainer {
   display: flex;
-  gap: var(--spacing-2x-large);
-  transition: transform var(--motion-duration-super-long)
-    var(--motion-easing-linear);
+  /* gap: var(--spacing-2x-large); */
   will-change: transform;
 }
-
+.slot {
+  margin-right: var(--spacing-2x-large);
+}
 /* Controls Container */
 .controls {
   display: flex;
@@ -50,15 +50,14 @@
 }
 
 .dot {
-  width: 8px;
   height: 8px;
   border-radius: var(--corner-radius-3x-large);
   border: none;
-  background-color: var(--neutral-dark);
   cursor: pointer;
-  transition: all var(--motion-duration-super-long) var(--motion-easing-linear);
   position: relative;
   overflow: hidden;
+  background-color: var(--neutral-dark);
+  transition: background-color 0.2s ease;
 }
 
 .dot:hover {
@@ -72,11 +71,25 @@
 }
 
 .dot.active {
-  width: 32px;
   background-color: var(--neutral-darkest);
 }
 
 .dot.active:hover {
   background-color: var(--neutral-darkest);
-  transform: none;
+}
+
+/* Progress fill for active dot when autoplay is active */
+.dotProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: var(--neutral-darkest);
+  border-radius: var(--corner-radius-3x-large);
+  pointer-events: none;
+}
+
+/* When showing progress, active dot background should match inactive dots */
+.dot.active:has(.dotProgress) {
+  background-color: var(--neutral-dark);
 }

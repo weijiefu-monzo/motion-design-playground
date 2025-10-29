@@ -4,11 +4,10 @@
   border-radius: var(--corner-radius-large, 32px);
   padding: var(--spacing-large, 24px);
   cursor: pointer;
-  transition: all var(--motion-duration-medium, 300ms)
-    var(--motion-easing-slow-down, cubic-bezier(0.4, 0, 0.2, 1));
   position: relative;
   overflow: hidden;
   width: 100%;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .accordion:hover:not(.disabled) {
@@ -27,7 +26,7 @@
 }
 
 .accordion.expanded {
-  border-color: transparent;
+  /* border-color: transparent; */
   background-color: var(--background-secondary, #f2f8f3);
 }
 
@@ -44,10 +43,6 @@
   width: 100%;
 }
 
-.expandedHeader {
-  margin-bottom: var(--spacing-medium, 16px);
-}
-
 .title {
   color: var(--content-primary, #091723);
   margin: 0;
@@ -62,31 +57,11 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform var(--motion-duration-medium, 300ms)
-    var(--motion-easing-linear, ease);
   color: var(--content-accent);
 }
 
-.expandedIcon {
-  transform: rotate(180deg);
-}
-
 .content {
-  animation: expandContent var(--motion-duration-medium, 300ms)
-    var(--motion-easing-linear, ease) forwards;
-  opacity: 0;
-  animation-delay: var(--motion-duration-medium, 300ms);
-}
-
-@keyframes expandContent {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  overflow: hidden;
 }
 
 .details {
