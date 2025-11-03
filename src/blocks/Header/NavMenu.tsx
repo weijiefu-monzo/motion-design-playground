@@ -438,7 +438,7 @@ export default function NavMenu({
   const menuSpring = useSpring({
     opacity: isOpen ? 1 : 0,
     y: isOpen ? 0 : -20,
-    config: springConfig.gentle,
+    config: springConfig.default,
   });
 
   const handlePrimaryItemClick = (item: PrimaryMenuItem) => {

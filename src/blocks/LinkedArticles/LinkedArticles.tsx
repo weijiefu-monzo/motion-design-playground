@@ -70,14 +70,14 @@ export default function LinkedArticles({
   const headerSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
   const cardsSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 1,
   });
 
@@ -125,7 +125,7 @@ export default function LinkedArticles({
             opacity: headerSpring.opacity,
             transform: headerSpring.y.to((y) => `translateY(${y}px)`),
             ...getAnimationHighlightStyle(
-              "gentle",
+              "default",
               springConfig.showHighlights
             ),
           }}
@@ -180,7 +180,7 @@ export default function LinkedArticles({
             opacity: cardsSpring.opacity,
             transform: cardsSpring.y.to((y) => `translateY(${y}px)`),
             ...getAnimationHighlightStyle(
-              "gentle",
+              "default",
               springConfig.showHighlights
             ),
           }}

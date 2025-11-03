@@ -69,14 +69,14 @@ export default function Testimonials({
   const trustpilotSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
   const contentSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 1,
   });
 
@@ -102,7 +102,7 @@ export default function Testimonials({
             opacity: trustpilotSpring.opacity,
             transform: trustpilotSpring.y.to((y) => `translateY(${y}px)`),
             ...getAnimationHighlightStyle(
-              "gentle",
+              "default",
               springConfig.showHighlights && isInView
             ),
           }}
@@ -121,7 +121,7 @@ export default function Testimonials({
             opacity: contentSpring.opacity,
             transform: contentSpring.y.to((y) => `translateY(${y}px)`),
             ...getAnimationHighlightStyle(
-              "gentle",
+              "default",
               springConfig.showHighlights && isInView
             ),
           }}

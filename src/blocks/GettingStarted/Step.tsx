@@ -77,7 +77,7 @@ export default function Step({
     opacity: current ? 1 : 0,
     height: current && descriptionHeight > 0 ? descriptionHeight : 0,
     y: current ? 0 : 20,
-    config: springConfig.default,
+    config: springConfig.gentle,
   });
 
   return (
@@ -95,7 +95,7 @@ export default function Step({
       }}
       style={{
         ...getAnimationHighlightStyle(
-          "default",
+          "gentle",
           springConfig.showHighlights && isInView
         ),
       }}

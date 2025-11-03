@@ -55,7 +55,7 @@ export default function FAQ({
   const titleSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
@@ -63,7 +63,7 @@ export default function FAQ({
   const accordionTrail = useTrail(questions.length, {
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 30,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 1,
   }) as any;
 
@@ -87,7 +87,7 @@ export default function FAQ({
             opacity: titleSpring.opacity,
             transform: titleSpring.y.to((y) => `translateY(${y}px)`),
             ...getAnimationHighlightStyle(
-              "gentle",
+              "default",
               springConfig.showHighlights
             ),
           }}

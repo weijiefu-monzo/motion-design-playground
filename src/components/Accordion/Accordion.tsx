@@ -61,7 +61,7 @@ export default function Accordion({
   // Icon rotation animation
   const [iconSpring, iconApi] = useSpring(() => ({
     transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-    config: springConfig.gentle,
+    config: springConfig.default,
   }));
 
   // Content animation
@@ -69,25 +69,25 @@ export default function Accordion({
     height: isExpanded && details && contentHeight > 0 ? contentHeight : 0,
     opacity: isExpanded ? 1 : 0,
     marginBottom: isExpanded ? "16px" : "0px",
-    config: springConfig.default,
+    config: springConfig.gentle,
   }));
 
   // Restart animations when config changes
   useEffect(() => {
     iconApi.start({
       transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-      config: springConfig.gentle,
+      config: springConfig.default,
     });
-  }, [springConfig.gentle, iconApi, isExpanded]);
+  }, [springConfig.default, iconApi, isExpanded]);
 
   useEffect(() => {
     contentApi.start({
       height: isExpanded && details && contentHeight > 0 ? contentHeight : 0,
       opacity: isExpanded ? 1 : 0,
       marginBottom: isExpanded ? "16px" : "0px",
-      config: springConfig.default,
+      config: springConfig.gentle,
     });
-  }, [springConfig.default, contentApi, isExpanded, details, contentHeight]);
+  }, [springConfig.gentle, contentApi, isExpanded, details, contentHeight]);
 
   const accordionClasses = clsx(
     styles.accordion,
@@ -111,7 +111,7 @@ export default function Accordion({
       aria-label={ariaLabel}
       data-qa={dataQa}
       style={{
-        ...getAnimationHighlightStyle("default", springConfig.showHighlights),
+        ...getAnimationHighlightStyle("gentle", springConfig.showHighlights),
       }}
     >
       <animated.div

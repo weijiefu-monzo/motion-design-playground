@@ -104,14 +104,14 @@ export default function HowItWorks({
   const titleSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
   const carouselSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 1,
   });
 
@@ -199,7 +199,7 @@ export default function HowItWorks({
         style={{
           opacity: titleSpring.opacity,
           transform: titleSpring.y.to((y) => `translateY(${y}px)`),
-          ...getAnimationHighlightStyle("gentle", springConfig.showHighlights),
+          ...getAnimationHighlightStyle("default", springConfig.showHighlights),
         }}
       >
         <H2 className={titleClasses}>{title}</H2>
@@ -209,7 +209,7 @@ export default function HowItWorks({
         style={{
           opacity: carouselSpring.opacity,
           transform: carouselSpring.y.to((y) => `translateY(${y}px)`),
-          ...getAnimationHighlightStyle("gentle", springConfig.showHighlights),
+          ...getAnimationHighlightStyle("default", springConfig.showHighlights),
         }}
       >
         {renderCards()}

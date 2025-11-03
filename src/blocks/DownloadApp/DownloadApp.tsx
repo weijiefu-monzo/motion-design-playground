@@ -60,7 +60,7 @@ export default function DownloadApp({
   const contentSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
@@ -92,7 +92,7 @@ export default function DownloadApp({
             opacity: contentSpring.opacity,
             transform: contentSpring.y.to((y) => `translateY(${y}px)`),
             ...getAnimationHighlightStyle(
-              "gentle",
+              "default",
               springConfig.showHighlights
             ),
           }}
@@ -121,10 +121,7 @@ export default function DownloadApp({
           style={{
             opacity: mediaSpring.opacity,
             // transform: mediaSpring.y.to((y) => `translateY(${y}px)`),
-            ...getAnimationHighlightStyle(
-              "gentle",
-              springConfig.showHighlights
-            ),
+            ...getAnimationHighlightStyle("slow", springConfig.showHighlights),
           }}
         >
           <div className={styles.videoContainer}>

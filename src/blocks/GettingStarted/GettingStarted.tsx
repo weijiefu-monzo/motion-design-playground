@@ -92,7 +92,7 @@ export default function GettingStarted({
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    config: springConfig.default,
+    config: springConfig.gentle,
   });
 
   // Dot animations - create springs for each dot that react to currentStep

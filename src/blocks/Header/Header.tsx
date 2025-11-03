@@ -96,7 +96,7 @@ export default function Header({
 
   const spring = useSpring({
     y: isVisible ? 0 : -100,
-    config: { ...springConfig.gentle, clamp: true },
+    config: { ...springConfig.default, clamp: true },
   });
 
   const handleTabChange = (tab: "Personal" | "Business") => {

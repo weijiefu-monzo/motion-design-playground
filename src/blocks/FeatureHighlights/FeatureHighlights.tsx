@@ -97,14 +97,14 @@ export default function FeatureHighlights({
   const headerSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 0,
   });
 
   const cardsSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 1,
   });
 
@@ -134,7 +134,7 @@ export default function FeatureHighlights({
         style={{
           opacity: headerSpring.opacity,
           transform: headerSpring.y.to((y) => `translateY(${y}px)`),
-          ...getAnimationHighlightStyle("gentle", springConfig.showHighlights),
+          ...getAnimationHighlightStyle("default", springConfig.showHighlights),
         }}
       >
         <div className={styles.text}>
@@ -188,7 +188,7 @@ export default function FeatureHighlights({
         style={{
           opacity: cardsSpring.opacity,
           transform: cardsSpring.y.to((y) => `translateY(${y}px)`),
-          ...getAnimationHighlightStyle("gentle", springConfig.showHighlights),
+          ...getAnimationHighlightStyle("default", springConfig.showHighlights),
         }}
       >
         {cards.map((card, index) => (

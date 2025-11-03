@@ -108,14 +108,14 @@ export default function Hero({
   ] = useTrail(5, {
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
   }) as any;
 
   // Image section uses different animation (x direction)
   const imageSectionSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 0.5,
   });
 
@@ -123,7 +123,7 @@ export default function Hero({
   const bankCardSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
-    config: springConfig.gentle,
+    config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 0.5, // 1 second delay
   });
 
@@ -140,7 +140,7 @@ export default function Hero({
             className={styles.textSection}
             style={{
               ...getAnimationHighlightStyle(
-                "gentle",
+                "default",
                 springConfig.showHighlights && isInView
               ),
               opacity: textSectionSpring.opacity,
@@ -159,7 +159,7 @@ export default function Hero({
           <animated.div
             style={{
               ...getAnimationHighlightStyle(
-                "gentle",
+                "default",
                 springConfig.showHighlights && isInView
               ),
               opacity: buttonSpring.opacity,
@@ -177,7 +177,7 @@ export default function Hero({
             className={styles.financialData}
             style={{
               ...getAnimationHighlightStyle(
-                "gentle",
+                "default",
                 springConfig.showHighlights && isInView
               ),
               opacity: financialDataSpring.opacity,
@@ -219,7 +219,7 @@ export default function Hero({
               (y: number) => `translateY(${y}px)`
             ),
             ...getAnimationHighlightStyle(
-              "gentle",
+              "default",
               springConfig.showHighlights
             ),
           }}
@@ -234,7 +234,7 @@ export default function Hero({
                   (y: number) => `translateY(${y}px)`
                 ),
                 ...getAnimationHighlightStyle(
-                  "gentle",
+                  "default",
                   springConfig.showHighlights && isInView
                 ),
               }}
@@ -249,7 +249,7 @@ export default function Hero({
         className={styles.socialProof}
         style={{
           ...getAnimationHighlightStyle(
-            "gentle",
+            "default",
             springConfig.showHighlights && isInView
           ),
           opacity: socialProofSpring.opacity,
@@ -293,7 +293,7 @@ export default function Hero({
       <animated.div
         style={{
           ...getAnimationHighlightStyle(
-            "gentle",
+            "default",
             springConfig.showHighlights && isInView
           ),
           opacity: legalCopySpring.opacity,
