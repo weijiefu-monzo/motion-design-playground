@@ -52,7 +52,7 @@ export default function Carousel({
   // Spring animation for carousel transitions
   const [slideSpring, slideApi] = useSpring(() => ({
     x: -(currentIndex * 100) / children.length,
-    config: springConfig.stiff,
+    config: springConfig.slow,
   }));
 
   // Restart animation when config changes
@@ -229,7 +229,7 @@ export default function Carousel({
                 const isActive = index === currentIndex;
                 const dotSpring = useSpring({
                   width: isActive ? 32 : 8,
-                  config: springConfig.stiff,
+                  config: springConfig.slow,
                 });
 
                 return (
