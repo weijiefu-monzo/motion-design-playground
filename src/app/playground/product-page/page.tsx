@@ -46,7 +46,7 @@ export default function ProductPage() {
             data-qa="header"
           />
           <Hero
-            title="Flex Purchase.
+            title="Flexx Purchase.
 An award-winning 0% credit card."
             chipLabel="Credit card"
             description="With 0% interest you can use again and again, and credit limits up to £10,000. It's a credit card with Monzo magic."

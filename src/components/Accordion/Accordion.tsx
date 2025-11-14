@@ -1,11 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
-import { useSpring, animated } from "@react-spring/web";
 import styles from "./Accordion.module.css";
 import { H5, Body } from "../Typography";
-import { AiOutlineDown } from "react-icons/ai";
-import { useSpringConfig } from "@/contexts/SpringConfigContext";
-import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 export interface AccordionProps {
   className?: string;
   title: string;
@@ -31,7 +27,6 @@ export default function Accordion({
   const contentRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
-  const springConfig = useSpringConfig();
 
   useEffect(() => {
     if (measureRef.current) {
@@ -58,37 +53,6 @@ export default function Accordion({
     }
   };
 
-  // Icon rotation animation
-  const [iconSpring, iconApi] = useSpring(() => ({
-    transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-    config: springConfig.default,
-  }));
-
-  // Content animation
-  const [contentSpring, contentApi] = useSpring(() => ({
-    height: isExpanded && details && contentHeight > 0 ? contentHeight : 0,
-    opacity: isExpanded ? 1 : 0,
-    marginBottom: isExpanded ? "16px" : "0px",
-    config: springConfig.gentle,
-  }));
-
-  // Restart animations when config changes
-  useEffect(() => {
-    iconApi.start({
-      transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-      config: springConfig.default,
-    });
-  }, [springConfig.default, iconApi, isExpanded]);
-
-  useEffect(() => {
-    contentApi.start({
-      height: isExpanded && details && contentHeight > 0 ? contentHeight : 0,
-      opacity: isExpanded ? 1 : 0,
-      marginBottom: isExpanded ? "16px" : "0px",
-      config: springConfig.gentle,
-    });
-  }, [springConfig.gentle, contentApi, isExpanded, details, contentHeight]);
-
   const accordionClasses = clsx(
     styles.accordion,
     {
@@ -110,37 +74,29 @@ export default function Accordion({
       aria-expanded={isExpanded}
       aria-label={ariaLabel}
       data-qa={dataQa}
-      style={{
-        ...getAnimationHighlightStyle("gentle", springConfig.showHighlights),
-      }}
     >
-      <animated.div
+      <div
         className={headerClasses}
         style={{
-          marginBottom: contentSpring.marginBottom,
+          marginBottom: isExpanded && details ? "16px" : "0px",
         }}
       >
         <H5 className={styles.title}>{title}</H5>
-        <animated.div
-          className={styles.icon}
-          style={{
-            transform: iconSpring.transform,
-          }}
-        >
+        <div className={styles.icon}>
           <svg
-            width="44"
-            height="44"
-            viewBox="0 0 44 44"
+            width="36"
+            height="36"
+            viewBox="0 0 36 36"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M22 27.4541C21.7556 27.4541 21.5264 27.4159 21.3125 27.3396C21.0986 27.2632 20.9 27.1333 20.7167 26.95L12.2833 18.5166C11.9472 18.1805 11.7792 17.7527 11.7792 17.2333C11.7792 16.7139 11.9472 16.2861 12.2833 15.95C12.6195 15.6139 13.0472 15.4458 13.5667 15.4458C14.0861 15.4458 14.5139 15.6139 14.85 15.95L22 23.1L29.15 15.95C29.4861 15.6139 29.9139 15.4458 30.4333 15.4458C30.9528 15.4458 31.3806 15.6139 31.7167 15.95C32.0528 16.2861 32.2208 16.7139 32.2208 17.2333C32.2208 17.7527 32.0528 18.1805 31.7167 18.5166L23.2833 26.95C23.1 27.1333 22.9014 27.2632 22.6875 27.3396C22.4736 27.4159 22.2445 27.4541 22 27.4541Z"
-              fill="currentColor"
+              d="M18 22.4625C17.8 22.4625 17.6125 22.4313 17.4375 22.3688C17.2625 22.3063 17.1 22.2 16.95 22.05L10.05 15.15C9.77501 14.875 9.63751 14.525 9.63751 14.1C9.63751 13.675 9.77501 13.325 10.05 13.05C10.325 12.775 10.675 12.6375 11.1 12.6375C11.525 12.6375 11.875 12.775 12.15 13.05L18 18.9L23.85 13.05C24.125 12.775 24.475 12.6375 24.9 12.6375C25.325 12.6375 25.675 12.775 25.95 13.05C26.225 13.325 26.3625 13.675 26.3625 14.1C26.3625 14.525 26.225 14.875 25.95 15.15L19.05 22.05C18.9 22.2 18.7375 22.3063 18.5625 22.3688C18.3875 22.4313 18.2 22.4625 18 22.4625Z"
+              fill="#FF4F40"
             />
           </svg>
-        </animated.div>
-      </animated.div>
+        </div>
+      </div>
 
       {details && (
         <>
@@ -158,16 +114,17 @@ export default function Accordion({
           </div>
 
           {/* Animated content */}
-          <animated.div
+          <div
             ref={contentRef}
             className={styles.content}
             style={{
-              height: contentSpring.height.to((h) => `${h}px`),
-              opacity: contentSpring.opacity,
+              height:
+                isExpanded && contentHeight > 0 ? `${contentHeight}px` : "0px",
+              opacity: isExpanded ? 1 : 0,
             }}
           >
             <Body className={styles.details}>{details}</Body>
-          </animated.div>
+          </div>
         </>
       )}
     </div>

@@ -6,6 +6,7 @@ interface SpringConfig {
   default: { tension: number; friction: number; clamp: boolean };
   gentle: { tension: number; friction: number; clamp: boolean };
   slow: { tension: number; friction: number; clamp: boolean };
+  nimble: { tension: number; friction: number; clamp: boolean };
   remountKey: number;
   showHighlights: boolean;
 }
@@ -32,29 +33,30 @@ export const SpringConfigProvider = ({
   const [remountKey, setRemountKey] = useState(0);
 
   const config = useControls("Spring Config", {
-    "🔵 Default": folder(
+    "🟡 Nimble": folder(
       {
-        defaultTension: {
-          value: 110,
+        nimbleTension: {
+          value: 200,
           min: 5,
           max: 300,
           step: 10,
           label: "Tension",
         },
-        defaultFriction: {
-          value: 24,
+        nimbleFriction: {
+          value: 20,
           min: 5,
           max: 300,
           step: 1,
           label: "Friction",
         },
-        defaultClamp: {
+        nimbleClamp: {
           value: true,
           label: "Clamp",
         },
       },
-      { color: "#3B82F6" }
+      { color: "#F59E0B" }
     ),
+
     "🟢 Gentle": folder(
       {
         gentleTension: {
@@ -77,6 +79,30 @@ export const SpringConfigProvider = ({
         },
       },
       { color: "#10B981" }
+    ),
+
+    "🔵 Default": folder(
+      {
+        defaultTension: {
+          value: 110,
+          min: 5,
+          max: 300,
+          step: 10,
+          label: "Tension",
+        },
+        defaultFriction: {
+          value: 24,
+          min: 5,
+          max: 300,
+          step: 1,
+          label: "Friction",
+        },
+        defaultClamp: {
+          value: true,
+          label: "Clamp",
+        },
+      },
+      { color: "#3B82F6" }
     ),
 
     "🟣 Slow": folder(
@@ -124,6 +150,9 @@ export const SpringConfigProvider = ({
     slowTension: number;
     slowFriction: number;
     slowClamp: boolean;
+    nimbleTension: number;
+    nimbleFriction: number;
+    nimbleClamp: boolean;
     remountComponents: boolean;
     showHighlights: boolean;
   };
@@ -148,6 +177,12 @@ export const SpringConfigProvider = ({
         clamp: config.slowClamp,
       },
 
+      nimble: {
+        tension: config.nimbleTension,
+        friction: config.nimbleFriction,
+        clamp: config.nimbleClamp,
+      },
+
       remountKey,
       showHighlights: config.showHighlights,
     }),
@@ -163,6 +198,10 @@ export const SpringConfigProvider = ({
       config.slowFriction,
       config.slowClamp,
 
+      config.nimbleTension,
+      config.nimbleFriction,
+      config.nimbleClamp,
+
       remountKey,
       config.showHighlights,
     ]
@@ -173,6 +212,7 @@ export const SpringConfigProvider = ({
     default: springConfig.default,
     gentle: springConfig.gentle,
     slow: springConfig.slow,
+    nimble: springConfig.nimble,
   });
 
   console.log("Raw config values:", {
@@ -180,6 +220,8 @@ export const SpringConfigProvider = ({
     defaultFriction: config.defaultFriction,
     gentleTension: config.gentleTension,
     gentleFriction: config.gentleFriction,
+    nimbleTension: config.nimbleTension,
+    nimbleFriction: config.nimbleFriction,
   });
 
   // Force a re-render when config changes by logging the timestamp
