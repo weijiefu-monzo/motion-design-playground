@@ -1,0 +1,189 @@
+.container {
+  min-height: 100vh;
+  background: repeating-linear-gradient(
+    45deg,
+    #eee,
+    #eee 10px,
+    #fff 10px,
+    #fff 20px
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  max-width: 1568px;
+  margin: 0 auto;
+}
+
+.controlsLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--background-primary);
+  padding: var(--spacing-small);
+  border-radius: var(--corner-radius-medium);
+
+  box-shadow: var(--elevation-level1-box-shadow);
+}
+
+.controlsRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--background-primary);
+  padding: var(--spacing-small);
+  border-radius: var(--corner-radius-medium);
+
+  box-shadow: var(--elevation-level1-box-shadow);
+}
+
+/* Override ThemeToggle's fixed positioning to integrate with controls */
+.controlsRight :global(button) {
+  position: static !important;
+  z-index: auto !important;
+}
+
+.segmentedControl {
+  display: flex;
+  background-color: var(--background-secondary);
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid var(--separator);
+}
+
+.segment {
+  padding: 0.5rem 1rem;
+  font-family: var(--font-family-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--content-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.segment:hover {
+  color: var(--content-primary);
+  background-color: var(--background-primary);
+}
+
+.segmentActive {
+  color: var(--content-primary);
+  background-color: var(--background-primary);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.select {
+  min-width: 200px;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  font-family: var(--font-family-text);
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--background-primary);
+  border: 1px solid var(--separator);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none;
+}
+
+.viewportInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--background-primary);
+  border-radius: 8px;
+  border: 1px solid var(--separator);
+}
+
+.viewportWidth {
+  font-family: var(--font-family-text);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--content-primary);
+  text-align: right;
+}
+
+.breakpoint {
+  font-family: var(--font-family-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--content-secondary);
+  padding-left: 1rem;
+  border-left: 1px solid var(--separator);
+}
+
+.preview {
+  width: 100%;
+}
+
+.controlsRightToggles {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 1040px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .controlsLeft {
+    width: 100%;
+  }
+  .select {
+    width: 100%;
+  }
+  .controlsRight {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .controlsRightToggles {
+    width: 100%;
+  }
+
+  .segmentedControl {
+    width: 100%;
+    order: 1;
+  }
+
+  .segment {
+    flex: 1;
+    text-align: center;
+  }
+
+  .viewportInfo {
+    width: 100%;
+    justify-content: space-between;
+    order: 2;
+  }
+
+  .breakpoint {
+    padding-left: 0.5rem;
+  }
+}

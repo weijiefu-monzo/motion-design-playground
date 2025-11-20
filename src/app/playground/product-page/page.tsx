@@ -1,10 +1,10 @@
 "use client";
 import { FeatureHighlights } from "@/blocks/FeatureHighlights";
 import { Hero } from "@/blocks/Hero";
-import { HowItWorks } from "@/blocks/HowItWorks";
-import { GettingStarted } from "@/blocks/GettingStarted";
-import { DownloadApp } from "@/blocks/DownloadApp";
-import { Testimonials } from "@/blocks/Testimonials";
+import { CardCarousel } from "@/blocks/CardCarousel";
+import { ProgressiveContent } from "@/blocks/ProgressiveContent";
+import { OpenAccount } from "@/blocks/OpenAccount";
+import { CustomerNumberAndTrustpilotScore } from "@/blocks/CustomerNumberAndTrustpilotScore";
 import { LinkedArticles } from "@/blocks/LinkedArticles";
 import { FAQ } from "@/blocks/FAQ";
 import { Header } from "@/blocks/Header";
@@ -23,7 +23,7 @@ import { RemountWrapper } from "@/components/RemountWrapper";
 export default function ProductPage() {
   return (
     <SpringConfigProvider>
-      <div style={{ position: "fixed", top: 0, right: 0, zIndex: 2000 }}>
+      <div style={{ position: "fixed", zIndex: 2000 }}>
         <Leva
           theme={{
             colors: {
@@ -51,10 +51,10 @@ An award-winning 0% credit card."
             chipLabel="Credit card"
             description="With 0% interest you can use again and again, and credit limits up to £10,000. It's a credit card with Monzo magic."
           />
-          <HowItWorks
+          <CardCarousel
             title="Not your average credit card"
-            cards={HowItWorksCards}
-            data-qa="how-it-works-desktop"
+            cards={CardCarouselCards}
+            data-qa="card-carousel-desktop"
           />
           <FeatureHighlights
             title="The best of Monzo in a credit card"
@@ -63,7 +63,7 @@ An award-winning 0% credit card."
             cards={FeatureHighlightsCards}
             data-qa="feature-highlights-desktop"
           />
-          <GettingStarted
+          <ProgressiveContent
             image={true}
             title="Get Started with Monzo"
             description="Join millions of people who are already banking with Monzo. It takes just a few minutes to get started."
@@ -78,7 +78,7 @@ An award-winning 0% credit card."
             cards={FeatureHighlightsCards2}
             data-qa="feature-highlights-desktop"
           />
-          <DownloadApp
+          <OpenAccount
             title="Open a free Monzo account and see if you are eligible"
             description="Body copy in a couple of sentences."
             buttonLabel="Open a free Monzo account"
@@ -87,7 +87,7 @@ An award-winning 0% credit card."
             googlePlayRating="4.9"
             data-qa="download-app"
           />
-          <Testimonials
+          <CustomerNumberAndTrustpilotScore
             title="13 million personal and business customers have changed the way they bank"
             buttonLabel="Open a free Monzo account"
             trustScore="4.8"
@@ -121,7 +121,7 @@ An award-winning 0% credit card."
     </SpringConfigProvider>
   );
 }
-const HowItWorksCards = [
+const CardCarouselCards = [
   {
     title: "No extra charges for missed payments",
     description:

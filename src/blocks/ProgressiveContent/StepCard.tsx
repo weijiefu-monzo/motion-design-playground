@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import styles from "./GettingStarted.module.css";
+import styles from "./ProgressiveContent.module.css";
 import { H4, Body, Billboard, H5 } from "../../components/Typography";
 
 export interface StepCardProps {
@@ -54,3 +54,4 @@ export default function StepCard({
     </div>
   );
 }
+

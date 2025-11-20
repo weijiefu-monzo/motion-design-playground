@@ -1,4 +1,4 @@
-/* GettingStarted Block Styles using Design System */
+/* ProgressiveContent Block Styles using Design System */
 
 /* Base Section Styles */
 .section {
@@ -340,3 +340,4 @@
 .section {
   animation: fadeInUp var(--motion-duration-medium) var(--motion-easing-linear);
 }
+

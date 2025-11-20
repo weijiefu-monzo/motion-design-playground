@@ -10,6 +10,7 @@ export interface ButtonProps {
   inverse?: boolean;
   disabled?: boolean;
   loading?: boolean;
+  fullWidth?: boolean;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   "aria-label"?: string;
@@ -24,6 +25,7 @@ export default function Button({
   inverse = false,
   disabled = false,
   loading = false,
+  fullWidth = false,
   onClick,
   type = "button",
   "aria-label": ariaLabel,
@@ -37,6 +39,7 @@ export default function Button({
       [styles.inverse]: inverse,
       [styles.disabled]: disabled,
       [styles.loading]: loading,
+      [styles.fullWidth]: fullWidth,
     },
     className
   );

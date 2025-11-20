@@ -15,6 +15,8 @@ export interface HeroProps {
   chipLabel?: string;
   ctaLabel?: string;
   ctaOnClick?: () => void;
+  dataHighlight?: boolean;
+  legalCopy?: string;
   "aria-label"?: string;
   "data-qa"?: string;
 }
@@ -26,6 +28,8 @@ export default function Hero({
   chipLabel = undefined,
   ctaLabel = "Open a free Monzo account",
   ctaOnClick,
+  dataHighlight = true,
+  legalCopy,
   "aria-label": ariaLabel,
   "data-qa": dataQa,
 }: HeroProps) {
@@ -173,42 +177,44 @@ export default function Hero({
             />
           </animated.div>
 
-          <animated.div
-            className={styles.financialData}
-            style={{
-              ...getAnimationHighlightStyle(
-                "default",
-                springConfig.showHighlights && isInView
-              ),
-              opacity: financialDataSpring.opacity,
-              transform: financialDataSpring.y.to(
-                (y: number) => `translateY(${y}px)`
-              ),
-            }}
-          >
-            {financialData.map((data, index) => (
-              <React.Fragment key={index}>
-                <div className={styles.dataItem}>
-                  <Body
-                    size="medium"
-                    style={{ color: "var(--content-secondary)" }}
-                  >
-                    {data.label}
-                  </Body>
-                  <Body
-                    size="medium"
-                    weight="emphasized"
-                    style={{ color: "var(--content-primary)" }}
-                  >
-                    {data.value}
-                  </Body>
-                </div>
-                {index < financialData.length - 1 && (
-                  <div className={styles.separator} />
-                )}
-              </React.Fragment>
-            ))}
-          </animated.div>
+          {dataHighlight && (
+            <animated.div
+              className={styles.financialData}
+              style={{
+                ...getAnimationHighlightStyle(
+                  "default",
+                  springConfig.showHighlights && isInView
+                ),
+                opacity: financialDataSpring.opacity,
+                transform: financialDataSpring.y.to(
+                  (y: number) => `translateY(${y}px)`
+                ),
+              }}
+            >
+              {financialData.map((data, index) => (
+                <React.Fragment key={index}>
+                  <div className={styles.dataItem}>
+                    <Body
+                      size="medium"
+                      style={{ color: "var(--content-secondary)" }}
+                    >
+                      {data.label}
+                    </Body>
+                    <Body
+                      size="medium"
+                      weight="emphasized"
+                      style={{ color: "var(--content-primary)" }}
+                    >
+                      {data.value}
+                    </Body>
+                  </div>
+                  {index < financialData.length - 1 && (
+                    <div className={styles.separator} />
+                  )}
+                </React.Fragment>
+              ))}
+            </animated.div>
+          )}
         </div>
 
         <animated.div
@@ -231,7 +237,8 @@ export default function Hero({
               style={{
                 opacity: bankCardSpring.opacity,
                 transform: bankCardSpring.y.to(
-                  (y: number) => `translateY(${y}px)`
+                  (y: number) =>
+                    `translateX(var(--card-translate-x, 0)) translateY(${y}px)`
                 ),
                 ...getAnimationHighlightStyle(
                   "default",
@@ -290,20 +297,25 @@ export default function Hero({
         ))}
       </animated.div>
 
-      <animated.div
-        style={{
-          ...getAnimationHighlightStyle(
-            "default",
-            springConfig.showHighlights && isInView
-          ),
-          opacity: legalCopySpring.opacity,
-          transform: legalCopySpring.y.to((y: number) => `translateY(${y}px)`),
-        }}
-      >
-        <Body size="medium" className={styles.legalCopy}>
-          Legal copy
-        </Body>
-      </animated.div>
+      {legalCopy && (
+        <animated.div
+          style={{
+            ...getAnimationHighlightStyle(
+              "default",
+              springConfig.showHighlights && isInView
+            ),
+            opacity: legalCopySpring.opacity,
+            transform: legalCopySpring.y.to(
+              (y: number) => `translateY(${y}px)`
+            ),
+          }}
+          className={styles.legalCopyContainer}
+        >
+          <Body size="medium" className={styles.legalCopy}>
+            {legalCopy}
+          </Body>
+        </animated.div>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-/* Testimonials Block Styles */
+/* CustomerNumberAndTrustpilotScore Block Styles */
 .section {
   background-color: var(--background-primary, #ffffff);
   padding: var(--spacing-3x-large, 64px);
@@ -164,3 +164,4 @@
     height: 60px;
   }
 }
+

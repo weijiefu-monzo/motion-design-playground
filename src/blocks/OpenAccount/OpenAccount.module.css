@@ -1,4 +1,4 @@
-/* DownloadApp Block Styles */
+/* OpenAccount Block Styles */
 .section {
   background-color: var(--background-primary, #ffffff);
   padding: var(--spacing-3x-large, 64px) var(--spacing-3x-large, 64px);
@@ -288,3 +288,4 @@
     gap: var(--spacing-medium, 16px);
   }
 }
+

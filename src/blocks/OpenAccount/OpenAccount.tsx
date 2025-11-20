@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import { useSpring, animated } from "@react-spring/web";
-import styles from "./DownloadApp.module.css";
+import styles from "./OpenAccount.module.css";
 import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
 import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
-export interface DownloadAppProps {
+export interface OpenAccountProps {
   className?: string;
   title?: string;
   description?: string;
@@ -18,7 +18,7 @@ export interface DownloadAppProps {
   "data-qa"?: string;
 }
 
-export default function DownloadApp({
+export default function OpenAccount({
   className = "",
   title = "Open a free Monzo account and see if you are eligible",
   description = "Body copy in a couple of sentences.",
@@ -28,7 +28,7 @@ export default function DownloadApp({
   googlePlayRating = "4.9",
   onButtonClick,
   "data-qa": dataQa,
-}: DownloadAppProps) {
+}: OpenAccountProps) {
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
   const springConfig = useSpringConfig();
@@ -282,3 +282,4 @@ export default function DownloadApp({
     </animated.section>
   );
 }
+
