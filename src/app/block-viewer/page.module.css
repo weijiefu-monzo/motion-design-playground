@@ -20,9 +20,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.5rem 2rem;
+  padding: var(--spacing-medium);
   width: 100%;
-  max-width: 1568px;
+  max-width: calc(1568px + var(--spacing-medium) * 2);
   margin: 0 auto;
 }
 
@@ -56,10 +56,10 @@
 
 .segmentedControl {
   display: flex;
-  background-color: var(--background-secondary);
+  background-color: var(--separator);
   border-radius: 8px;
   padding: 4px;
-  border: 1px solid var(--separator);
+  /* border: 1px solid var(--separator); */
 }
 
 .segment {

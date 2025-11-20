@@ -84,13 +84,22 @@
 .financialData {
   display: flex;
   gap: var(--spacing-medium);
-  align-items: center;
+
+  flex-direction: column;
+}
+.financialDataList {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-medium);
 }
 
 .dataItem {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2x-small);
+  padding: var(--spacing-x-small) var(--spacing-medium);
+  background-color: var(--background-primary);
+  border-radius: var(--corner-radius-small);
 }
 
 .dataLabel {
@@ -256,6 +265,9 @@
   .heroImage {
     aspect-ratio: unset;
   }
+  .financialDataList {
+    gap: var(--spacing-small);
+  }
 }
 
 @media (max-width: 768px) {
@@ -312,5 +324,8 @@
   }
   .ctaButton {
     width: 100%;
+  }
+  .dataItem {
+    padding: var(--spacing-x-small) var(--spacing-small);
   }
 }

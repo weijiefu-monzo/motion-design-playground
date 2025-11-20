@@ -14,6 +14,7 @@ import {
 import { SpringConfigProvider } from "@/contexts/SpringConfigContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { RemountWrapper } from "@/components/RemountWrapper";
 import styles from "./page.module.css";
 
 // Mock data for blocks
@@ -416,7 +417,9 @@ export default function BlockViewer() {
             </div>
           </div>
 
-          <div className={styles.preview}>{renderBlock()}</div>
+          <div className={styles.preview}>
+            <RemountWrapper>{renderBlock()}</RemountWrapper>
+          </div>
         </div>
       </SpringConfigProvider>
     </ThemeProvider>

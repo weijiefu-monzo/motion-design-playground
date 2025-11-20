@@ -160,6 +160,45 @@ export default function Hero({
             </Body>
           </animated.div>
 
+          {dataHighlight && (
+            <animated.div
+              className={styles.financialData}
+              style={{
+                ...getAnimationHighlightStyle(
+                  "default",
+                  springConfig.showHighlights && isInView
+                ),
+                opacity: financialDataSpring.opacity,
+                transform: financialDataSpring.y.to(
+                  (y: number) => `translateY(${y}px)`
+                ),
+              }}
+            >
+              <div className={styles.financialDataHeader}>
+                <Body size="medium" weight="emphasized">
+                  Representative example
+                </Body>
+              </div>
+              <div className={styles.financialDataList}>
+                {financialData.map((data, index) => (
+                  <React.Fragment key={index}>
+                    <div className={styles.dataItem}>
+                      <Body
+                        size="medium"
+                        style={{ color: "var(--content-secondary)" }}
+                      >
+                        {data.label}
+                      </Body>
+                      <Body style={{ color: "var(--content-primary)" }}>
+                        {data.value}
+                      </Body>
+                    </div>
+                  </React.Fragment>
+                ))}
+              </div>
+            </animated.div>
+          )}
+
           <animated.div
             style={{
               ...getAnimationHighlightStyle(
@@ -176,45 +215,6 @@ export default function Hero({
               className={styles.ctaButton}
             />
           </animated.div>
-
-          {dataHighlight && (
-            <animated.div
-              className={styles.financialData}
-              style={{
-                ...getAnimationHighlightStyle(
-                  "default",
-                  springConfig.showHighlights && isInView
-                ),
-                opacity: financialDataSpring.opacity,
-                transform: financialDataSpring.y.to(
-                  (y: number) => `translateY(${y}px)`
-                ),
-              }}
-            >
-              {financialData.map((data, index) => (
-                <React.Fragment key={index}>
-                  <div className={styles.dataItem}>
-                    <Body
-                      size="medium"
-                      style={{ color: "var(--content-secondary)" }}
-                    >
-                      {data.label}
-                    </Body>
-                    <Body
-                      size="medium"
-                      weight="emphasized"
-                      style={{ color: "var(--content-primary)" }}
-                    >
-                      {data.value}
-                    </Body>
-                  </div>
-                  {index < financialData.length - 1 && (
-                    <div className={styles.separator} />
-                  )}
-                </React.Fragment>
-              ))}
-            </animated.div>
-          )}
         </div>
 
         <animated.div
