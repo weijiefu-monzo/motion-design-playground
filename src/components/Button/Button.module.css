@@ -35,6 +35,12 @@
   }
 }
 
+/* Full Width Variant */
+.fullWidth {
+  width: 100%;
+  display: flex;
+}
+
 /* Content wrapper */
 .content {
   display: flex;

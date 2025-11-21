@@ -7,14 +7,14 @@ import {
   useSprings,
   animated,
 } from "@react-spring/web";
-import styles from "./GettingStarted.module.css";
+import styles from "./ProgressiveContent.module.css";
 import { Button } from "../../components";
 import { H2, Body } from "../../components/Typography";
 import Step from "./Step";
 import StepCard from "./StepCard";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
 import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
-export interface GettingStartedProps {
+export interface ProgressiveContentProps {
   className?: string;
   title?: string;
   description?: string;
@@ -32,7 +32,7 @@ export interface GettingStartedProps {
   "data-qa"?: string;
 }
 
-export default function GettingStarted({
+export default function ProgressiveContent({
   className = "",
   title = "Title",
   description,
@@ -42,7 +42,7 @@ export default function GettingStarted({
   onButtonClick,
   onStepClick,
   "data-qa": dataQa,
-}: GettingStartedProps) {
+}: ProgressiveContentProps) {
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -265,3 +265,4 @@ export default function GettingStarted({
     </animated.section>
   );
 }
+

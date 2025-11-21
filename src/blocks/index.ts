@@ -1,20 +1,20 @@
 // Hero Block
 export * from "./Hero";
 
-// HowItWorks Block
-export * from "./HowItWorks";
+// CardCarousel Block
+export * from "./CardCarousel";
 
 // FeatureHighlights Block
 export * from "./FeatureHighlights";
 
-// GettingStarted Block
-export * from "./GettingStarted";
+// ProgressiveContent Block
+export * from "./ProgressiveContent";
 
-// DownloadApp Block
-export * from "./DownloadApp";
+// OpenAccount Block
+export * from "./OpenAccount";
 
-// Testimonials Block
-export * from "./Testimonials";
+// CustomerNumberAndTrustpilotScore Block
+export * from "./CustomerNumberAndTrustpilotScore";
 
 // LinkedArticles Block
 export * from "./LinkedArticles";

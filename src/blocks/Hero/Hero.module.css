@@ -7,6 +7,8 @@
     var(--spacing-3x-large);
   background-color: var(--background-primary);
   color: var(--content-primary);
+  max-width: 1568px;
+  margin: 0 auto;
 }
 
 .container {
@@ -26,6 +28,7 @@
   gap: var(--spacing-x-large);
   flex: 1;
   min-width: 0;
+  width: 100%;
 }
 
 .textSection {
@@ -81,13 +84,22 @@
 .financialData {
   display: flex;
   gap: var(--spacing-medium);
-  align-items: center;
+
+  flex-direction: column;
+}
+.financialDataList {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-medium);
 }
 
 .dataItem {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2x-small);
+  padding: var(--spacing-x-small) var(--spacing-medium);
+  background-color: var(--background-primary);
+  border-radius: var(--corner-radius-small);
 }
 
 .dataLabel {
@@ -136,8 +148,8 @@
   position: absolute;
   bottom: 56px;
   left: -32px;
-  width: 360px;
-  height: 226px;
+  width: 55%;
+  /* height: 226px; */
   aspect-ratio: 360/226;
   background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%);
   border-radius: var(--corner-radius-medium);
@@ -148,6 +160,7 @@
   color: var(--inverse-content-primary);
   font-weight: bold;
   font-size: 18px;
+  --card-translate-x: 0;
 }
 
 .socialProof {
@@ -217,11 +230,17 @@
   max-width: 960px;
   margin: 0;
 }
+.legalCopyContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
 /* Responsive Design */
 @media (max-width: 1040px) {
   .hero {
-    padding: var(--spacing-medium) var(--spacing-x-large)
+    padding: calc(var(--spacing-medium) + 84px) var(--spacing-x-large)
       var(--spacing-2x-large);
   }
   .container {
@@ -229,25 +248,31 @@
   }
 
   .imageSection {
-    height: 100%;
+    align-self: stretch;
   }
-
+  .bankCard {
+    width: 70%;
+  }
   .socialProof {
     justify-content: flex-start;
     overflow-x: auto;
     width: 100%;
-    padding: 0 var(--spacing-medium);
   }
 
   .socialProofItem {
     flex: 0 0 auto;
-    scroll-snap-align: start;
+  }
+  .heroImage {
+    aspect-ratio: unset;
+  }
+  .financialDataList {
+    gap: var(--spacing-small);
   }
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding: 0;
+    padding: calc(var(--spacing-medium) + 84px) 0 var(--spacing-x-large) 0;
   }
 
   .imageSection {
@@ -268,20 +293,21 @@
     aspect-ratio: 360/226;
     bottom: -32px;
     left: 50%;
-    transform: translateX(-50%);
+    --card-translate-x: -50%;
   }
 
   .socialProof {
+    padding: 0 var(--spacing-x-large);
+  }
+  .legalCopyContainer {
     padding: 0 var(--spacing-x-large);
   }
 }
 
 @media (max-width: 393px) {
   .hero {
-    padding: 0;
-    padding-top: 64px;
+    padding: calc(var(--spacing-medium) + 64px) 0 var(--spacing-x-large) 0;
   }
-
   .container {
     padding: var(--spacing-medium) var(--spacing-medium) var(--spacing-3x-large);
   }
@@ -289,8 +315,17 @@
   .financialData {
     gap: var(--spacing-small);
   }
+  .socialProof {
+    padding: 0 var(--spacing-medium);
+  }
 
+  .legalCopyContainer {
+    padding: 0 var(--spacing-medium);
+  }
   .ctaButton {
-    align-self: stretch;
+    width: 100%;
+  }
+  .dataItem {
+    padding: var(--spacing-x-small) var(--spacing-small);
   }
 }

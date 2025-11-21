@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import { useSpring, animated } from "@react-spring/web";
-import styles from "./Testimonials.module.css";
+import styles from "./CustomerNumberAndTrustpilotScore.module.css";
 import { Button } from "../../components";
 import { H1, Body } from "../../components/Typography";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
 import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
-export interface TestimonialsProps {
+export interface CustomerNumberAndTrustpilotScoreProps {
   className?: string;
   title?: string;
   buttonLabel?: string;
@@ -20,7 +20,7 @@ export interface TestimonialsProps {
   "data-qa"?: string;
 }
 
-export default function Testimonials({
+export default function CustomerNumberAndTrustpilotScore({
   className = "",
   title = "13 million personal and business customers have changed the way they bank",
   buttonLabel = "Open a free Monzo account",
@@ -38,7 +38,7 @@ export default function Testimonials({
   ],
   onButtonClick,
   "data-qa": dataQa,
-}: TestimonialsProps) {
+}: CustomerNumberAndTrustpilotScoreProps) {
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
   const springConfig = useSpringConfig();
@@ -168,3 +168,4 @@ export default function Testimonials({
     </animated.section>
   );
 }
+

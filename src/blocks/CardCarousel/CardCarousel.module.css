@@ -1,4 +1,4 @@
-/* HowItWorks Block Styles using Design System */
+/* CardCarousel Block Styles using Design System */
 
 /* Base Section Styles */
 .section {
@@ -9,7 +9,7 @@
   padding: var(--spacing-3x-large);
   position: relative;
   width: 100%;
-  max-width: 1536px;
+  max-width: 1568px;
   margin: 0 auto;
 }
 
@@ -97,7 +97,7 @@
 
 @media (min-width: 1041px) {
   .section {
-    max-width: 1536px;
+    max-width: 1568px;
     padding: var(--spacing-3x-large);
   }
 

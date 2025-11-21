@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import clsx from "clsx";
 import { useSpring, animated } from "@react-spring/web";
-import styles from "./GettingStarted.module.css";
+import styles from "./ProgressiveContent.module.css";
 import { H4, Body, Billboard } from "../../components/Typography";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
 import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
@@ -144,3 +144,4 @@ export default function Step({
     </div>
   );
 }
+

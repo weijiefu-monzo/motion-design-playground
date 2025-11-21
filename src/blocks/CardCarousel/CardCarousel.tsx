@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import { useSpring, animated } from "@react-spring/web";
-import styles from "./HowItWorks.module.css";
+import styles from "./CardCarousel.module.css";
 import { Carousel } from "../../components";
 import { H2 } from "../../components/Typography";
 import Card from "../../components/Card/Card";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
 import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
 
-export interface HowItWorksProps {
+export interface CardCarouselProps {
   className?: string;
   title?: string;
   cards?: Array<{
@@ -25,7 +25,7 @@ export interface HowItWorksProps {
   "data-qa"?: string;
 }
 
-export default function HowItWorks({
+export default function CardCarousel({
   className = "",
   title = "How it works",
   cards = [
@@ -72,7 +72,7 @@ export default function HowItWorks({
   ],
   onCardButtonClick,
   "data-qa": dataQa,
-}: HowItWorksProps) {
+}: CardCarouselProps) {
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
   const springConfig = useSpringConfig();
@@ -217,3 +217,4 @@ export default function HowItWorks({
     </animated.section>
   );
 }
+
