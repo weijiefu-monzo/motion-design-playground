@@ -133,6 +133,7 @@ export default function CardCarousel({
         style={{
           width: `clamp(80vw, 80vw, calc(1440px / ${cards.length}))`,
           height: "auto",
+          maxWidth: "1440px",
         }}
       >
         <Card
@@ -156,14 +157,15 @@ export default function CardCarousel({
         {/* Desktop/Tablet Landscape - Carousel */}
         <div className={styles.carouselContainer}>
           <Carousel
-            children={carouselItems}
             autoplay={true}
             autoplayInterval={4000}
             showControls={true}
             showDots={true}
             showAutoplayToggle={true}
             className={styles.carousel}
-          />
+          >
+            {carouselItems}
+          </Carousel>
         </div>
 
         {/* Mobile/Tablet Portrait - Stack */}
@@ -217,4 +219,3 @@ export default function CardCarousel({
     </animated.section>
   );
 }
-

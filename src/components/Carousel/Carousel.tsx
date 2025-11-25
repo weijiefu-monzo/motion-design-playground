@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import clsx from "clsx";
-import { useSpring, animated } from "@react-spring/web";
+import { useSpring, animated, SpringValue } from "@react-spring/web";
 import styles from "./Carousel.module.css";
 import IconButton from "../IconButton/IconButton";
 import {
@@ -10,6 +10,61 @@ import {
 } from "react-icons/ai";
 import { useSpringConfig } from "@/contexts/SpringConfigContext";
 import { getAnimationHighlightStyle } from "@/utils/animationHighlights";
+
+// Dot component that uses hooks properly
+const Dot: React.FC<{
+  isActive: boolean;
+  onClick: () => void;
+  springConfig: ReturnType<typeof useSpringConfig>;
+  isAutoplayActive: boolean;
+  isHovered: boolean;
+  progressSpring: { progress: SpringValue<number> };
+  slideIndex: number;
+}> = ({
+  isActive,
+  onClick,
+  springConfig,
+  isAutoplayActive,
+  isHovered,
+  progressSpring,
+  slideIndex,
+}) => {
+  const dotSpring = useSpring({
+    width: isActive ? 32 : 8,
+    config: springConfig.slow,
+  });
+
+  return (
+    <animated.button
+      className={clsx(styles.dot, {
+        [styles.active]: isActive,
+      })}
+      style={{
+        width: dotSpring.width.to((w) => `${w}px`),
+      }}
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+      role="tab"
+      aria-label={`Go to slide ${slideIndex + 1}`}
+      aria-selected={isActive}
+      tabIndex={isActive ? 0 : -1}
+    >
+      {isActive && isAutoplayActive && !isHovered && (
+        <animated.div
+          className={styles.dotProgress}
+          style={{
+            width: progressSpring.progress.to((p: number) => `${p}%`),
+          }}
+        />
+      )}
+    </animated.button>
+  );
+};
 
 export interface CarouselProps {
   className?: string;
@@ -225,45 +280,18 @@ export default function Carousel({
               role="tablist"
               aria-label="Carousel pagination"
             >
-              {children.map((_, index) => {
-                const isActive = index === currentIndex;
-                const dotSpring = useSpring({
-                  width: isActive ? 32 : 8,
-                  config: springConfig.slow,
-                });
-
-                return (
-                  <animated.button
-                    key={index}
-                    className={clsx(styles.dot, {
-                      [styles.active]: isActive,
-                    })}
-                    style={{
-                      width: dotSpring.width.to((w) => `${w}px`),
-                    }}
-                    onClick={() => goToSlide(index)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        goToSlide(index);
-                      }
-                    }}
-                    role="tab"
-                    aria-label={`Go to slide ${index + 1}`}
-                    aria-selected={isActive}
-                    tabIndex={isActive ? 0 : -1}
-                  >
-                    {isActive && isAutoplayActive && !isHovered && (
-                      <animated.div
-                        className={styles.dotProgress}
-                        style={{
-                          width: progressSpring.progress.to((p) => `${p}%`),
-                        }}
-                      />
-                    )}
-                  </animated.button>
-                );
-              })}
+              {children.map((_, index) => (
+                <Dot
+                  key={index}
+                  isActive={index === currentIndex}
+                  onClick={() => goToSlide(index)}
+                  springConfig={springConfig}
+                  isAutoplayActive={isAutoplayActive}
+                  isHovered={isHovered}
+                  progressSpring={progressSpring}
+                  slideIndex={index}
+                />
+              ))}
             </div>
           )}
 

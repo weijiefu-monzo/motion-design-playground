@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import {
   Hero,
   CardCarousel,
@@ -17,119 +17,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { RemountWrapper } from "@/components/RemountWrapper";
 import styles from "./page.module.css";
 
-// Mock data for blocks
-const mockData = {
-  cardCarouselCards: [
-    {
-      title: "No extra charges for missed payments",
-      description:
-        "We'll give you 7 days to catch up from the date of your missed payment. It's best to get back on track as soon as you can to protect your credit score.",
-      buttonLabel: "Check you're eligible",
-      imageSrc: "/slide-1.png",
-      inverse: false,
-    },
-    {
-      title: "Flex now or later",
-      description:
-        "Use Flex at the checkout like other credit cards, or Flex transactions from the last two weeks for a bit more time to pay.",
-      buttonLabel: "Check you're eligible",
-      imageSrc: "/slide-2.png",
-      inverse: true,
-    },
-  ],
-  featureHighlightsCards: [
-    {
-      title: "No fees overseas",
-      description:
-        "Au revoir and adios to extra fees abroad. We'll charge you Mastercard's exchange rate and nothing else.",
-      inverse: false,
-      imageSrc: "/card-1.png",
-    },
-    {
-      title: "Straightforward cashback",
-      description:
-        "Earn cashback when you use your Flex card at top brands, and get your money in just a few days. Ts&Cs apply.",
-      inverse: false,
-      imageSrc: "/card-2.png",
-    },
-    {
-      title: "Flex on the fly",
-      description:
-        "Add Flex to your digital wallet and use in-store, online and in-app straightaway, with no need for a physical card.",
-      inverse: false,
-      imageSrc: "/card-3.png",
-    },
-  ],
-  steps: [
-    {
-      index: "1",
-      title: "Create Your Account",
-      description:
-        "Sign up with your email and create a secure password to get started with Monzo.",
-      imageSrc: "/step-1.png",
-      imageAlt: "Account creation step",
-    },
-    {
-      index: "2",
-      title: "Verify Your Identity",
-      description:
-        "Complete our quick identity verification process to keep your account secure.",
-      imageSrc: "/step-2.png",
-      imageAlt: "Identity verification step",
-    },
-    {
-      index: "3",
-      title: "Start Banking",
-      description:
-        "You're all set! Start using your Monzo account to manage your money.",
-      imageSrc: "/step-3.png",
-      imageAlt: "Start banking step",
-    },
-  ],
-  articles: [
-    {
-      title: "Flex Build. The credit-builder card that keeps getting better.",
-      description:
-        "Can help build your credit score over time. See if you're eligible with no impact on your credit score",
-      imageSrc: "/article-1.png",
-      imageAlt: "Getting started guide",
-    },
-    {
-      title: "Get a loan that treats you right",
-      description:
-        "Ditch hidden fees, confusing terms and waiting around. Achieve your goals and feel in control with a Monzo loan.",
-      imageSrc: "/article-2.png",
-      imageAlt: "Advanced features",
-    },
-    {
-      title: "Check in on credit score",
-      description:
-        "From having the chance to unlock better rates to managing swings in your credit score, you can stay on top of your credit health on Monzo.",
-      imageSrc: "/article-3.png",
-      imageAlt: "Security practices",
-    },
-  ],
-  questions: [
-    {
-      question: "How does Flex Build impact my credit score?",
-      answer:
-        "We report how you use Flex Build to credit reference agencies. We tell them things like what your credit limit is, what your outstanding balance is and whether you've made your monthly payment on time.",
-      expanded: false,
-    },
-    {
-      question: "What are the fees for Flex Build?",
-      answer:
-        "There are no fees for using Flex Build. We don't charge any monthly fees, annual fees, or setup fees. The only cost is the interest on any outstanding balance, which is clearly shown before you make a purchase.",
-      expanded: false,
-    },
-    {
-      question: "How do I apply for Flex Build?",
-      answer:
-        "You can apply for Flex Build directly in the Monzo app. The application process takes just a few minutes and we'll give you an instant decision.",
-      expanded: false,
-    },
-  ],
-};
+import { mockData } from "./mockData";
 
 type BlockName =
   | "Hero"
@@ -148,18 +36,29 @@ export default function BlockViewer() {
   const [viewportWidth, setViewportWidth] = useState(0);
   const [contentLevel, setContentLevel] = useState<ContentLevel>("normal");
 
-  useEffect(() => {
-    // Set initial width
-    setViewportWidth(window.innerWidth);
+  // Track if we're on the client to avoid hydration mismatch
+  const [isClient, setIsClient] = useState(false);
 
-    // Update width on resize
+  useLayoutEffect(() => {
+    // Setting client flag to avoid hydration mismatch - this is intentional
+    // eslint-disable-next-line
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+
+    // Update width on resize and set initial value
     const handleResize = () => {
       setViewportWidth(window.innerWidth);
     };
 
+    // Call immediately to set initial value
+    handleResize();
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isClient]);
 
   const getBreakpoint = (width: number): string => {
     if (width <= 393) return "Mobile (≤393px)";
@@ -169,117 +68,67 @@ export default function BlockViewer() {
     return "Exceed Max Width (>1440px + 64px * 2)";
   };
 
-  const getContentByLevel = (
-    min: string,
-    normal: string,
-    max: string
-  ): string => {
-    switch (contentLevel) {
-      case "min":
-        return min;
-      case "max":
-        return max;
-      default:
-        return normal;
-    }
-  };
-
   const renderBlock = () => {
     switch (selectedBlock) {
       case "Hero":
         return (
           <Hero
-            title={getContentByLevel(
-              "Flexx Purchase.",
-              "Flexx Purchase. An award-winning 0% credit card.",
-              "Flexx Purchase. An award-winning 0% credit card with exceptional benefits and features."
-            )}
+            title={mockData[contentLevel].heroTitle[contentLevel]}
             chipLabel={contentLevel === "min" ? undefined : "Credit card"}
-            description={getContentByLevel(
-              "0% interest credit card.",
-              "With 0% interest you can use again and again, and credit limits up to £10,000. It's a credit card with Monzo magic.",
-              "With 0% interest you can use again and again, and credit limits up to £10,000. It's a credit card with Monzo magic. Enjoy flexible spending, instant notifications, and complete control over your finances with our award-winning app experience."
-            )}
+            description={mockData[contentLevel].heroDescription[contentLevel]}
             dataHighlight={contentLevel !== "min"}
-            legalCopy={getContentByLevel(
-              "",
-              "Representative example: 39% APR (variable). Terms and conditions apply. Full details available on request.",
-              "Representative example: 39% APR (variable). Terms and conditions apply. Full details available on request. Flexible spending, instant notifications, and complete control over your finances with our award-winning app experience."
-            )}
+            legalCopy={mockData[contentLevel].heroLegalCopy[contentLevel]}
           />
         );
       case "CardCarousel":
         return (
           <CardCarousel
-            title={getContentByLevel(
-              "Not your average card",
-              "Not your average credit card",
-              "Not your average credit card - Built for modern life"
-            )}
-            cards={mockData.cardCarouselCards}
+            key={`carousel-${contentLevel}-${mockData[contentLevel].cardCarouselCards.length}`}
+            title={mockData[contentLevel].cardCarouselTitle[contentLevel]}
+            cards={mockData[contentLevel].cardCarouselCards}
           />
         );
       case "FeatureHighlights":
         return (
           <FeatureHighlights
-            title={getContentByLevel(
-              "The best of Monzo",
-              "The best of Monzo in a credit card",
-              "The best of Monzo in a credit card - All your favorite features"
-            )}
+            title={mockData[contentLevel].featureHighlightsTitle[contentLevel]}
             description={
               contentLevel === "min"
                 ? undefined
-                : getContentByLevel(
-                    "",
-                    "Get instant notifications, real-time balance updates and freeze and defrost your card, all from the app.",
-                    "Get instant notifications, real-time balance updates and freeze and defrost your card, all from the app. Plus spending insights, budgeting tools, and complete control over your financial life."
-                  )
+                : mockData[contentLevel].featureHighlightsDescription[
+                    contentLevel
+                  ]
             }
             buttonLabel={
               contentLevel === "min" ? undefined : "Open a free Monzo account"
             }
-            cards={mockData.featureHighlightsCards}
+            cards={mockData[contentLevel].featureHighlightsCards}
           />
         );
       case "ProgressiveContent":
         return (
           <ProgressiveContent
             image={true}
-            title={getContentByLevel(
-              "Get Started",
-              "Get Started with Monzo",
-              "Get Started with Monzo - Your journey to better banking"
-            )}
+            title={mockData[contentLevel].progressiveContentTitle[contentLevel]}
             description={
               contentLevel === "min"
                 ? undefined
-                : getContentByLevel(
-                    "",
-                    "Join millions of people who are already banking with Monzo. It takes just a few minutes to get started.",
-                    "Join millions of people who are already banking with Monzo. It takes just a few minutes to get started. Experience banking that works the way you do, with smart features and intuitive design."
-                  )
+                : mockData[contentLevel].progressiveContentDescription[
+                    contentLevel
+                  ]
             }
             buttonLabel={contentLevel === "min" ? undefined : "Open Account"}
-            steps={mockData.steps}
+            steps={mockData[contentLevel].steps}
           />
         );
       case "OpenAccount":
         return (
           <OpenAccount
-            title={getContentByLevel(
-              "Open a free account",
-              "Open a free Monzo account and see if you are eligible",
-              "Open a free Monzo account today and see if you are eligible for our premium features"
-            )}
+            title={mockData[contentLevel].openAccountTitle[contentLevel]}
             description={
               contentLevel === "min"
                 ? undefined
-                : getContentByLevel(
-                    "",
-                    "Body copy in a couple of sentences.",
-                    "Body copy in a couple of sentences. Join millions who trust Monzo for their everyday banking needs with award-winning features."
-                  )
+                : mockData[contentLevel].openAccountDescription[contentLevel]
             }
             buttonLabel="Open a free Monzo account"
             customerCount="13 million customers"
@@ -290,11 +139,11 @@ export default function BlockViewer() {
       case "CustomerNumberAndTrustpilotScore":
         return (
           <CustomerNumberAndTrustpilotScore
-            title={getContentByLevel(
-              "13 million customers",
-              "13 million personal and business customers have changed the way they bank",
-              "13 million personal and business customers have changed the way they bank with Monzo"
-            )}
+            title={
+              mockData[contentLevel].customerNumberAndTrustpilotScoreTitle[
+                contentLevel
+              ]
+            }
             buttonLabel={
               contentLevel === "min" ? undefined : "Open a free Monzo account"
             }
@@ -305,37 +154,25 @@ export default function BlockViewer() {
       case "LinkedArticles":
         return (
           <LinkedArticles
-            title={getContentByLevel(
-              "Other products",
-              "Other useful products",
-              "Other useful products to help you manage your finances"
-            )}
+            title={mockData[contentLevel].linkedArticlesTitle[contentLevel]}
             description={
               contentLevel === "min"
                 ? undefined
-                : getContentByLevel(
-                    "",
-                    "See how else Monzo can help with the big life steps and safety nets.",
-                    "See how else Monzo can help with the big life steps and safety nets. From loans to savings, we've got you covered."
-                  )
+                : mockData[contentLevel].linkedArticlesDescription[contentLevel]
             }
             buttonLabel={
               contentLevel === "min" ? undefined : "Open a free Monzo account"
             }
             showDescription={contentLevel !== "min"}
             showPageControl={contentLevel !== "min"}
-            cards={mockData.articles}
+            cards={mockData[contentLevel].articles}
           />
         );
       case "FAQ":
         return (
           <FAQ
-            title={getContentByLevel(
-              "FAQ",
-              "Questions? Answers.",
-              "Questions? We've got answers for you."
-            )}
-            questions={mockData.questions}
+            title={mockData[contentLevel].faqTitle[contentLevel]}
+            questions={mockData[contentLevel].questions}
           />
         );
 
@@ -408,12 +245,16 @@ export default function BlockViewer() {
                   </button>
                 </div>
               </div>
-              <div className={styles.viewportInfo}>
-                <span className={styles.viewportWidth}>{viewportWidth}px</span>
-                <span className={styles.breakpoint}>
-                  {getBreakpoint(viewportWidth)}
-                </span>
-              </div>
+              {isClient && (
+                <div className={styles.viewportInfo}>
+                  <span className={styles.viewportWidth}>
+                    {viewportWidth}px
+                  </span>
+                  <span className={styles.breakpoint}>
+                    {getBreakpoint(viewportWidth)}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 

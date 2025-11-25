@@ -21,7 +21,7 @@
   color: var(--content-primary);
   text-align: center;
   margin: 0;
-  white-space: nowrap;
+  white-space: normal;
   letter-spacing: 0.3906px;
   font-size: var(--font-size-step-4);
   line-height: var(--line-height-step-4);
@@ -87,11 +87,11 @@
 
   /* Show carousel, hide stack on tablet landscape */
   .carouselContainer {
-    display: block;
+    display: none;
   }
 
   .cardsStack {
-    display: none;
+    display: block;
   }
 }
 
