@@ -18,6 +18,7 @@ import { RemountWrapper } from "@/components/RemountWrapper";
 import styles from "./page.module.css";
 
 import { mockData } from "./mockData";
+import { Leva } from "leva";
 
 type BlockName =
   | "Hero"
@@ -99,9 +100,7 @@ export default function BlockViewer() {
                     contentLevel
                   ]
             }
-            buttonLabel={
-              contentLevel === "min" ? undefined : "Open a free Monzo account"
-            }
+            buttonLabel={"Open a free Monzo account"}
             cards={mockData[contentLevel].featureHighlightsCards}
           />
         );
@@ -195,6 +194,9 @@ export default function BlockViewer() {
   return (
     <ThemeProvider>
       <SpringConfigProvider>
+        <div style={{ position: "fixed", bottom: 8, right: 8, zIndex: 2000 }}>
+          <Leva fill collapsed />
+        </div>
         <div className={styles.container}>
           <div className={styles.controls}>
             <div className={styles.controlsLeft}>

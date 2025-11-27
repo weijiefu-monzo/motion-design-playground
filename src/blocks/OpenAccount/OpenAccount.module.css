@@ -85,9 +85,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-x-large, 32px);
-  min-height: 140px;
-  flex-wrap: wrap;
+  gap: var(--spacing-small, 12px);
+  /* min-height: 140px; */
+  /* flex-wrap: wrap; */
 }
 .row {
   display: flex;
@@ -101,13 +101,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-2x-small, 4px);
+  /* gap: var(--spacing-2x-small, 4px); */
 }
 
 .heartIcon {
   width: 24px;
   height: 24px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,13 +118,12 @@
 }
 
 .joinText {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--color-white);
   margin: 0;
 }
 
 .countText {
-  color: #ffffff;
-  opacity: 0.9;
+  color: var(--color-white);
   margin: 0;
 }
 
@@ -138,7 +137,7 @@
 .appIcon {
   width: 25px;
   height: 32px;
-  color: #ffffff;
+  color: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,14 +147,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-2x-small, 4px);
+  /* gap: var(--spacing-2x-small, 4px); */
 }
 
 .ratingScore {
   display: flex;
   gap: var(--spacing-2x-small, 4px);
   align-items: center;
-  height: 32px;
 }
 
 .starIcon {
@@ -168,13 +166,13 @@
 }
 
 .scoreText {
-  color: var(--alpha-white-90);
+  color: var(--color-white);
   margin: 0;
 }
 
 .platformText {
   text-wrap: nowrap;
-  color: var(--alpha-white-50);
+  color: var(--color-white);
   margin: 0;
 }
 
@@ -202,6 +200,12 @@
   .ratings {
     gap: var(--spacing-medium, 16px);
   }
+  .customerCount {
+    display: none;
+  }
+  .separator {
+    display: none;
+  }
 }
 
 /* Tablet Portrait (768px) */
@@ -227,17 +231,23 @@
     border-radius: var(--corner-radius-x-large, 48px);
   }
 
-  .socialProof {
+  /* .socialProof {
     border-radius: 0 0 var(--corner-radius-x-large, 48px)
       var(--corner-radius-x-large, 48px);
     gap: var(--spacing-medium, 16px);
     padding: var(--spacing-medium, 16px) 0;
-  }
+  } */
 
-  .ratings {
+  /* .ratings {
     flex-direction: row;
     gap: var(--spacing-medium, 16px);
+  } */
+  /* .customerCount {
+    display: flex;
   }
+  .separator {
+    display: block;
+  } */
 }
 
 /* Mobile (393px) */
@@ -274,7 +284,7 @@
     object-fit: cover;
   }
 
-  .socialProof {
+  /* .socialProof {
     position: relative;
     border-radius: 0 0 var(--corner-radius-x-large, 32px)
       var(--corner-radius-x-large, 32px);
@@ -286,6 +296,5 @@
   .ratings {
     flex-direction: row;
     gap: var(--spacing-medium, 16px);
-  }
+  } */
 }
-

@@ -23,16 +23,8 @@ import { RemountWrapper } from "@/components/RemountWrapper";
 export default function ProductPage() {
   return (
     <SpringConfigProvider>
-      <div style={{ position: "fixed", zIndex: 2000 }}>
-        <Leva
-          theme={{
-            colors: {
-              accent1: "#3B82F6", // Blue 500 - matches default highlight
-              accent2: "#60A5FA", // Blue 400 - lighter shade for hover
-              accent3: "#2563EB", // Blue 600 - darker shade
-            },
-          }}
-        />
+      <div style={{ position: "fixed", bottom: 8, right: 8, zIndex: 2000 }}>
+        <Leva fill />
       </div>
       <div style={{ height: "100vh", overflowY: "scroll" }}>
         <RemountWrapper>

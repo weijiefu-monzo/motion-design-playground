@@ -91,7 +91,7 @@
   }
 
   .cardsStack {
-    display: block;
+    display: flex;
   }
 }
 

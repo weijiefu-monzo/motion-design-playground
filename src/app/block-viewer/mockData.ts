@@ -107,6 +107,12 @@ export const mockData = {
         inverse: false,
         imageSrc: "/card-2.png",
       },
+      {
+        title: "Flex on the fly",
+        description: "Add Flex to your digital wallet instantly.",
+        inverse: false,
+        imageSrc: "/card-3.png",
+      },
     ],
     steps: [
       {
@@ -292,6 +298,13 @@ export const mockData = {
           "Add Flex to your digital wallet and use in-store, online and in-app straightaway, with no need for a physical card.",
         inverse: false,
         imageSrc: "/card-3.png",
+      },
+      {
+        title: "Advanced security",
+        description:
+          "Bank-grade security with biometric authentication and real-time fraud monitoring to protect your money.",
+        inverse: false,
+        imageSrc: "/card-4.png",
       },
     ],
     steps: [
@@ -533,8 +546,22 @@ export const mockData = {
         title: "Advanced security features protect your money",
         description:
           "Bank-grade security with biometric authentication, real-time fraud monitoring, and instant card freezing capabilities. Our advanced AI system detects suspicious activity before it happens, keeping your money safe 24/7.",
-        inverse: true,
+        inverse: false,
         imageSrc: "/card-4.png",
+      },
+      {
+        title: "Mobile payments made simple - contactless and digital",
+        description:
+          "Pay with your phone or smartwatch anywhere contactless payments are accepted. Advanced NFC technology ensures fast, secure transactions with biometric authentication and tokenization.",
+        inverse: false,
+        imageSrc: "/card-5.png",
+      },
+      {
+        title: "Personalized financial insights and smart budgeting",
+        description:
+          "Get AI-powered financial insights based on your spending patterns. Our smart budgeting tools help set realistic goals, track progress, and identify savings opportunities with personalized tips.",
+        inverse: false,
+        imageSrc: "/card-6.png",
       },
     ],
     steps: [

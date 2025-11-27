@@ -78,7 +78,7 @@
 
 .cardContainer {
   flex: 1;
-  min-width: 300px;
+  min-width: 320px;
   flex-shrink: 0;
 }
 
@@ -99,10 +99,6 @@
     width: 100%;
   }
 
-  .button {
-    width: 100%;
-  }
-
   .pageControl {
     display: none; /* Hide page controls on mobile */
   }
@@ -114,6 +110,14 @@
 @media (max-width: 393px) {
   .section {
     padding: var(--spacing-medium) var(--spacing-medium);
+  }
+
+  .cardContainer {
+    min-width: 280px;
+  }
+
+  .button {
+    width: 100%;
   }
 }
 

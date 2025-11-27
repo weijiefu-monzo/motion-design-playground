@@ -54,7 +54,7 @@
 }
 
 .verticalContent {
-  padding: var(--spacing-large);
+  padding: var(--spacing-x-large);
   width: 100%;
   gap: var(--spacing-large);
 }
@@ -113,10 +113,6 @@
   width: auto;
 }
 
-.vertical .button {
-  width: 100%;
-}
-
 .notContained.vertical .button {
   width: auto;
 }
@@ -163,4 +159,10 @@
 }
 .inverse .imagePlaceholder {
   background-color: var(--neutral-darker);
+}
+
+@media (max-width: 393px) {
+  .vertical .button {
+    width: 100%;
+  }
 }

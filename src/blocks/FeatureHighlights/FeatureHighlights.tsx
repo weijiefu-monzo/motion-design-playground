@@ -143,7 +143,6 @@ export default function FeatureHighlights({
             <Body className={styles.description}>{description}</Body>
           )}
         </div>
-
         <div className={styles.action}>
           <div className={styles.cta}>
             {buttonLabel && (
