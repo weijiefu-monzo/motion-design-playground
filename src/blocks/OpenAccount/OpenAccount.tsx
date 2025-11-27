@@ -130,7 +130,7 @@ export default function OpenAccount({
 
           <div className={styles.socialProof}>
             <div className={styles.ratingItem}>
-              {/* <div className={styles.appIcon}>
+              <div className={styles.appIcon}>
                 <svg
                   width="25"
                   height="32"
@@ -144,7 +144,7 @@ export default function OpenAccount({
                     fillOpacity="0.5"
                   />
                 </svg>
-              </div> */}
+              </div>
               <div className={styles.ratingContent}>
                 <div className={styles.ratingScore}>
                   <div className={styles.starIcon}>
@@ -171,7 +171,7 @@ export default function OpenAccount({
                   App Store
                 </Body>
               </div>
-              {/* <div className={styles.appIcon}>
+              <div className={styles.appIcon}>
                 <svg
                   width="25"
                   height="32"
@@ -185,18 +185,8 @@ export default function OpenAccount({
                     fillOpacity="0.5"
                   />
                 </svg>
-              </div> */}
+              </div>
             </div>
-            <svg
-              width="1"
-              height="24"
-              viewBox="0 0 1 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className={styles.separator}
-            >
-              <path d="M0.5 0V24" style={{ stroke: "var(--alpha-white-50)" }} />
-            </svg>
 
             <div className={styles.customerCount}>
               <div className={styles.row}>
@@ -228,17 +218,9 @@ export default function OpenAccount({
                 </Body>
               </div>
             </div>
-            <svg
-              width="1"
-              height="24"
-              viewBox="0 0 1 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M0.5 0V24" style={{ stroke: "var(--alpha-white-50)" }} />
-            </svg>
+
             <div className={styles.ratingItem}>
-              {/* <div className={styles.appIcon}>
+              <div className={styles.appIcon}>
                 <svg
                   width="25"
                   height="32"
@@ -252,7 +234,7 @@ export default function OpenAccount({
                     fillOpacity="0.5"
                   />
                 </svg>
-              </div> */}
+              </div>
               <div className={styles.ratingContent}>
                 <div className={styles.ratingScore}>
                   <div className={styles.starIcon}>
@@ -279,7 +261,7 @@ export default function OpenAccount({
                   Google Play
                 </Body>
               </div>
-              {/* <div className={styles.appIcon}>
+              <div className={styles.appIcon}>
                 <svg
                   width="25"
                   height="32"
@@ -293,7 +275,7 @@ export default function OpenAccount({
                     fillOpacity="0.5"
                   />
                 </svg>
-              </div> */}
+              </div>
             </div>
           </div>
         </animated.div>
