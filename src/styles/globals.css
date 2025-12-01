@@ -247,10 +247,10 @@
 
   /* ===== RESPONSIVE BREAKPOINTS ===== */
 
-  /* Mobile (393px) - Default values */
-  --viewport-width-mobile: 393px;
+  /* Mobile (480px) - Default values */
+  --viewport-width-mobile: 480px;
   --navigation-height-mobile: 64px;
-  --navigation-width-mobile: 393px;
+  --navigation-width-mobile: 480px;
   --navigation-menu-mobile: true;
   --navigation-personal-business-mobile: false;
 

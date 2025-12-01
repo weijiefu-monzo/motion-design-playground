@@ -290,7 +290,7 @@
     display: none;
   }
 }
-@media (max-width: 393px) {
+@media (max-width: 480px) {
   .section {
     padding: var(--spacing-medium) var(--spacing-medium);
   }
@@ -340,4 +340,3 @@
 .section {
   animation: fadeInUp var(--motion-duration-medium) var(--motion-easing-linear);
 }
-

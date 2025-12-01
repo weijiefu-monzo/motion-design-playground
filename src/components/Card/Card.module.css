@@ -161,7 +161,7 @@
   background-color: var(--neutral-darker);
 }
 
-@media (max-width: 393px) {
+@media (max-width: 480px) {
   .vertical .button {
     width: 100%;
   }

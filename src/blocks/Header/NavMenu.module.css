@@ -279,8 +279,8 @@
   }
 }
 
-/* Mobile (393px) */
-@media (max-width: 393px) {
+/* Mobile (480px) */
+@media (max-width: 480px) {
   .navMenu {
     top: 64px;
     max-height: calc(100vh - 64px);

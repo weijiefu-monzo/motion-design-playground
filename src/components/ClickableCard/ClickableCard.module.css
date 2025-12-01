@@ -140,7 +140,7 @@
   }
 }
 
-@media (max-width: 393px) {
+@media (max-width: 480px) {
   .card {
     height: 300px;
   }

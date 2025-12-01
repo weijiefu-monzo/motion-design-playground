@@ -1,19 +1,19 @@
 {
   "$schema": "https://design-tokens.org/dtcg/schema.json",
   "$metadata": {
-    "name": "Figma Variables — [Web]Breakpoints (Mobile[393])",
-    "description": "Tokens resolved for collection: [Web]Breakpoints, mode: Mobile[393]"
+    "name": "Figma Variables — [Web]Breakpoints (Mobile[480])",
+    "description": "Tokens resolved for collection: [Web]Breakpoints, mode: Mobile[480]"
   },
   "tokens": {
     "viewport": {
       "width": {
         "max": {
           "$type": "dimension",
-          "$value": "393px"
+          "$value": "480px"
         },
         "min": {
           "$type": "dimension",
-          "$value": "393px"
+          "$value": "480px"
         },
         "breakpoint": {
           "$type": "string",
@@ -51,7 +51,7 @@
         },
         "width": {
           "$type": "dimension",
-          "$value": "393px"
+          "$value": "480px"
         }
       },
       "page": {

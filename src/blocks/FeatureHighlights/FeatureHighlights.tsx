@@ -129,55 +129,57 @@ export default function FeatureHighlights({
       data-qa={dataQa}
     >
       {/* Header Content */}
+
       <animated.div
-        className={styles.content}
+        className={styles.wrapper}
         style={{
           opacity: headerSpring.opacity,
           transform: headerSpring.y.to((y) => `translateY(${y}px)`),
           ...getAnimationHighlightStyle("default", springConfig.showHighlights),
         }}
       >
-        <div className={styles.text}>
-          <H2 className={styles.title}>{title}</H2>
-          {description && (
-            <Body className={styles.description}>{description}</Body>
-          )}
-        </div>
-        <div className={styles.action}>
-          <div className={styles.cta}>
-            {buttonLabel && (
-              <Button
-                label={buttonLabel}
-                variant="primary"
-                size="medium"
-                onClick={handleButtonClick}
-                className={styles.button}
-              />
+        <div className={styles.content}>
+          <div className={styles.text}>
+            <H2 className={styles.title}>{title}</H2>
+            {description && (
+              <Body className={styles.description}>{description}</Body>
             )}
           </div>
-
-          {cards.length > 4 && (
-            <div className={styles.pageControl}>
-              <IconButton
-                icon={<AiOutlineArrowLeft />}
-                onClick={() => {
-                  console.log("Previous");
-                }}
-                aria-label="Previous"
-                size="medium"
-                className={styles.button}
-              />
-              <IconButton
-                icon={<AiOutlineArrowRight />}
-                onClick={() => {
-                  console.log("Next");
-                }}
-                aria-label="Next"
-                size="medium"
-                className={styles.button}
-              />
+          <div className={styles.action}>
+            <div className={styles.cta}>
+              {buttonLabel && (
+                <Button
+                  label={buttonLabel}
+                  variant="primary"
+                  size="medium"
+                  onClick={handleButtonClick}
+                  className={styles.button}
+                />
+              )}
             </div>
-          )}
+          </div>
+        </div>
+        <div>
+          <div className={styles.pageControl}>
+            <IconButton
+              icon={<AiOutlineArrowLeft />}
+              onClick={() => {
+                console.log("Previous");
+              }}
+              aria-label="Previous"
+              size="medium"
+              className={styles.button}
+            />
+            <IconButton
+              icon={<AiOutlineArrowRight />}
+              onClick={() => {
+                console.log("Next");
+              }}
+              aria-label="Next"
+              size="medium"
+              className={styles.button}
+            />
+          </div>
         </div>
       </animated.div>
 

@@ -193,15 +193,15 @@
   }
 }
 
-/* Mobile (393px) */
-@media (max-width: 393px) {
+/* Mobile (480px) */
+@media (max-width: 480px) {
   .header {
     height: 64px;
   }
 
   .container {
     padding: 0 var(--spacing-medium, 16px);
-    max-width: 393px;
+    max-width: 480px;
     gap: var(--spacing-large, 24px);
   }
 

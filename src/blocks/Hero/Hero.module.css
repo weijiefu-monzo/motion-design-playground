@@ -304,7 +304,7 @@
   }
 }
 
-@media (max-width: 393px) {
+@media (max-width: 480px) {
   .hero {
     padding: calc(var(--spacing-medium) + 64px) 0 var(--spacing-x-large) 0;
   }

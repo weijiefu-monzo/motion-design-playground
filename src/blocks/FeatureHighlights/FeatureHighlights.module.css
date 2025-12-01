@@ -20,7 +20,11 @@
   gap: var(--spacing-x-large);
   width: 100%;
 }
-
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+}
 .text {
   display: flex;
   flex-direction: column;
@@ -102,12 +106,8 @@
   .pageControl {
     display: none; /* Hide page controls on mobile */
   }
-
-  .card {
-    min-width: 280px;
-  }
 }
-@media (max-width: 393px) {
+@media (max-width: 480px) {
   .section {
     padding: var(--spacing-medium) var(--spacing-medium);
   }
@@ -118,6 +118,9 @@
 
   .button {
     width: 100%;
+  }
+  .card {
+    min-width: 280px;
   }
 }
 

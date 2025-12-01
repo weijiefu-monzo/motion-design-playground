@@ -62,7 +62,7 @@ export default function BlockViewer() {
   }, [isClient]);
 
   const getBreakpoint = (width: number): string => {
-    if (width <= 393) return "Mobile (≤393px)";
+    if (width <= 480) return "Mobile (≤480px)";
     if (width <= 768) return "Tablet Portrait (≤768px)";
     if (width <= 1040) return "Tablet Landscape (≤1040px)";
     if (width <= 1440 + 64 * 2) return "Desktop (≤1440px + 64px * 2)";
