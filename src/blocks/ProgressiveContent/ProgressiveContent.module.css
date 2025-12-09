@@ -128,6 +128,7 @@
   flex-direction: column;
   gap: var(--spacing-x-large);
   width: 100%;
+  align-items: center;
 }
 
 /* Step Component Styles */
@@ -202,6 +203,7 @@
   align-items: center;
   width: 100%;
   overflow: hidden;
+  max-width: 640px;
 }
 
 .stepCardImage {
@@ -260,7 +262,16 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+
+@media (max-width: 1040px) {
+  /* Hide horizontal steps, show vertical */
+  .stepsHorizontal {
+    display: none;
+  }
+
+  .stepsVertical {
+    display: flex;
+  }
   .section {
     padding: var(--spacing-x-large);
     border-radius: 0;
@@ -272,25 +283,17 @@
     border-radius: 0;
     background-color: transparent;
   }
+}
 
-  .button {
-    width: 100%;
-  }
-
-  /* Hide horizontal steps, show vertical */
-  .stepsHorizontal {
-    display: none;
-  }
-
-  .stepsVertical {
-    display: flex;
-  }
-
+@media (max-width: 768px) {
   .pageControl {
     display: none;
   }
 }
 @media (max-width: 480px) {
+  .button {
+    width: 100%;
+  }
   .section {
     padding: var(--spacing-medium) var(--spacing-medium);
   }
@@ -299,7 +302,7 @@
   }
 }
 
-@media (min-width: 769px) and (max-width: 1040px) {
+/* @media (min-width: 769px) and (max-width: 1040px) {
   .section {
     max-width: 1040px;
     padding: var(--spacing-x-large) var(--spacing-3x-large);
@@ -312,7 +315,7 @@
   .pageControl {
     right: -28px;
   }
-}
+} */
 
 @media (min-width: 1041px) {
   .section {
