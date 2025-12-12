@@ -247,6 +247,7 @@ export default function Hero({
               }}
             >
               <img src="/bank-card.png" alt="Bank card" />
+              <div className={styles.shimmer}></div>
             </animated.div>
           </div>
         </animated.div>

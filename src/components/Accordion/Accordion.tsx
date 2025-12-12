@@ -1,7 +1,10 @@
+"use client";
 import React, { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
+import { useSpring, animated } from "@react-spring/web";
 import styles from "./Accordion.module.css";
 import { H5, Body } from "../Typography";
+import { useSpringConfig } from "@/contexts/SpringConfigContext";
 export interface AccordionProps {
   className?: string;
   title: string;
@@ -27,6 +30,7 @@ export default function Accordion({
   const contentRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
+  const springConfig = useSpringConfig();
 
   useEffect(() => {
     if (measureRef.current) {
@@ -35,6 +39,20 @@ export default function Accordion({
       setContentHeight(height);
     }
   }, [details]);
+
+  // Spring animation for expand/collapse
+  const contentSpring = useSpring({
+    opacity: isExpanded && details ? 1 : 0,
+    height: isExpanded && details && contentHeight > 0 ? contentHeight : 0,
+    marginBottom: isExpanded && details ? 16 : 0,
+    config: springConfig.gentle,
+  });
+
+  // Spring animation for icon rotation
+  const iconSpring = useSpring({
+    transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+    config: springConfig.gentle,
+  });
 
   const handleToggle = () => {
     if (!disabled) {
@@ -75,14 +93,21 @@ export default function Accordion({
       aria-label={ariaLabel}
       data-qa={dataQa}
     >
-      <div
+      <animated.div
         className={headerClasses}
         style={{
-          marginBottom: isExpanded && details ? "16px" : "0px",
+          marginBottom: contentSpring.marginBottom.to(
+            (mb: number) => `${mb}px`
+          ),
         }}
       >
         <H5 className={styles.title}>{title}</H5>
-        <div className={styles.icon}>
+        <animated.div
+          className={styles.icon}
+          style={{
+            transform: iconSpring.transform,
+          }}
+        >
           <svg
             width="36"
             height="36"
@@ -95,8 +120,8 @@ export default function Accordion({
               fill="#FF4F40"
             />
           </svg>
-        </div>
-      </div>
+        </animated.div>
+      </animated.div>
 
       {details && (
         <>
@@ -114,17 +139,17 @@ export default function Accordion({
           </div>
 
           {/* Animated content */}
-          <div
+          <animated.div
             ref={contentRef}
             className={styles.content}
             style={{
-              height:
-                isExpanded && contentHeight > 0 ? `${contentHeight}px` : "0px",
-              opacity: isExpanded ? 1 : 0,
+              opacity: contentSpring.opacity,
+              height: contentSpring.height.to((h: number) => `${h}px`),
+              overflow: "hidden",
             }}
           >
             <Body className={styles.details}>{details}</Body>
-          </div>
+          </animated.div>
         </>
       )}
     </div>

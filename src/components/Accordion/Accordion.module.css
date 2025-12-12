@@ -41,8 +41,6 @@
   justify-content: space-between;
   gap: var(--spacing-large, 24px);
   width: 100%;
-  transition: margin-bottom var(--motion-duration-long)
-    var(--motion-easing-flow);
 }
 
 .title {
@@ -60,17 +58,10 @@
   justify-content: center;
   flex-shrink: 0;
   color: var(--content-accent);
-  transition: transform var(--motion-duration-medium) var(--motion-easing-flow);
-}
-
-.accordion.expanded .icon {
-  transform: rotate(180deg);
 }
 
 .content {
   overflow: hidden;
-  transition: height var(--motion-duration-long) var(--motion-easing-flow),
-    opacity var(--motion-duration-long) var(--motion-easing-flow);
 }
 
 .details {
