@@ -48,7 +48,7 @@ export default function ProgressiveContent({
   const [currentStep, setCurrentStep] = useState(0);
   const springConfig = useSpringConfig();
 
-  const ANIMATION_DELAY_BASE = 100;
+  const ANIMATION_DELAY_BASE = 150;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,7 +84,7 @@ export default function ProgressiveContent({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
     config: springConfig.gentle,
-    delay: ANIMATION_DELAY_BASE * 2,
+    delay: ANIMATION_DELAY_BASE * 1,
   });
 
   // Image transition when step changes - fade out then fade in
@@ -265,4 +265,3 @@ export default function ProgressiveContent({
     </animated.section>
   );
 }
-

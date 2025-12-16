@@ -29,7 +29,7 @@ export default function FAQ({
   const [isInView, setIsInView] = useState(false);
   const springConfig = useSpringConfig();
 
-  const ANIMATION_DELAY_BASE = 100;
+  const ANIMATION_DELAY_BASE = 150;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,7 +65,7 @@ export default function FAQ({
     y: isInView ? 0 : 30,
     config: springConfig.default,
     delay: ANIMATION_DELAY_BASE * 1,
-  }) as any;
+  });
 
   const handleToggle = (index: number, expanded: boolean) => {
     if (onToggle) {

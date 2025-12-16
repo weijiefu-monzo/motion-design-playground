@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import clsx from "clsx";
-import { animated, useTrail, useSpring } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
 import styles from "./Hero.module.css";
 import { Chip } from "../../components/Chip";
 import { H1, Body, H3, H2 } from "../../components/Typography";
@@ -42,7 +42,7 @@ export default function Hero({
   console.log("Hero component springConfig:", springConfig);
 
   // Animation delays for staggered effect (in milliseconds)
-  const ANIMATION_DELAY_BASE = 100;
+  const GROUP_2_DELAY = 150;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -102,33 +102,58 @@ export default function Hero({
     },
   ];
 
-  // Animation trail for vertical (y) animations
-  const [
-    textSectionSpring,
-    buttonSpring,
-    financialDataSpring,
-    socialProofSpring,
-    legalCopySpring,
-  ] = useTrail(5, {
+  // Group 1: Credit Card chip, title, description, Image on the Right, Card overlay
+  // No delay - starts immediately
+  const textSectionSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
     config: springConfig.default,
-  }) as any;
+    delay: 0,
+  });
 
-  // Image section uses different animation (x direction)
   const imageSectionSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
     config: springConfig.default,
-    delay: ANIMATION_DELAY_BASE * 0.5,
+    delay: 0,
   });
 
-  // Bank card slides in separately with 1 second delay
   const bankCardSpring = useSpring({
     opacity: isInView ? 1 : 0,
     y: isInView ? 0 : 20,
     config: springConfig.default,
-    delay: ANIMATION_DELAY_BASE * 0.5, // 1 second delay
+    delay: 0,
+  });
+
+  // Group 2: Financial data, button, social proof
+  // 150ms delay
+  const financialDataSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: springConfig.default,
+    delay: GROUP_2_DELAY,
+  });
+
+  const buttonSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: springConfig.default,
+    delay: GROUP_2_DELAY,
+  });
+
+  const socialProofSpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: springConfig.default,
+    delay: GROUP_2_DELAY,
+  });
+
+  // Legal copy uses same delay as Group 2
+  const legalCopySpring = useSpring({
+    opacity: isInView ? 1 : 0,
+    y: isInView ? 0 : 20,
+    config: springConfig.default,
+    delay: GROUP_2_DELAY,
   });
 
   return (
